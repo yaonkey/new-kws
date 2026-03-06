@@ -15,10 +15,15 @@ const estimateReadingTime = (post: Record<string, any>) => {
   return Math.max(1, Math.ceil(words / 180))
 }
 
+const getDateTimestamp = (value: unknown) => {
+  const time = new Date(String(value || '')).getTime()
+  return Number.isFinite(time) ? time : 0
+}
+
 const sortedPosts = computed(() => {
   const allPosts = posts.value ?? []
   return [...allPosts]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => getDateTimestamp(b.date) - getDateTimestamp(a.date))
     .map((post) => ({
       ...post,
       localizedTitle: post.title || 'Untitled',
@@ -41,11 +46,12 @@ useHead({
 })
 
 const formatBlogDate = (date: string, currentLocale: string) => {
-  return new Intl.DateTimeFormat(currentLocale === 'ru' ? 'ru-RU' : 'en-US', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(date))
+  const timestamp = getDateTimestamp(date)
+  if (!timestamp) {
+    return ''
+  }
+  const safeLocale = currentLocale === 'ru' ? 'ru-RU' : 'en-US'
+  return new Intl.DateTimeFormat(safeLocale, { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(timestamp))
 }
 </script>
 

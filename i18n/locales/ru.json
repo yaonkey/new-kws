@@ -3,6 +3,7 @@
   "nav": {
     "home": "Главная",
     "products": "Товары",
+    "patterns": "PDF-описания",
     "blog": "Блог",
     "about": "О мастерской",
     "cart": "Корзина"
@@ -35,6 +36,13 @@
     "metaPdf": "PDF",
     "extraDetailsTitle": "Дополнительное описание"
   },
+  "patterns": {
+    "title": "PDF-описания",
+    "subtitle": "Отдельная витрина цифровых схем и описаний.",
+    "searchPlaceholder": "Поиск по названию или описанию",
+    "results": "Найдено PDF-описаний",
+    "loading": "Загрузка PDF-каталога..."
+  },
   "blog": {
     "title": "Блог мастерской",
     "subtitle": "Истории создания и советы по уходу за handmade-изделиями.",
@@ -64,6 +72,7 @@
   "seo": {
     "homeTitle": "Главная",
     "productsTitle": "Каталог товаров",
+    "patternsTitle": "Каталог PDF-описаний",
     "blogTitle": "Блог",
     "cartTitle": "Корзина",
     "aboutTitle": "О мастерской"

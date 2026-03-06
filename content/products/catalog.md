@@ -2,6 +2,8 @@
 title: "Workshop Catalog"
 products:
   - slug: "knitted-doll-01"
+    categories: ["knitted", "toys"]
+    labels: ["new"]
     title: { ru: "Вязаная кукла №1", en: "Knitted Doll #1" }
     description: { ru: "Мягкая интерьерная кукла ручной работы.", en: "Soft handmade decorative doll." }
     details:
@@ -20,6 +22,7 @@ products:
     price: 25
     image: "/images/product-placeholder.svg"
   - slug: "knitted-doll-03"
+    categories: ["knitted", "toys"]
     title: { ru: "Вязаная кукла №3", en: "Knitted Doll #3" }
     description: { ru: "Авторский образ с вышитыми деталями.", en: "Author design with embroidered details." }
     price: 26
@@ -39,6 +42,8 @@ products:
     price: 28
     image: "/images/product-placeholder.svg"
   - slug: "wooden-toy-06"
+    categories: ["wooden", "toys", "eco"]
+    labels: ["hit"]
     title: { ru: "Деревянная игрушка №6", en: "Wooden Toy #6" }
     description: { ru: "Экологичная игрушка из натурального дерева.", en: "Eco-friendly toy made from natural wood." }
     details:
@@ -98,6 +103,8 @@ products:
     price: 35
     image: "/images/product-placeholder.svg"
   - slug: "ceramic-cup-16"
+    categories: ["ceramic", "kitchen"]
+    labels: ["new"]
     title: { ru: "Керамическая чашка №16", en: "Ceramic Cup #16" }
     description: { ru: "Чашка ручной лепки для ежедневного чая.", en: "Hand-thrown cup for your daily tea." }
     details:
@@ -292,6 +299,7 @@ products:
     price: 42
     image: "/images/product-placeholder.svg"
   - slug: "gift-box-52"
+    categories: ["gift", "holiday"]
     title: { ru: "Подарочный бокс №52", en: "Gift Box #52" }
     description: { ru: "Включает сезонные изделия мастерской.", en: "Includes seasonal workshop products." }
     price: 43
@@ -334,11 +342,75 @@ products:
     price: 20
     image: "/images/product-placeholder.svg"
   - slug: "holiday-ornament-60"
+    categories: ["holiday", "decor"]
     title: { ru: "Праздничное украшение №60", en: "Holiday Ornament #60" }
     description: { ru: "Финальный элемент коллекции сезона.", en: "Final piece of the seasonal collection." }
     price: 21
     image: "/images/product-placeholder.svg"
     hasPdf: true
+  - slug: "knitted-schema-61"
+    categories: ["patterns", "schema", "knitted"]
+    labels: ["new"]
+    is_schema: true
+    title: { ru: "PDF-описание: Вязаная кукла №61", en: "PDF Pattern: Knitted Doll #61" }
+    description: { ru: "Цифровая схема по вязанию куклы. Физическая игрушка не входит в заказ.", en: "Digital knitting pattern for a doll. Physical toy is not included." }
+    price: { rub: 160 }
+    image:
+      - "/images/product-placeholder-2.svg"
+      - "/images/product-placeholder.svg"
+    hasPdf: true
+  - slug: "macrame-schema-62"
+    categories: ["patterns", "schema", "macrame"]
+    is_schema: true
+    title: { ru: "PDF-описание: Макраме-декор №62", en: "PDF Pattern: Macrame Decor #62" }
+    description: { ru: "Схема плетения макраме с пошаговыми инструкциями и списком материалов.", en: "Macrame knot pattern with step-by-step instructions and materials list." }
+    price: { usd: 2 }
+    image:
+      - "/images/product-placeholder-3.svg"
+      - "/images/product-placeholder.svg"
+      - "/images/product-placeholder-2.svg"
+    hasPdf: true
+  - slug: "wooden-toy-63"
+    categories: ["wooden", "toys", "eco"]
+    labels: ["new", "limited"]
+    title: { ru: "Деревянная игрушка №63", en: "Wooden Toy #63" }
+    description: { ru: "Тестовый товар для проверки нескольких категорий и label-бейджей.", en: "Test item to preview multi-category filtering and custom labels." }
+    price: { rub: 2790, usd: 31 }
+    image:
+      - "/images/product-placeholder.svg"
+      - "/images/product-placeholder-2.svg"
+    hasPdf: true
+    pdfPrice: { rub: 160, usd: 1.8 }
+  - slug: "knitted-schema-64"
+    categories: ["patterns", "schema", "knitted"]
+    labels: ["new", "bestseller"]
+    is_schema: true
+    title: { ru: "PDF-описание: Вязаный шарф №64", en: "PDF Pattern: Knitted Scarf #64" }
+    description: { ru: "Отдельно продаваемая цифровая схема. Покупка физического изделия недоступна.", en: "Standalone digital pattern. Physical item purchase is disabled." }
+    price: { rub: 110 }
+    image:
+      - "/images/product-placeholder-2.svg"
+      - "/images/product-placeholder-3.svg"
+      - "/images/product-placeholder.svg"
+    hasPdf: true
+  - slug: "ceramic-cup-65"
+    categories: ["ceramic", "kitchen", "gift"]
+    labels: ["new"]
+    title: { ru: "Керамическая чашка №65", en: "Ceramic Cup #65" }
+    description: { ru: "Тестовая карточка с тремя категориями и одной пользовательской меткой.", en: "Test card with three categories and one custom badge." }
+    price: { usd: 24 }
+    image: "/images/product-placeholder-3.svg"
+    hasPdf: true
+    pdfPrice: { rub: 160 }
+  - slug: "macrame-decor-66"
+    categories: ["macrame", "decor", "holiday"]
+    labels: ["new", "handmade"]
+    title: { ru: "Макраме-декор №66", en: "Macrame Decor #66" }
+    description: { ru: "Наглядный пример карточки с несколькими label и категориями.", en: "Visual example card with multiple labels and categories." }
+    price: { rub: 3150, usd: 35 }
+    image:
+      - "/images/product-placeholder.svg"
+      - "/images/product-placeholder-3.svg"
 ---
 
 # Product Catalog

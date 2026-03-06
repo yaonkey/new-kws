@@ -3,6 +3,7 @@
   "nav": {
     "home": "Home",
     "products": "Products",
+    "patterns": "PDF Patterns",
     "blog": "Blog",
     "about": "About",
     "cart": "Cart"
@@ -35,6 +36,13 @@
     "metaPdf": "PDF",
     "extraDetailsTitle": "Additional details"
   },
+  "patterns": {
+    "title": "PDF Patterns",
+    "subtitle": "A separate storefront for digital descriptions and patterns.",
+    "searchPlaceholder": "Search by title or description",
+    "results": "PDF patterns found",
+    "loading": "Loading PDF catalog..."
+  },
   "blog": {
     "title": "Workshop Blog",
     "subtitle": "Behind-the-scenes stories and tips for handmade care.",
@@ -64,6 +72,7 @@
   "seo": {
     "homeTitle": "Home",
     "productsTitle": "Product Catalog",
+    "patternsTitle": "PDF Pattern Catalog",
     "blogTitle": "Blog",
     "cartTitle": "Cart",
     "aboutTitle": "About"

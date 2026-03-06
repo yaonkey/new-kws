@@ -4,7 +4,7 @@ import {
   getCategoryLabel,
   getPriceByLocale,
   getPrimaryProductImage,
-  getProductCategory,
+  getProductCategories,
   getProductImages,
   normalizePriceValue,
 } from '~/composables/useCatalog'
@@ -16,7 +16,20 @@ const localePath = useLocalePath()
 const cart = useCart()
 const drawer = useCartDrawer()
 
-const { data: catalog } = await useAsyncData('products-catalog-item', () => queryCollection('products').first())
+const loadProductsCatalog = async () => {
+  const byPath = await queryCollection('products').path('/products/catalog').first()
+  if (byPath?.products) {
+    return byPath
+  }
+  const all = await queryCollection('products').all()
+  return all.find((entry) => Array.isArray(entry.products)) || { products: [] }
+}
+
+const { data: catalog, refresh } = await useAsyncData(
+  () => `products-catalog-item-${locale.value}`,
+  loadProductsCatalog,
+  { watch: [locale] },
+)
 
 const product = computed<CatalogProduct | null>(() => {
   const list = catalog.value?.products ?? []
@@ -35,10 +48,15 @@ const productDetails = computed(() => {
   return product.value.details.en || ''
 })
 const activeImage = ref('')
-const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? { rub: 110, usd: 2 }, locale.value))
+const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? product.value?.price ?? { rub: 110, usd: 2 }, locale.value))
 const productPrice = computed(() => (product.value ? getPriceByLocale(product.value.price, locale.value) : 0))
-const productCategory = computed(() => (product.value ? getProductCategory(product.value) : ''))
-const productCategoryLabel = computed(() => getCategoryLabel(productCategory.value, locale.value))
+const productCategoryLabels = computed(() =>
+  product.value ? getProductCategories(product.value).map((category) => getCategoryLabel(category, locale.value)).join(', ') : '',
+)
+const canBuyProduct = computed(() => !product.value?.is_schema)
+const canBuyPdf = computed(() => Boolean(product.value?.hasPdf || product.value?.is_schema))
+const catalogLink = computed(() => localePath(product.value?.is_schema ? '/patterns' : '/products'))
+const catalogLabel = computed(() => (product.value?.is_schema ? t('nav.patterns') : t('nav.products')))
 const galleryImages = computed(() => {
   if (!product.value) {
     return []
@@ -46,12 +64,22 @@ const galleryImages = computed(() => {
   return getProductImages(product.value)
 })
 
+watch(
+  () => [String(route.params.slug), galleryImages.value.join('|')],
+  () => {
+    activeImage.value = galleryImages.value[0] || ''
+  },
+  { immediate: true },
+)
+
+onMounted(async () => {
+  if (galleryImages.value.length <= 1) {
+    await refresh()
+  }
+})
+
 if (!product.value) {
   throw createError({ statusCode: 404, statusMessage: t('products.notFound') })
-}
-
-if (!activeImage.value) {
-  activeImage.value = galleryImages.value[0]
 }
 
 useSeoMeta({
@@ -94,7 +122,7 @@ useHead({
     <nav class="mb-5 text-sm text-stone-500">
       <NuxtLink :to="localePath('/')" class="hover:text-emerald-700">{{ t('nav.home') }}</NuxtLink>
       <span class="mx-2">/</span>
-      <NuxtLink :to="localePath('/products')" class="hover:text-emerald-700">{{ t('nav.products') }}</NuxtLink>
+      <NuxtLink :to="catalogLink" class="hover:text-emerald-700">{{ catalogLabel }}</NuxtLink>
       <span class="mx-2">/</span>
       <span class="text-stone-700">{{ productTitle }}</span>
     </nav>
@@ -136,7 +164,7 @@ useHead({
         <section class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm">
           <h2 class="mb-3 font-semibold text-stone-900">{{ t('products.metaTitle') }}</h2>
           <dl class="space-y-1 text-stone-700">
-            <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productCategoryLabel }}</dd></div>
+            <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productCategoryLabels }}</dd></div>
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product!.slug }}</dd></div>
           </dl>
         </section>
@@ -150,18 +178,17 @@ useHead({
         </section>
 
         <aside class="sticky top-24 rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-          <p v-if="product?.hasPdf" class="mb-2 text-sm text-stone-500">
-            {{ t('products.pdfAvailable') }}
-          </p>
           <button
+            v-if="canBuyProduct"
             class="w-full rounded-lg bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
             @click="cart.addItem(product!); drawer.open()"
           >
             {{ t('products.addToCart') }}
           </button>
           <button
-            v-if="product?.hasPdf"
-            class="mt-2 w-full rounded-lg border border-emerald-700 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+            v-if="canBuyPdf"
+            class="w-full rounded-lg border border-emerald-700 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+            :class="canBuyProduct ? 'mt-2' : ''"
             @click="cart.addPdfItem(product!); drawer.open()"
           >
             {{ t('products.addPdfToCart') }} ({{ pdfPrice }} {{ t('currency') }})

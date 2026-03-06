@@ -25,6 +25,12 @@ const CATEGORY_LABELS: Record<string, { ru: string; en: string }> = {
   table: { ru: 'Декор стола', en: 'Table Decor' },
   gift: { ru: 'Подарочные боксы', en: 'Gift Boxes' },
   holiday: { ru: 'Праздничный декор', en: 'Holiday' },
+  patterns: { ru: 'PDF-описания', en: 'PDF Patterns' },
+  schema: { ru: 'Схемы', en: 'Patterns' },
+  toys: { ru: 'Игрушки', en: 'Toys' },
+  eco: { ru: 'Эко', en: 'Eco' },
+  kitchen: { ru: 'Кухня', en: 'Kitchen' },
+  decor: { ru: 'Декор', en: 'Decor' },
 }
 
 export const getLocalizedField = (
@@ -44,11 +50,33 @@ export const getLocalizedField = (
   return fallback
 }
 
-export const getProductCategory = (product: CatalogProduct) => {
+const normalizeTerm = (value: string) => value.trim().toLowerCase()
+
+const LABELS: Record<string, { ru: string; en: string }> = {
+  new: { ru: 'Новинка', en: 'New' },
+  bestseller: { ru: 'Бестселлер', en: 'Bestseller' },
+  limited: { ru: 'Ограниченная серия', en: 'Limited' },
+  handmade: { ru: 'Ручная работа', en: 'Handmade' },
+  hit: { ru: 'Хит', en: 'Hit' },
+}
+
+export const getCategoryKey = (category: string) => normalizeTerm(category)
+
+export const getProductCategory = (product: CatalogProduct): string => {
+  if (product.categories?.length) {
+    return product.categories[0] || product.slug
+  }
   if (product.category) {
     return product.category
   }
-  return product.slug.split('-')[0]
+  return product.slug.split('-')[0] || product.slug
+}
+
+export const getProductCategories = (product: CatalogProduct): string[] => {
+  if (product.categories?.length) {
+    return product.categories
+  }
+  return [getProductCategory(product)]
 }
 
 export const getCategoryLabel = (category: string, locale: string) => {
@@ -104,11 +132,39 @@ export const getCurrencyByLocale = (locale: string) => {
 }
 
 export const getProductImages = (product: CatalogProduct) => {
-  const rawImages = Array.isArray(product.image) ? product.image : [product.image]
+  let rawImages: unknown[] = []
+
+  if (Array.isArray(product.image)) {
+    rawImages = product.image
+  } else if (typeof product.image === 'string') {
+    const trimmed = product.image.trim()
+    if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(trimmed)
+        rawImages = Array.isArray(parsed) ? parsed : [product.image]
+      } catch {
+        rawImages = [product.image]
+      }
+    } else {
+      rawImages = [product.image]
+    }
+  }
+
   const images = rawImages.filter((image) => typeof image === 'string' && image.trim().length > 0)
   return images.length ? images : ['/images/product-placeholder.svg']
 }
 
 export const getPrimaryProductImage = (product: CatalogProduct) => {
   return getProductImages(product)[0]
+}
+
+export const getProductLabels = (product: CatalogProduct, locale: string) => {
+  const labels = (product.labels || []).map((label) => LABELS[label]?.[locale as 'ru' | 'en'] || label)
+  if (product.hasPdf && !product.is_schema) {
+    labels.unshift('PDF')
+  }
+  if (product.is_schema) {
+    labels.unshift(locale === 'ru' ? 'Схема' : 'Pattern')
+  }
+  return Array.from(new Set(labels.filter(Boolean)))
 }

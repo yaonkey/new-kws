@@ -24,6 +24,7 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
 
       <nav class="hidden gap-6 text-sm font-medium md:flex">
         <NuxtLink :to="localePath('/products')" class="hover:text-emerald-700">{{ t('nav.products') }}</NuxtLink>
+        <NuxtLink :to="localePath('/patterns')" class="hover:text-emerald-700">{{ t('nav.patterns') }}</NuxtLink>
         <NuxtLink :to="localePath('/blog')" class="hover:text-emerald-700">{{ t('nav.blog') }}</NuxtLink>
         <NuxtLink :to="localePath('/about')" class="hover:text-emerald-700">{{ t('nav.about') }}</NuxtLink>
       </nav>
@@ -60,6 +61,7 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
     <nav v-if="mobileMenuOpen" class="border-t border-stone-200 px-4 py-3 md:hidden">
       <div class="flex flex-col gap-3 text-sm font-medium">
         <NuxtLink :to="localePath('/products')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.products') }}</NuxtLink>
+        <NuxtLink :to="localePath('/patterns')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.patterns') }}</NuxtLink>
         <NuxtLink :to="localePath('/blog')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.blog') }}</NuxtLink>
         <NuxtLink :to="localePath('/about')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.about') }}</NuxtLink>
         <button class="inline-flex w-fit rounded border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100" @click="open(); mobileMenuOpen = false">

@@ -11,6 +11,9 @@ export default defineContentConfig({
           z.object({
             slug: z.string(),
             category: z.string().optional(),
+            categories: z.array(z.string()).optional(),
+            labels: z.array(z.string()).optional(),
+            is_schema: z.boolean().optional(),
             title: z.object({
               ru: z.string(),
               en: z.string(),

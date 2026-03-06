@@ -1,22 +1,38 @@
 <script setup lang="ts">
 import type { CatalogProduct } from '~/composables/useCart'
 import {
+  getCategoryKey,
   getCategoryLabel,
   getLocalizedField,
   getPriceByLocale,
-  getProductCategory,
+  getProductCategories,
 } from '~/composables/useCatalog'
 
 const { t, locale } = useI18n()
 const config = useRuntimeConfig()
 const localePath = useLocalePath()
 
-const { data: catalog } = await useAsyncData('products-catalog', () => queryCollection('products').first())
+const loadProductsCatalog = async () => {
+  const byPath = await queryCollection('products').path('/products/catalog').first()
+  if (byPath?.products) {
+    return byPath
+  }
+  const all = await queryCollection('products').all()
+  return all.find((entry) => Array.isArray(entry.products)) || { products: [] }
+}
 
-const products = computed<CatalogProduct[]>(() => catalog.value?.products ?? [])
+const { data: catalog, refresh } = await useAsyncData(
+  () => `products-catalog-${locale.value}`,
+  loadProductsCatalog,
+  {
+    watch: [locale],
+    default: () => ({ products: [] }),
+  },
+)
+
+const products = computed<CatalogProduct[]>(() => (catalog.value?.products ?? []).filter((product) => !product.is_schema))
 const searchQuery = ref('')
 const selectedCategory = ref('all')
-const pdfOnly = ref(false)
 
 const priceBounds = computed(() => {
   if (!products.value.length) {
@@ -38,8 +54,18 @@ watchEffect(() => {
 })
 
 const categories = computed(() => {
-  const all = Array.from(new Set(products.value.map((product) => getProductCategory(product))))
-  return all.sort((a, b) => a.localeCompare(b))
+  const categoryMap = new Map<string, string>()
+  products.value.forEach((product) => {
+    getProductCategories(product).forEach((category) => {
+      const key = getCategoryKey(category)
+      if (!categoryMap.has(key)) {
+        categoryMap.set(key, getCategoryLabel(category, locale.value))
+      }
+    })
+  })
+  return Array.from(categoryMap.entries())
+    .map(([key, label]) => ({ key, label }))
+    .sort((a, b) => a.label.localeCompare(b.label))
 })
 
 const filteredProducts = computed(() => {
@@ -47,14 +73,19 @@ const filteredProducts = computed(() => {
   return products.value.filter((product) => {
     const localizedTitle = getLocalizedField(product.title, locale.value).toLowerCase()
     const localizedDescription = getLocalizedField(product.description, locale.value).toLowerCase()
-    const productCategory = getProductCategory(product)
+    const productCategoryKeys = getProductCategories(product).map((category) => getCategoryKey(category))
     const matchesSearch = !query || localizedTitle.includes(query) || localizedDescription.includes(query)
-    const matchesCategory = selectedCategory.value === 'all' || selectedCategory.value === productCategory
-    const matchesPdf = !pdfOnly.value || Boolean(product.hasPdf)
+    const matchesCategory = selectedCategory.value === 'all' || productCategoryKeys.includes(selectedCategory.value)
     const productPrice = getPriceByLocale(product.price, locale.value)
     const matchesPrice = productPrice >= minPrice.value && productPrice <= maxPrice.value
-    return matchesSearch && matchesCategory && matchesPdf && matchesPrice
+    return matchesSearch && matchesCategory && matchesPrice
   })
+})
+
+onMounted(async () => {
+  if (!products.value.length) {
+    await refresh()
+  }
 })
 
 useSeoMeta({
@@ -88,17 +119,13 @@ useHead({
         />
         <select v-model="selectedCategory" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600">
           <option value="all">{{ t('products.allCategories') }}</option>
-          <option v-for="category in categories" :key="category" :value="category">
-            {{ getCategoryLabel(category, locale) }}
+          <option v-for="category in categories" :key="category.key" :value="category.key">
+            {{ category.label }}
           </option>
         </select>
         <input v-model.number="minPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600" />
         <input v-model.number="maxPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600" />
       </div>
-      <label class="mt-4 inline-flex items-center gap-2 text-sm text-stone-700">
-        <input v-model="pdfOnly" type="checkbox" class="h-4 w-4 rounded border-stone-300 text-emerald-700" />
-        {{ t('products.onlyPdf') }}
-      </label>
     </section>
 
     <div class="mb-4 text-sm text-stone-600">{{ t('products.results') }}: {{ filteredProducts.length }}</div>

@@ -5,6 +5,9 @@ export type CartItemKind = 'product' | 'pdf'
 export interface CatalogProduct {
   slug: string
   category?: string
+  categories?: string[]
+  labels?: string[]
+  is_schema?: boolean
   title: {
     ru: string
     en: string
@@ -47,7 +50,7 @@ export const useCart = () => {
   const initialized = useState<boolean>('cart-initialized', () => false)
 
   const makeItemId = (slug: string, kind: CartItemKind) => `${kind}:${slug}`
-  const getPdfPrice = (product: CatalogProduct) => normalizePriceValue(product.pdfPrice ?? { rub: 110, usd: 2 })
+  const getPdfPrice = (product: CatalogProduct) => normalizePriceValue(product.pdfPrice ?? product.price ?? { rub: 110, usd: 2 })
   const findItemById = (itemId: string) => items.value.find((item) => item.id === itemId)
 
   if (import.meta.client && !initialized.value) {
@@ -121,7 +124,7 @@ export const useCart = () => {
   }
 
   const addPdfItem = (product: CatalogProduct) => {
-    if (!product.hasPdf) {
+    if (!product.hasPdf && !product.is_schema) {
       return
     }
 
@@ -137,8 +140,8 @@ export const useCart = () => {
       kind: 'pdf',
       slug: product.slug,
       title: {
-        ru: `${product.title.ru}${PDF_SUFFIX.ru}`,
-        en: `${product.title.en}${PDF_SUFFIX.en}`,
+        ru: product.is_schema ? product.title.ru : `${product.title.ru}${PDF_SUFFIX.ru}`,
+        en: product.is_schema ? product.title.en : `${product.title.en}${PDF_SUFFIX.en}`,
       },
       price: getPdfPrice(product),
       image: getPrimaryProductImage(product),
