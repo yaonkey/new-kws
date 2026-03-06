@@ -4,6 +4,9 @@ products:
   - slug: "knitted-doll-01"
     title: { ru: "Вязаная кукла №1", en: "Knitted Doll #1" }
     description: { ru: "Мягкая интерьерная кукла ручной работы.", en: "Soft handmade decorative doll." }
+    details:
+      ru: "Размер: 28 см\nПряжа: хлопок/акрил\nНаполнитель: гипоаллергенный холлофайбер\nУход: ручная стирка при 30°C"
+      en: "Size: 28 cm\nYarn: cotton/acrylic\nFilling: hypoallergenic hollow fiber\nCare: hand wash at 30°C"
     price: 24
     image:
       - "/images/product-placeholder.svg"
@@ -38,6 +41,8 @@ products:
   - slug: "wooden-toy-06"
     title: { ru: "Деревянная игрушка №6", en: "Wooden Toy #6" }
     description: { ru: "Экологичная игрушка из натурального дерева.", en: "Eco-friendly toy made from natural wood." }
+    details:
+      ru: "Материал: береза\nПокрытие: безопасный воск\nРазмер: 11 x 7 см\nРекомендуемый возраст: 3+"
     price: 22
     image:
       - "/images/product-placeholder-3.svg"
@@ -95,6 +100,8 @@ products:
   - slug: "ceramic-cup-16"
     title: { ru: "Керамическая чашка №16", en: "Ceramic Cup #16" }
     description: { ru: "Чашка ручной лепки для ежедневного чая.", en: "Hand-thrown cup for your daily tea." }
+    details:
+      en: "Volume: 280 ml\nHeight: 9 cm\nFood-safe glaze\nMicrowave safe: yes\nDishwasher: gentle mode"
     price: 19
     image: "/images/product-placeholder.svg"
     hasPdf: true

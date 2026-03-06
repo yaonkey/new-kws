@@ -13,6 +13,10 @@ export interface CatalogProduct {
     ru: string
     en: string
   }
+  details?: {
+    ru?: string
+    en?: string
+  }
   price: number | PriceValue
   image: string | string[]
   hasPdf?: boolean

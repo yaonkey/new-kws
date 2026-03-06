@@ -3,24 +3,11 @@ const { t, locale } = useI18n()
 const config = useRuntimeConfig()
 const localePath = useLocalePath()
 
-const { data: posts } = await useAsyncData('blog-posts', () => queryCollection('blog').all())
-
-const getLocalizedText = (
-  value: unknown,
-  currentLocale: string,
-  fallback = '',
-) => {
-  if (typeof value === 'string') {
-    return value
-  }
-
-  if (value && typeof value === 'object') {
-    const dictionary = value as Record<string, string | undefined>
-    return dictionary[currentLocale] || dictionary.ru || dictionary.en || fallback
-  }
-
-  return fallback
-}
+const { data: posts } = await useAsyncData(
+  () => `blog-posts-${locale.value}`,
+  () => queryCollection('blog').where('locale', '=', locale.value as 'ru' | 'en').all(),
+  { watch: [locale] },
+)
 
 const estimateReadingTime = (post: Record<string, any>) => {
   const raw = String(post?.rawbody || '')
@@ -34,8 +21,8 @@ const sortedPosts = computed(() => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map((post) => ({
       ...post,
-      localizedTitle: getLocalizedText(post.title, locale.value, 'Untitled'),
-      localizedExcerpt: getLocalizedText(post.excerpt, locale.value, ''),
+      localizedTitle: post.title || 'Untitled',
+      localizedExcerpt: post.excerpt || '',
       readingTime: estimateReadingTime(post),
     }))
 })

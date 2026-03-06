@@ -19,11 +19,17 @@ export default defineContentConfig({
               ru: z.string(),
               en: z.string(),
             }),
+            details: z.object({
+              ru: z.string().optional(),
+              en: z.string().optional(),
+            }).optional(),
             price: z.union([
               z.number(),
               z.object({
-                rub: z.number(),
-                usd: z.number(),
+                rub: z.number().optional(),
+                usd: z.number().optional(),
+              }).refine((value) => value.rub !== undefined || value.usd !== undefined, {
+                message: 'Either rub or usd must be provided',
               }),
             ]),
             image: z.union([z.string(), z.array(z.string()).min(1)]),
@@ -31,8 +37,10 @@ export default defineContentConfig({
             pdfPrice: z.union([
               z.number(),
               z.object({
-                rub: z.number(),
-                usd: z.number(),
+                rub: z.number().optional(),
+                usd: z.number().optional(),
+              }).refine((value) => value.rub !== undefined || value.usd !== undefined, {
+                message: 'Either rub or usd must be provided',
               }),
             ]).optional(),
           }),
@@ -44,14 +52,9 @@ export default defineContentConfig({
       source: 'blog/**/*.md',
       schema: z.object({
         slug: z.string(),
-        title: z.object({
-          ru: z.string(),
-          en: z.string(),
-        }),
-        excerpt: z.object({
-          ru: z.string(),
-          en: z.string(),
-        }),
+        locale: z.enum(['ru', 'en']),
+        title: z.string(),
+        excerpt: z.string(),
         date: z.string(),
         coverImage: z.string(),
       }),

@@ -32,7 +32,8 @@
     "metaTitle": "Характеристики",
     "metaCategory": "Категория",
     "metaSku": "Артикул",
-    "metaPdf": "PDF"
+    "metaPdf": "PDF",
+    "extraDetailsTitle": "Дополнительное описание"
   },
   "blog": {
     "title": "Блог мастерской",
@@ -58,7 +59,7 @@
     "description": "Мы создаем handmade-изделия из натуральных материалов, уделяя внимание деталям, долговечности и эстетике."
   },
   "footer": {
-    "copyright": "© Handmade Workshop. Все права защищены."
+    "copyright": "© Kofworkshop. Все права защищены."
   },
   "seo": {
     "homeTitle": "Главная",

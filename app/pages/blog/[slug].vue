@@ -4,33 +4,22 @@ const { t, locale } = useI18n()
 const config = useRuntimeConfig()
 const localePath = useLocalePath()
 
-const { data: post } = await useAsyncData(`blog-${String(route.params.slug)}`, () =>
-  queryCollection('blog').where('slug', '=', String(route.params.slug)).first(),
+const { data: post } = await useAsyncData(
+  () => `blog-${String(route.params.slug)}-${locale.value}`,
+  () =>
+    queryCollection('blog')
+      .where('slug', '=', String(route.params.slug))
+      .where('locale', '=', locale.value as 'ru' | 'en')
+      .first(),
+  { watch: [locale] },
 )
-
-const getLocalizedText = (
-  value: unknown,
-  currentLocale: string,
-  fallback = '',
-) => {
-  if (typeof value === 'string') {
-    return value
-  }
-
-  if (value && typeof value === 'object') {
-    const dictionary = value as Record<string, string | undefined>
-    return dictionary[currentLocale] || dictionary.ru || dictionary.en || fallback
-  }
-
-  return fallback
-}
 
 if (!post.value) {
   throw createError({ statusCode: 404, statusMessage: t('blog.notFound') })
 }
 
-const localizedTitle = computed(() => getLocalizedText(post.value?.title, locale.value, 'Untitled'))
-const localizedExcerpt = computed(() => getLocalizedText(post.value?.excerpt, locale.value, ''))
+const localizedTitle = computed(() => post.value?.title || 'Untitled')
+const localizedExcerpt = computed(() => post.value?.excerpt || '')
 const readingTime = computed(() => {
   const raw = String(post.value?.rawbody || '')
   const words = raw.trim().split(/\s+/).filter(Boolean).length
@@ -39,13 +28,17 @@ const readingTime = computed(() => {
 
 const tocLinks = computed(() => post.value?.body?.toc?.links ?? [])
 
-const { data: allPosts } = await useAsyncData('blog-posts-related', () => queryCollection('blog').all())
+const { data: allPosts } = await useAsyncData(
+  () => `blog-posts-related-${locale.value}`,
+  () => queryCollection('blog').where('locale', '=', locale.value as 'ru' | 'en').all(),
+  { watch: [locale] },
+)
 const relatedPosts = computed(() => {
   const currentSlug = String(route.params.slug)
   const list = (allPosts.value ?? []).filter((item) => item.slug !== currentSlug)
   return list.slice(0, 3).map((item) => ({
     ...item,
-    localizedTitle: getLocalizedText(item.title, locale.value, 'Untitled'),
+    localizedTitle: item.title || 'Untitled',
   }))
 })
 

@@ -25,6 +25,15 @@ const product = computed<CatalogProduct | null>(() => {
 
 const productTitle = computed(() => product.value?.title[locale.value as 'ru' | 'en'] ?? '')
 const productDescription = computed(() => product.value?.description[locale.value as 'ru' | 'en'] ?? '')
+const productDetails = computed(() => {
+  if (!product.value?.details) {
+    return ''
+  }
+  if (locale.value === 'ru') {
+    return product.value.details.ru || ''
+  }
+  return product.value.details.en || ''
+})
 const activeImage = ref('')
 const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? { rub: 110, usd: 2 }, locale.value))
 const productPrice = computed(() => (product.value ? getPriceByLocale(product.value.price, locale.value) : 0))
@@ -129,8 +138,15 @@ useHead({
           <dl class="space-y-1 text-stone-700">
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productCategoryLabel }}</dd></div>
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product!.slug }}</dd></div>
-            <div class="flex justify-between gap-2"><dt>{{ t('products.metaPdf') }}</dt><dd>{{ product?.hasPdf ? 'Yes' : 'No' }}</dd></div>
           </dl>
+        </section>
+
+        <section
+          v-if="productDetails"
+          class="rounded-xl border border-stone-200 bg-white p-4 text-sm"
+        >
+          <h2 class="mb-3 font-semibold text-stone-900">{{ t('products.extraDetailsTitle') }}</h2>
+          <p class="whitespace-pre-line leading-relaxed text-stone-700">{{ productDetails }}</p>
         </section>
 
         <aside class="sticky top-24 rounded-xl border border-stone-200 bg-white p-4 shadow-sm">

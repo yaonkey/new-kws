@@ -5,6 +5,13 @@ export interface PriceValue {
   usd: number
 }
 
+export interface PartialPriceValue {
+  rub?: number
+  usd?: number
+}
+
+const USD_TO_RUB_RATE = 90
+
 const CATEGORY_LABELS: Record<string, { ru: string; en: string }> = {
   knitted: { ru: 'Вязаные изделия', en: 'Knitted' },
   wooden: { ru: 'Деревянные игрушки', en: 'Wooden' },
@@ -48,17 +55,42 @@ export const getCategoryLabel = (category: string, locale: string) => {
   return CATEGORY_LABELS[category]?.[locale as 'ru' | 'en'] || category
 }
 
-export const normalizePriceValue = (value: number | PriceValue): PriceValue => {
+const roundUsd = (value: number) => Math.round(value * 100) / 100
+const roundRub = (value: number) => Math.round(value)
+
+export const normalizePriceValue = (value: number | PriceValue | PartialPriceValue): PriceValue => {
   if (typeof value === 'number') {
+    // Backward compatibility: numeric value is treated as USD.
     return {
-      usd: value,
-      rub: Math.round(value * 90),
+      usd: roundUsd(value),
+      rub: roundRub(value * USD_TO_RUB_RATE),
+    }
+  }
+
+  if (value.usd !== undefined && value.rub !== undefined) {
+    return {
+      usd: roundUsd(value.usd),
+      rub: roundRub(value.rub),
+    }
+  }
+
+  if (value.usd !== undefined) {
+    return {
+      usd: roundUsd(value.usd),
+      rub: roundRub(value.usd * USD_TO_RUB_RATE),
+    }
+  }
+
+  if (value.rub !== undefined) {
+    return {
+      rub: roundRub(value.rub),
+      usd: roundUsd(value.rub / USD_TO_RUB_RATE),
     }
   }
 
   return {
-    rub: value.rub,
-    usd: value.usd,
+    rub: 0,
+    usd: 0,
   }
 }
 
@@ -68,7 +100,7 @@ export const getPriceByLocale = (value: number | PriceValue, locale: string) => 
 }
 
 export const getCurrencyByLocale = (locale: string) => {
-  return locale === 'ru' ? 'RUB' : 'USD'
+  return locale === 'ru' ? 'РУБ' : 'USD'
 }
 
 export const getProductImages = (product: CatalogProduct) => {

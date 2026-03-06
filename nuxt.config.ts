@@ -13,7 +13,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ru',
       },
-      titleTemplate: '%s | Handmade Workshop',
+      titleTemplate: '%s | Kofworkshop',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {

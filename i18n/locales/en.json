@@ -32,7 +32,8 @@
     "metaTitle": "Product metadata",
     "metaCategory": "Category",
     "metaSku": "SKU",
-    "metaPdf": "PDF"
+    "metaPdf": "PDF",
+    "extraDetailsTitle": "Additional details"
   },
   "blog": {
     "title": "Workshop Blog",
@@ -58,7 +59,7 @@
     "description": "We create handmade products from natural materials with a focus on quality, longevity, and thoughtful design."
   },
   "footer": {
-    "copyright": "© Handmade Workshop. All rights reserved."
+    "copyright": "© Kofworkshop. All rights reserved."
   },
   "seo": {
     "homeTitle": "Home",

@@ -17,12 +17,10 @@ export default defineEventHandler(async (event) => {
   )
 
   const blogPosts = await queryCollection(event, 'blog').all()
-  const blogUrls = locales.flatMap((locale) =>
-    blogPosts.map((post: { slug: string; date?: string }) => ({
-      loc: `/${locale}/blog/${post.slug}`,
-      lastmod: post.date,
-    })),
-  )
+  const blogUrls = blogPosts.map((post: { slug: string; date?: string; locale?: string }) => ({
+    loc: `/${post.locale === 'en' ? 'en' : 'ru'}/blog/${post.slug}`,
+    lastmod: post.date,
+  }))
 
   return [...localizedStaticUrls, ...productUrls, ...blogUrls]
 })
