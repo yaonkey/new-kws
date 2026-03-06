@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import type { CatalogProduct } from '~/composables/useCart'
 import {
-  getCategoryLabel,
   getProductBasePrice,
   getProductEffectivePrice,
   hasSalePrice,
   getPriceByLocale,
   getPrimaryProductImage,
-  getProductCategories,
   getProductImages,
   getProductLabels,
 } from '~/composables/useCatalog'
@@ -19,7 +17,6 @@ const props = defineProps<{
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const cart = useCart()
-const currentLocale = computed(() => locale.value || 'ru')
 
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
 const coverImage = computed(() => getPrimaryProductImage(props.product))
@@ -28,9 +25,6 @@ const localizedPrice = computed(() => getPriceByLocale(getProductEffectivePrice(
 const localizedBasePrice = computed(() => getPriceByLocale(getProductBasePrice(props.product), locale.value))
 const isOnSale = computed(() => hasSalePrice(props.product))
 const badges = computed(() => getProductLabels(props.product, locale.value))
-const labelCategories = computed(() =>
-  getProductCategories(props.product).map((category) => getCategoryLabel(category ?? 'other', currentLocale.value ?? 'ru')),
-)
 const canBuyProduct = computed(() => !props.product.is_schema)
 const canBuyPdf = computed(() => Boolean(props.product.hasPdf || props.product.is_schema))
 
@@ -73,7 +67,6 @@ const handleQuickAdd = () => {
       </div>
       <div class="space-y-3 p-4">
         <h3 class="line-clamp-2 text-base font-semibold text-stone-900 md:text-lg">{{ productTitle }}</h3>
-        <p class="line-clamp-1 text-xs text-stone-500">{{ labelCategories.join(', ') || '—' }}</p>
         <p v-if="isOnSale" class="flex items-baseline gap-2">
           <span class="text-sm font-semibold text-red-600 line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
           <span class="text-lg font-bold text-emerald-700">{{ localizedPrice }} {{ t('currency') }}</span>

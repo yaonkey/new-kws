@@ -403,73 +403,24 @@ products:
     image: "/images/product-placeholder.svg"
 
   - slug: "knitted-schema-61"
-    categories: ["patterns", "schema", "knitted"]
     labels: ["new"]
     is_schema: true
     title: { ru: "PDF-описание: Вязаная кукла №61", en: "PDF Pattern: Knitted Doll #61" }
     description: { ru: "Цифровая схема по вязанию куклы. Физическая игрушка не входит в заказ.", en: "Digital knitting pattern for a doll. Physical toy is not included." }
-    price: { rub: 160 }
+    price: { rub: 160, usd: 2 }
     image:
       - "/images/product-placeholder-2.svg"
       - "/images/product-placeholder.svg"
-    hasPdf: true
 
   - slug: "macrame-schema-62"
-    categories: ["patterns", "schema", "macrame"]
     is_schema: true
     title: { ru: "PDF-описание: Макраме-декор №62", en: "PDF Pattern: Macrame Decor #62" }
     description: { ru: "Схема плетения макраме с пошаговыми инструкциями и списком материалов.", en: "Macrame knot pattern with step-by-step instructions and materials list." }
-    price: { usd: 2 }
+    price: { rub: 160, usd: 2 }
     image:
       - "/images/product-placeholder-3.svg"
       - "/images/product-placeholder.svg"
       - "/images/product-placeholder-2.svg"
-    hasPdf: true
-
-  - slug: "wooden-toy-63"
-    categories: ["wooden", "toys", "eco"]
-    labels: ["new"]
-    title: { ru: "Деревянная игрушка №63", en: "Wooden Toy #63" }
-    description: { ru: "Тестовый товар для проверки нескольких категорий и label-бейджей.", en: "Test item to preview multi-category filtering and custom labels." }
-    price: { rub: 2790, usd: 31 }
-    image:
-      - "/images/product-placeholder.svg"
-      - "/images/product-placeholder-2.svg"
-    hasPdf: true
-    pdfPrice: { rub: 160, usd: 2 }
-
-  - slug: "knitted-schema-64"
-    categories: ["patterns", "schema", "knitted"]
-    labels: ["new", "hit"]
-    is_schema: true
-    title: { ru: "PDF-описание: Вязаный шарф №64", en: "PDF Pattern: Knitted Scarf #64" }
-    description: { ru: "Отдельно продаваемая цифровая схема. Покупка физического изделия недоступна.", en: "Standalone digital pattern. Physical item purchase is disabled." }
-    price: { rub: 110 }
-    image:
-      - "/images/product-placeholder-2.svg"
-      - "/images/product-placeholder-3.svg"
-      - "/images/product-placeholder.svg"
-    hasPdf: true
-
-  - slug: "ceramic-cup-65"
-    categories: ["ceramic", "kitchen", "gift"]
-    labels: ["new"]
-    title: { ru: "Керамическая чашка №65", en: "Ceramic Cup #65" }
-    description: { ru: "Тестовая карточка с тремя категориями и одной пользовательской меткой.", en: "Test card with three categories and one custom badge." }
-    price: { usd: 24 }
-    image: "/images/product-placeholder-3.svg"
-    hasPdf: true
-    pdfPrice: { rub: 160 }
-
-  - slug: "macrame-decor-66"
-    categories: ["macrame", "decor", "holiday"]
-    labels: ["new"]
-    title: { ru: "Макраме-декор №66", en: "Macrame Decor #66" }
-    description: { ru: "Наглядный пример карточки с несколькими label и категориями.", en: "Visual example card with multiple labels and categories." }
-    price: { rub: 3150, usd: 35 }
-    image:
-      - "/images/product-placeholder.svg"
-      - "/images/product-placeholder-3.svg"
 ---
 
 # Product Catalog

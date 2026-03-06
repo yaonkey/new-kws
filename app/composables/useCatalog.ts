@@ -46,7 +46,7 @@ const getLocalizedLabel = (key: string, locale: string) => LABELS[key]?.[locale 
 
 export const getProductLabelKeys = (product: CatalogProduct) => {
   const keys = new Set((product.labels || []).map(getCategoryKey))
-  if (product.hasPdf || product.is_schema) {
+  if (product.hasPdf && !product.is_schema) {
     keys.add('pdf')
   }
   if (product.salePrice) {
