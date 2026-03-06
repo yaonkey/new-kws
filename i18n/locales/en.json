@@ -1,0 +1,70 @@
+{
+  "currency": "USD",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "blog": "Blog",
+    "about": "About",
+    "cart": "Cart"
+  },
+  "home": {
+    "title": "Handmade Products with Soul",
+    "subtitle": "A boutique workshop for handmade toys, decor, and gift items.",
+    "ctaProducts": "View catalog",
+    "ctaBlog": "Read blog",
+    "statsTitle": "What you get",
+    "statsProducts": "60+ products",
+    "statsShipping": "Worldwide shipping",
+    "statsCustom": "Custom orders"
+  },
+  "products": {
+    "title": "Product Catalog",
+    "subtitle": "Explore ready-made products or get ideas for your custom order.",
+    "details": "View details",
+    "addToCart": "Add to cart",
+    "addPdfToCart": "Add PDF description",
+    "pdfAvailable": "PDF description available",
+    "notFound": "Product not found",
+    "searchPlaceholder": "Search by title or description",
+    "allCategories": "All categories",
+    "onlyPdf": "Only with PDF description",
+    "results": "Products found",
+    "metaTitle": "Product metadata",
+    "metaCategory": "Category",
+    "metaSku": "SKU",
+    "metaPdf": "PDF"
+  },
+  "blog": {
+    "title": "Workshop Blog",
+    "subtitle": "Behind-the-scenes stories and tips for handmade care.",
+    "readMore": "Read article",
+    "notFound": "Article not found",
+    "readingTime": "min read",
+    "toc": "Table of contents",
+    "related": "Related posts"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Go to catalog",
+    "remove": "Remove",
+    "pdfItem": "Digital item: PDF",
+    "total": "Total",
+    "checkout": "Checkout via Telegram",
+    "decrease": "Decrease quantity"
+  },
+  "about": {
+    "title": "About the Workshop",
+    "description": "We create handmade products from natural materials with a focus on quality, longevity, and thoughtful design."
+  },
+  "footer": {
+    "copyright": "© Handmade Workshop. All rights reserved."
+  },
+  "seo": {
+    "homeTitle": "Home",
+    "productsTitle": "Product Catalog",
+    "blogTitle": "Blog",
+    "cartTitle": "Cart",
+    "aboutTitle": "About"
+  }
+}

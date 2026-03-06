@@ -1,0 +1,11 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F4F1EC"/>
+  <rect x="180" y="140" width="840" height="620" rx="28" fill="#FFFFFF"/>
+  <circle cx="430" cy="430" r="120" fill="#D9CDBB"/>
+  <rect x="610" y="330" width="260" height="30" rx="8" fill="#E7DFD2"/>
+  <rect x="610" y="390" width="220" height="30" rx="8" fill="#E7DFD2"/>
+  <rect x="610" y="450" width="180" height="30" rx="8" fill="#E7DFD2"/>
+  <text x="600" y="660" text-anchor="middle" fill="#766B5C" font-size="46" font-family="Arial, sans-serif">
+    Handmade Product
+  </text>
+</svg>

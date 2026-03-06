@@ -1,0 +1,70 @@
+{
+  "currency": "RUB",
+  "nav": {
+    "home": "Главная",
+    "products": "Товары",
+    "blog": "Блог",
+    "about": "О мастерской",
+    "cart": "Корзина"
+  },
+  "home": {
+    "title": "Ручные изделия с душой",
+    "subtitle": "Авторская мастерская: игрушки, декор и подарки ручной работы.",
+    "ctaProducts": "Смотреть каталог",
+    "ctaBlog": "Читать блог",
+    "statsTitle": "Что вы найдете",
+    "statsProducts": "60+ изделий",
+    "statsShipping": "Доставка по миру",
+    "statsCustom": "Индивидуальные заказы"
+  },
+  "products": {
+    "title": "Каталог изделий",
+    "subtitle": "Выберите готовое изделие или вдохновитесь для персонального заказа.",
+    "details": "Подробнее",
+    "addToCart": "Добавить в корзину",
+    "addPdfToCart": "Добавить PDF-описание",
+    "pdfAvailable": "Доступно PDF-описание",
+    "notFound": "Товар не найден",
+    "searchPlaceholder": "Поиск по названию или описанию",
+    "allCategories": "Все категории",
+    "onlyPdf": "Только с PDF-описанием",
+    "results": "Найдено товаров",
+    "metaTitle": "Характеристики",
+    "metaCategory": "Категория",
+    "metaSku": "Артикул",
+    "metaPdf": "PDF"
+  },
+  "blog": {
+    "title": "Блог мастерской",
+    "subtitle": "Истории создания и советы по уходу за handmade-изделиями.",
+    "readMore": "Читать статью",
+    "notFound": "Статья не найдена",
+    "readingTime": "мин чтения",
+    "toc": "Содержание",
+    "related": "Похожие статьи"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "continueShopping": "Перейти в каталог",
+    "remove": "Удалить",
+    "pdfItem": "Цифровой товар: PDF",
+    "total": "Итого",
+    "checkout": "Оформить через Telegram",
+    "decrease": "Уменьшить количество"
+  },
+  "about": {
+    "title": "О мастерской",
+    "description": "Мы создаем handmade-изделия из натуральных материалов, уделяя внимание деталям, долговечности и эстетике."
+  },
+  "footer": {
+    "copyright": "© Handmade Workshop. Все права защищены."
+  },
+  "seo": {
+    "homeTitle": "Главная",
+    "productsTitle": "Каталог товаров",
+    "blogTitle": "Блог",
+    "cartTitle": "Корзина",
+    "aboutTitle": "О мастерской"
+  }
+}

@@ -1,0 +1,10 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" fill="#EFE8DC"/>
+  <rect x="120" y="90" width="960" height="520" rx="30" fill="#FFFFFF"/>
+  <rect x="220" y="210" width="760" height="42" rx="10" fill="#D6C7B2"/>
+  <rect x="220" y="286" width="620" height="30" rx="10" fill="#E5D9C8"/>
+  <rect x="220" y="340" width="560" height="30" rx="10" fill="#E5D9C8"/>
+  <text x="600" y="470" text-anchor="middle" fill="#736553" font-size="44" font-family="Arial, sans-serif">
+    Workshop Blog
+  </text>
+</svg>

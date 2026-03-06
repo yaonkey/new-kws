@@ -1,0 +1,19 @@
+{
+  "name": "kws",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.12.0",
+    "@nuxtjs/i18n": "^10.1.3",
+    "@nuxtjs/sitemap": "^7.4.7",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "better-sqlite3": "^12.6.2",
+    "nuxt": "^4.3.1"
+  }
+}
