@@ -26,7 +26,7 @@
     "addPdfToCart": "Добавить PDF-описание",
     "pdfAvailable": "Доступно PDF-описание",
     "notFound": "Товар не найден",
-    "searchPlaceholder": "Поиск по названию или описанию",
+    "searchPlaceholder": "Поиск...",
     "allCategories": "Все метки",
     "onlyPdf": "Только с PDF-описанием",
     "results": "Найдено товаров",
@@ -39,7 +39,7 @@
   "patterns": {
     "title": "PDF-описания",
     "subtitle": "Отдельная витрина цифровых схем и описаний.",
-    "searchPlaceholder": "Поиск по названию или описанию",
+    "searchPlaceholder": "Поиск...",
     "results": "Найдено PDF-описаний",
     "loading": "Загрузка PDF-каталога..."
   },

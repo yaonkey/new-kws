@@ -26,7 +26,7 @@
     "addPdfToCart": "Add PDF description",
     "pdfAvailable": "PDF description available",
     "notFound": "Product not found",
-    "searchPlaceholder": "Search by title or description",
+    "searchPlaceholder": "Search...",
     "allCategories": "All labels",
     "onlyPdf": "Only with PDF description",
     "results": "Products found",
@@ -39,7 +39,7 @@
   "patterns": {
     "title": "PDF Patterns",
     "subtitle": "A separate storefront for digital descriptions and patterns.",
-    "searchPlaceholder": "Search by title or description",
+    "searchPlaceholder": "Search...",
     "results": "PDF patterns found",
     "loading": "Loading PDF catalog..."
   },
