@@ -28,10 +28,13 @@ const loadProductsCatalog = async () => {
   return all.find((entry) => Array.isArray(entry.products)) || { products: [] }
 }
 
-const { data: catalog, refresh } = await useAsyncData(
+const { data: catalog, status, refresh } = await useAsyncData(
   () => `products-catalog-item-${locale.value}`,
   loadProductsCatalog,
-  { watch: [locale] },
+  {
+    watch: [locale],
+    default: () => ({ products: [] }),
+  },
 )
 
 const product = computed<CatalogProduct | null>(() => {
@@ -87,10 +90,6 @@ onMounted(async () => {
   }
 })
 
-if (!product.value) {
-  throw createError({ statusCode: 404, statusMessage: t('products.notFound') })
-}
-
 useSeoMeta({
   title: productTitle,
   description: productDescription,
@@ -136,14 +135,14 @@ useHead({
       <span class="text-stone-700">{{ productTitle }}</span>
     </nav>
 
-    <article class="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+    <article v-if="product" class="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
       <div>
         <div
           class="mt-3 grid gap-3"
           :class="galleryImages.length > 1 ? 'md:grid-cols-[1fr_110px]' : 'grid-cols-1'"
         >
           <img
-            :src="activeImage || getPrimaryProductImage(product!)"
+            :src="activeImage || getPrimaryProductImage(product)"
             :alt="productTitle"
             loading="lazy"
             class="h-[320px] w-full rounded-2xl border border-stone-200 object-cover bg-white sm:h-[420px] md:h-[520px]"
@@ -192,7 +191,7 @@ useHead({
           <h2 class="mb-3 font-semibold text-stone-900">{{ t('products.metaTitle') }}</h2>
           <dl class="space-y-1 text-stone-700">
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productLabelCategories }}</dd></div>
-            <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product!.slug }}</dd></div>
+            <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product.slug }}</dd></div>
           </dl>
         </section>
 
@@ -208,7 +207,7 @@ useHead({
           <button
             v-if="canBuyProduct"
             class="w-full rounded-lg bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            @click="cart.addItem(product!); drawer.open()"
+            @click="cart.addItem(product); drawer.open()"
           >
             {{ t('products.addToCart') }}
           </button>
@@ -216,12 +215,18 @@ useHead({
             v-if="canBuyPdf"
             class="w-full rounded-lg border border-emerald-700 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
             :class="canBuyProduct ? 'mt-2' : ''"
-            @click="cart.addPdfItem(product!); drawer.open()"
+            @click="cart.addPdfItem(product); drawer.open()"
           >
             {{ t('products.addPdfToCart') }} ({{ pdfPrice }} {{ t('currency') }})
           </button>
         </aside>
       </div>
     </article>
+    <div v-else-if="status === 'pending'" class="rounded-xl border border-stone-200 bg-white p-6 text-sm text-stone-500">
+      {{ t('patterns.loading') }}
+    </div>
+    <div v-else class="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
+      {{ t('products.notFound') }}
+    </div>
   </div>
 </template>
