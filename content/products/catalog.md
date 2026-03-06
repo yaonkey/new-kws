@@ -9,7 +9,7 @@ products:
     price: { rub: 1500, usd: 25 }
     image: "/images/product-placeholder.svg"
 
-  - slug: "the-secret-frog-box"
+  - slug: "secret-frog-box"
     categories: ["knitted", "toys", "eco"]
     title: { ru: "Секретная лягушка", en: "The Secret Frog Box" }
     description: { ru: "Кукла в пастельной палитре для детской комнаты.", en: "Pastel-tone doll for kids room decor." }
@@ -296,7 +296,7 @@ products:
     price: { rub: 400, usd: 7}
     image: "/images/product-placeholder.svg"
 
-  - slug: "yuki-the-cat"
+  - slug: "yuki-cat"
     title: { ru: "Котик Юки", en: "Yuki the cat" }
     description: { ru: "Универсальный цвет для повседневности.", en: "Versatile tone for everyday use." }
     price: { rub: 1500, usd: 25}
@@ -309,20 +309,20 @@ products:
     price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
 
-  - slug: "the-frog-in-love"
+  - slug: "frog-in-love"
     title: { ru: "Влюбленная лягушка", en: "The Frog in Love" }
     description: { ru: "Стильный аксессуар ручной работы.", en: "Stylish handmade wardrobe piece." }
     price: { rub: 1700, usd: 27}
     image: "/images/product-placeholder.svg"
 
-  - slug: "glinda-the-bunny"
+  - slug: "glinda-bunny"
     title: { ru: "Зайка Глинда", en: "Glinda the Bunny" }
     description: { ru: "Набор для сервировки в эко-стиле.", en: "Eco-style table setting decor set." }
     price: { rub: 2000, usd: 33}
     image: "/images/product-placeholder.svg"
     hasPdf: true
 
-  - slug: "the-raccoon"
+  - slug: "raccoon"
     title: { ru: "Енот", en: "The Raccoon" }
     description: { ru: "Ручная отделка и натуральные ткани.", en: "Hand-finished with natural fabrics." }
     price: { rub: 1800, usd: 30}
@@ -334,13 +334,13 @@ products:
     price: { rub: 2000, usd: 33}
     image: "/images/product-placeholder.svg"
 
-  - slug: "woof-the-kitten"
+  - slug: "woof-kitten"
     title: { ru: "Котенок Гав!", en: "Woof The Kitten" }
     description: { ru: "Практичный и эстетичный формат.", en: "Practical and aesthetic format." }
     price: { rub: 1400, usd: 25}
     image: "/images/product-placeholder.svg"
 
-  - slug: "robin-the-kitten"
+  - slug: "robin-kitten"
     title: { ru: "Котенок Робин", en: "Robin The Kitten" }
     description: { ru: "Подходит для праздничных сервировок.", en: "Great for festive table settings." }
     price: { rub: 2200, usd: 35}
@@ -360,7 +360,7 @@ products:
     image: "/images/product-placeholder.svg"
     hasPdf: true
 
-  - slug: "the-frog"
+  - slug: "frog"
     title: { ru: "ЛЯгушенок", en: "The Frog" }
     description: { ru: "Упакован и готов к отправке.", en: "Packed and ready for shipping." }
     price: { rub: 1600, usd: 25}
@@ -378,7 +378,7 @@ products:
     price: { rub: 2200, usd: 35}
     image: "/images/product-placeholder.svg"
 
-  - slug: "silver-the-kitty"
+  - slug: "silver-kitty"
     title: { ru: "Котик Сильвер", en: "Silver The Kitten" }
     description: { ru: "Декор ручной работы для праздничного настроения.", en: "Handmade ornament for festive vibes." }
     price: { rub: 1750, usd: 27}
@@ -391,7 +391,7 @@ products:
     price: { rub: 1650, usd: 25}
     image: "/images/product-placeholder.svg"
 
-  - slug: "dirty-the-kitten"
+  - slug: "dirty-kitten"
     title: { ru: "Котенок Грязнуля", en: "Dirty The Kitten" }
     description: { ru: "Мини-серия с авторским дизайном.", en: "Mini series with signature style." }
     price: { rub: 1800, usd: 30}
