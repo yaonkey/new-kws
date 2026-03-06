@@ -35,6 +35,15 @@ export default defineContentConfig({
                 message: 'Either rub or usd must be provided',
               }),
             ]),
+            salePrice: z.union([
+              z.number(),
+              z.object({
+                rub: z.number().optional(),
+                usd: z.number().optional(),
+              }).refine((value) => value.rub !== undefined || value.usd !== undefined, {
+                message: 'Either rub or usd must be provided',
+              }),
+            ]).optional(),
             image: z.union([z.string(), z.array(z.string()).min(1)]),
             hasPdf: z.boolean().optional(),
             pdfPrice: z.union([

@@ -27,11 +27,11 @@
     "pdfAvailable": "Доступно PDF-описание",
     "notFound": "Товар не найден",
     "searchPlaceholder": "Поиск по названию или описанию",
-    "allCategories": "Все категории",
+    "allCategories": "Все метки",
     "onlyPdf": "Только с PDF-описанием",
     "results": "Найдено товаров",
     "metaTitle": "Характеристики",
-    "metaCategory": "Категория",
+    "metaCategory": "Метки",
     "metaSku": "Артикул",
     "metaPdf": "PDF",
     "extraDetailsTitle": "Дополнительное описание"

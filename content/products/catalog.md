@@ -11,6 +11,7 @@ products:
 
   - slug: "secret-frog-box"
     categories: ["knitted", "toys", "eco"]
+    labels: ["gacha"]
     title: { ru: "Секретная лягушка", en: "The Secret Frog Box" }
     description: { ru: "Кукла в пастельной палитре для детской комнаты.", en: "Pastel-tone doll for kids room decor." }
     price: { rub: 400, usd: 5 }
@@ -39,11 +40,12 @@ products:
     title: { ru: "Лошадка-качалка", en: "Rocking horse" }
     description: { ru: "Подходит как подарок для праздника.", en: "Great gift option for special occasions." }
     price: { rub: 1800, usd: 30 }
+    salePrice: { rub: 1550 }
     image: "/images/product-placeholder.svg"
 
   - slug: "totoro-keychain"
     categories: ["knitted", "toys", "eco"]
-    labels: ["hit"]
+    labels: ["hit", "keychain"]
     title: { ru: "Брелок Тоторо", en: "Totoro keychain" }
     description: { ru: "Экологичная игрушка из натурального дерева.", en: "Eco-friendly toy made from natural wood." }
     price: { rub: 550, usd: 10 }
@@ -171,6 +173,7 @@ products:
     image: "/images/product-placeholder.svg"
 
   - slug: "dove-keychain"
+    labels: ["keychain"]
     title: { ru: "Брелок голубь", en: "Dove keychain" }
     description: { ru: "Изготовлена из мягкого шерстяного фетра.", en: "Crafted from soft wool felt." }
     price: { rub: 450, usd: 7 }
@@ -228,7 +231,7 @@ products:
     image: "/images/product-placeholder.svg"
 
   - slug: "kitty-fly-agaric"
-    title: { ru: "Котик Мухомур", en: "Kitty Fly Agaric" }
+    title: { ru: "Котик Мухомор", en: "Fly Agaric Kitty" }
     description: { ru: "Цветочные мотивы ручной вышивки.", en: "Floral motifs stitched by hand." }
     price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
@@ -253,7 +256,7 @@ products:
     image: "/images/product-placeholder.svg"
 
   - slug: "cat-in-a-fish-hat"
-    title: { ru: "Котик в шапке рыбке", en: "A cat in a fish hat" }
+    title: { ru: "Котик в шапке рыбки", en: "A cat in a fish hat" }
     description: { ru: "Свечи ручной заливки с мягким ароматом.", en: "Hand-poured candles with gentle scent." }
     price: { rub: 1300, usd: 22}
     image: "/images/product-placeholder.svg"
@@ -291,6 +294,7 @@ products:
     image: "/images/product-placeholder.svg"
 
   - slug: "keychain-cat"
+    labels: ["keychain"]
     title: { ru: "Брелок котик", en: "Keychain cat" }
     description: { ru: "Мягкая пряжа и плотный узор.", en: "Soft yarn with dense knit pattern." }
     price: { rub: 400, usd: 7}
@@ -348,6 +352,7 @@ products:
     hasPdf: true
 
   - slug: "gift-box-51"
+    labels: ["gacha"]
     title: { ru: "Зайчик Фурфур", en: "Furfur the Bunny" }
     description: { ru: "Собранный вручную подарочный комплект.", en: "Curated handmade gift box." }
     price: { rub: 2200, usd: 35}
@@ -361,7 +366,7 @@ products:
     hasPdf: true
 
   - slug: "frog"
-    title: { ru: "ЛЯгушенок", en: "The Frog" }
+    title: { ru: "Лягушенок", en: "The Frog" }
     description: { ru: "Упакован и готов к отправке.", en: "Packed and ready for shipping." }
     price: { rub: 1600, usd: 25}
     image: "/images/product-placeholder.svg"
@@ -423,7 +428,7 @@ products:
 
   - slug: "wooden-toy-63"
     categories: ["wooden", "toys", "eco"]
-    labels: ["new", "limited"]
+    labels: ["new"]
     title: { ru: "Деревянная игрушка №63", en: "Wooden Toy #63" }
     description: { ru: "Тестовый товар для проверки нескольких категорий и label-бейджей.", en: "Test item to preview multi-category filtering and custom labels." }
     price: { rub: 2790, usd: 31 }
@@ -431,11 +436,11 @@ products:
       - "/images/product-placeholder.svg"
       - "/images/product-placeholder-2.svg"
     hasPdf: true
-    pdfPrice: { rub: 160, usd: 1.8 }
+    pdfPrice: { rub: 160, usd: 2 }
 
   - slug: "knitted-schema-64"
     categories: ["patterns", "schema", "knitted"]
-    labels: ["new", "bestseller"]
+    labels: ["new", "hit"]
     is_schema: true
     title: { ru: "PDF-описание: Вязаный шарф №64", en: "PDF Pattern: Knitted Scarf #64" }
     description: { ru: "Отдельно продаваемая цифровая схема. Покупка физического изделия недоступна.", en: "Standalone digital pattern. Physical item purchase is disabled." }
@@ -458,7 +463,7 @@ products:
 
   - slug: "macrame-decor-66"
     categories: ["macrame", "decor", "holiday"]
-    labels: ["new", "handmade"]
+    labels: ["new"]
     title: { ru: "Макраме-декор №66", en: "Macrame Decor #66" }
     description: { ru: "Наглядный пример карточки с несколькими label и категориями.", en: "Visual example card with multiple labels and categories." }
     price: { rub: 3150, usd: 35 }

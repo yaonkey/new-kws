@@ -27,11 +27,11 @@
     "pdfAvailable": "PDF description available",
     "notFound": "Product not found",
     "searchPlaceholder": "Search by title or description",
-    "allCategories": "All categories",
+    "allCategories": "All labels",
     "onlyPdf": "Only with PDF description",
     "results": "Products found",
     "metaTitle": "Product metadata",
-    "metaCategory": "Category",
+    "metaCategory": "Labels",
     "metaSku": "SKU",
     "metaPdf": "PDF",
     "extraDetailsTitle": "Additional details"

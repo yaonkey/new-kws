@@ -1,4 +1,4 @@
-import { getPrimaryProductImage, normalizePriceValue, type PriceValue } from '~/composables/useCatalog'
+import { getPrimaryProductImage, getProductEffectivePrice, normalizePriceValue, type PriceValue } from '~/composables/useCatalog'
 
 export type CartItemKind = 'product' | 'pdf'
 
@@ -21,6 +21,7 @@ export interface CatalogProduct {
     en?: string
   }
   price: number | PriceValue
+  salePrice?: number | PriceValue
   image: string | string[]
   hasPdf?: boolean
   pdfPrice?: number | PriceValue
@@ -117,7 +118,7 @@ export const useCart = () => {
       kind: 'product',
       slug: product.slug,
       title: product.title,
-      price: normalizePriceValue(product.price),
+      price: getProductEffectivePrice(product),
       image: getPrimaryProductImage(product),
       quantity: 1,
     })

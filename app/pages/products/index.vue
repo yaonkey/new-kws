@@ -5,6 +5,7 @@ import {
   getCategoryLabel,
   getLocalizedField,
   getPriceByLocale,
+  getProductEffectivePrice,
   getProductCategories,
 } from '~/composables/useCatalog'
 
@@ -32,13 +33,13 @@ const { data: catalog, refresh } = await useAsyncData(
 
 const products = computed<CatalogProduct[]>(() => (catalog.value?.products ?? []).filter((product) => !product.is_schema))
 const searchQuery = ref('')
-const selectedCategory = ref('all')
+const selectedLabel = ref('all')
 
 const priceBounds = computed(() => {
   if (!products.value.length) {
     return { min: 0, max: 0 }
   }
-  const prices = products.value.map((product) => product.price)
+  const prices = products.value.map((product) => getProductEffectivePrice(product))
   const localizedPrices = prices.map((price) => getPriceByLocale(price, locale.value))
   return { min: Math.min(...localizedPrices), max: Math.max(...localizedPrices) }
 })
@@ -54,16 +55,16 @@ watchEffect(() => {
 })
 
 const categories = computed(() => {
-  const categoryMap = new Map<string, string>()
+  const labelMap = new Map<string, string>()
   products.value.forEach((product) => {
-    getProductCategories(product).forEach((category) => {
-      const key = getCategoryKey(category)
-      if (!categoryMap.has(key)) {
-        categoryMap.set(key, getCategoryLabel(category, locale.value))
+    getProductCategories(product).forEach((label) => {
+      const key = getCategoryKey(label)
+      if (!labelMap.has(key)) {
+        labelMap.set(key, getCategoryLabel(label, locale.value))
       }
     })
   })
-  return Array.from(categoryMap.entries())
+  return Array.from(labelMap.entries())
     .map(([key, label]) => ({ key, label }))
     .sort((a, b) => a.label.localeCompare(b.label))
 })
@@ -73,10 +74,10 @@ const filteredProducts = computed(() => {
   return products.value.filter((product) => {
     const localizedTitle = getLocalizedField(product.title, locale.value).toLowerCase()
     const localizedDescription = getLocalizedField(product.description, locale.value).toLowerCase()
-    const productCategoryKeys = getProductCategories(product).map((category) => getCategoryKey(category))
+    const productLabelKeys = getProductCategories(product).map((label) => getCategoryKey(label))
     const matchesSearch = !query || localizedTitle.includes(query) || localizedDescription.includes(query)
-    const matchesCategory = selectedCategory.value === 'all' || productCategoryKeys.includes(selectedCategory.value)
-    const productPrice = getPriceByLocale(product.price, locale.value)
+    const matchesCategory = selectedLabel.value === 'all' || productLabelKeys.includes(selectedLabel.value)
+    const productPrice = getPriceByLocale(getProductEffectivePrice(product), locale.value)
     const matchesPrice = productPrice >= minPrice.value && productPrice <= maxPrice.value
     return matchesSearch && matchesCategory && matchesPrice
   })
@@ -117,7 +118,7 @@ useHead({
           :placeholder="t('products.searchPlaceholder')"
           class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600"
         />
-        <select v-model="selectedCategory" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600">
+        <select v-model="selectedLabel" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600">
           <option value="all">{{ t('products.allCategories') }}</option>
           <option v-for="category in categories" :key="category.key" :value="category.key">
             {{ category.label }}

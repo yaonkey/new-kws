@@ -12,27 +12,6 @@ export interface PartialPriceValue {
 
 const USD_TO_RUB_RATE = 90
 
-const CATEGORY_LABELS: Record<string, { ru: string; en: string }> = {
-  knitted: { ru: 'Вязаные изделия', en: 'Knitted' },
-  wooden: { ru: 'Деревянные игрушки', en: 'Wooden' },
-  macrame: { ru: 'Макраме', en: 'Macrame' },
-  ceramic: { ru: 'Керамика', en: 'Ceramic' },
-  felt: { ru: 'Фетр', en: 'Felt' },
-  linen: { ru: 'Лен', en: 'Linen' },
-  embroidery: { ru: 'Вышивка', en: 'Embroidery' },
-  candles: { ru: 'Свечи', en: 'Candles' },
-  wool: { ru: 'Шерстяные изделия', en: 'Wool' },
-  table: { ru: 'Декор стола', en: 'Table Decor' },
-  gift: { ru: 'Подарочные боксы', en: 'Gift Boxes' },
-  holiday: { ru: 'Праздничный декор', en: 'Holiday' },
-  patterns: { ru: 'PDF-описания', en: 'PDF Patterns' },
-  schema: { ru: 'Схемы', en: 'Patterns' },
-  toys: { ru: 'Игрушки', en: 'Toys' },
-  eco: { ru: 'Эко', en: 'Eco' },
-  kitchen: { ru: 'Кухня', en: 'Kitchen' },
-  decor: { ru: 'Декор', en: 'Decor' },
-}
-
 export const getLocalizedField = (
   value: unknown,
   locale: string,
@@ -54,33 +33,38 @@ const normalizeTerm = (value: string) => value.trim().toLowerCase()
 
 const LABELS: Record<string, { ru: string; en: string }> = {
   new: { ru: 'Новинка', en: 'New' },
-  bestseller: { ru: 'Бестселлер', en: 'Bestseller' },
-  limited: { ru: 'Ограниченная серия', en: 'Limited' },
-  handmade: { ru: 'Ручная работа', en: 'Handmade' },
   hit: { ru: 'Хит', en: 'Hit' },
+  keychain: { ru: 'Брелок', en: 'Keychain' },
+  pdf: { ru: 'С описанием', en: 'With schema' },
+  gacha: { ru: 'Гача', en: 'Gacha' },
+  sale: { ru: 'Скидка', en: 'Sale' },
 }
 
 export const getCategoryKey = (category: string) => normalizeTerm(category)
 
+const getLocalizedLabel = (key: string, locale: string) => LABELS[key]?.[locale as 'ru' | 'en'] || key
+
+export const getProductLabelKeys = (product: CatalogProduct) => {
+  const keys = new Set((product.labels || []).map(getCategoryKey))
+  if (product.hasPdf || product.is_schema) {
+    keys.add('pdf')
+  }
+  if (product.salePrice) {
+    keys.add('sale')
+  }
+  return Array.from(keys)
+}
+
 export const getProductCategory = (product: CatalogProduct): string => {
-  if (product.categories?.length) {
-    return product.categories[0] || product.slug
-  }
-  if (product.category) {
-    return product.category
-  }
-  return product.slug.split('-')[0] || product.slug
+  return getProductLabelKeys(product)[0] || ''
 }
 
 export const getProductCategories = (product: CatalogProduct): string[] => {
-  if (product.categories?.length) {
-    return product.categories
-  }
-  return [getProductCategory(product)]
+  return getProductLabelKeys(product)
 }
 
 export const getCategoryLabel = (category: string, locale: string) => {
-  return CATEGORY_LABELS[category]?.[locale as 'ru' | 'en'] || category
+  return getLocalizedLabel(getCategoryKey(category), locale)
 }
 
 const roundUsd = (value: number) => Math.round(value * 100) / 100
@@ -88,7 +72,7 @@ const roundRub = (value: number) => Math.round(value)
 
 export const normalizePriceValue = (value: number | PriceValue | PartialPriceValue): PriceValue => {
   if (typeof value === 'number') {
-    // Backward compatibility: numeric value is treated as USD.
+    // Backward compatibility for legacy values.
     return {
       usd: roundUsd(value),
       rub: roundRub(value * USD_TO_RUB_RATE),
@@ -97,8 +81,8 @@ export const normalizePriceValue = (value: number | PriceValue | PartialPriceVal
 
   if (value.usd !== undefined && value.rub !== undefined) {
     return {
-      usd: roundUsd(value.usd),
       rub: roundRub(value.rub),
+      usd: roundUsd(value.usd),
     }
   }
 
@@ -158,13 +142,10 @@ export const getPrimaryProductImage = (product: CatalogProduct) => {
   return getProductImages(product)[0]
 }
 
+export const getProductBasePrice = (product: CatalogProduct) => normalizePriceValue(product.price)
+export const getProductEffectivePrice = (product: CatalogProduct) => normalizePriceValue(product.salePrice ?? product.price)
+export const hasSalePrice = (product: CatalogProduct) => Boolean(product.salePrice)
+
 export const getProductLabels = (product: CatalogProduct, locale: string) => {
-  const labels = (product.labels || []).map((label) => LABELS[label]?.[locale as 'ru' | 'en'] || label)
-  if (product.hasPdf && !product.is_schema) {
-    labels.unshift('PDF')
-  }
-  if (product.is_schema) {
-    labels.unshift(locale === 'ru' ? 'Схема' : 'Pattern')
-  }
-  return Array.from(new Set(labels.filter(Boolean)))
+  return getProductLabelKeys(product).map((label) => getLocalizedLabel(label, locale)).filter(Boolean)
 }

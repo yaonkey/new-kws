@@ -2,6 +2,9 @@
 import type { CatalogProduct } from '~/composables/useCart'
 import {
   getCategoryLabel,
+  getProductBasePrice,
+  getProductEffectivePrice,
+  hasSalePrice,
   getPriceByLocale,
   getPrimaryProductImage,
   getProductCategories,
@@ -21,9 +24,11 @@ const currentLocale = computed(() => locale.value || 'ru')
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
 const coverImage = computed(() => getPrimaryProductImage(props.product))
 const totalImages = computed(() => getProductImages(props.product).length)
-const localizedPrice = computed(() => getPriceByLocale(props.product.price, locale.value))
+const localizedPrice = computed(() => getPriceByLocale(getProductEffectivePrice(props.product), locale.value))
+const localizedBasePrice = computed(() => getPriceByLocale(getProductBasePrice(props.product), locale.value))
+const isOnSale = computed(() => hasSalePrice(props.product))
 const badges = computed(() => getProductLabels(props.product, locale.value))
-const categoryLabels = computed(() =>
+const labelCategories = computed(() =>
   getProductCategories(props.product).map((category) => getCategoryLabel(category ?? 'other', currentLocale.value ?? 'ru')),
 )
 const canBuyProduct = computed(() => !props.product.is_schema)
@@ -68,8 +73,12 @@ const handleQuickAdd = () => {
       </div>
       <div class="space-y-3 p-4">
         <h3 class="line-clamp-2 text-base font-semibold text-stone-900 md:text-lg">{{ productTitle }}</h3>
-        <p class="line-clamp-1 text-xs text-stone-500">{{ categoryLabels.join(', ') }}</p>
-        <p class="text-lg font-bold text-emerald-700">{{ localizedPrice }} {{ t('currency') }}</p>
+        <p class="line-clamp-1 text-xs text-stone-500">{{ labelCategories.join(', ') || '—' }}</p>
+        <p v-if="isOnSale" class="flex items-baseline gap-2">
+          <span class="text-sm font-semibold text-red-600 line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
+          <span class="text-lg font-bold text-emerald-700">{{ localizedPrice }} {{ t('currency') }}</span>
+        </p>
+        <p v-else class="text-lg font-bold text-emerald-700">{{ localizedPrice }} {{ t('currency') }}</p>
       </div>
     </NuxtLink>
     <div class="mt-auto px-4 pb-4">

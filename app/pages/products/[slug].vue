@@ -2,6 +2,9 @@
 import type { CatalogProduct } from '~/composables/useCart'
 import {
   getCategoryLabel,
+  getProductBasePrice,
+  getProductEffectivePrice,
+  hasSalePrice,
   getPriceByLocale,
   getPrimaryProductImage,
   getProductCategories,
@@ -49,10 +52,16 @@ const productDetails = computed(() => {
 })
 const activeImage = ref('')
 const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? product.value?.price ?? { rub: 110, usd: 2 }, locale.value))
-const productPrice = computed(() => (product.value ? getPriceByLocale(product.value.price, locale.value) : 0))
-const productCategoryLabels = computed(() =>
-  product.value ? getProductCategories(product.value).map((category) => getCategoryLabel(category, locale.value)).join(', ') : '',
-)
+const productPrice = computed(() => (product.value ? getPriceByLocale(getProductEffectivePrice(product.value), locale.value) : 0))
+const productBasePrice = computed(() => (product.value ? getPriceByLocale(getProductBasePrice(product.value), locale.value) : 0))
+const isOnSale = computed(() => (product.value ? hasSalePrice(product.value) : false))
+const productLabelCategories = computed(() => {
+  if (!product.value) {
+    return '—'
+  }
+  const labels = getProductCategories(product.value).map((category) => getCategoryLabel(category, locale.value))
+  return labels.join(', ') || '—'
+})
 const canBuyProduct = computed(() => !product.value?.is_schema)
 const canBuyPdf = computed(() => Boolean(product.value?.hasPdf || product.value?.is_schema))
 const catalogLink = computed(() => localePath(product.value?.is_schema ? '/patterns' : '/products'))
@@ -159,12 +168,16 @@ useHead({
       <div class="space-y-5">
         <h1 class="text-3xl font-bold text-stone-900">{{ productTitle }}</h1>
         <p class="leading-relaxed text-stone-700">{{ productDescription }}</p>
-        <p class="text-2xl font-bold text-emerald-700">{{ productPrice }} {{ t('currency') }}</p>
+        <p v-if="isOnSale" class="flex items-baseline gap-3">
+          <span class="text-lg font-semibold text-red-600 line-through">{{ productBasePrice }} {{ t('currency') }}</span>
+          <span class="text-2xl font-bold text-emerald-700">{{ productPrice }} {{ t('currency') }}</span>
+        </p>
+        <p v-else class="text-2xl font-bold text-emerald-700">{{ productPrice }} {{ t('currency') }}</p>
 
         <section class="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm">
           <h2 class="mb-3 font-semibold text-stone-900">{{ t('products.metaTitle') }}</h2>
           <dl class="space-y-1 text-stone-700">
-            <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productCategoryLabels }}</dd></div>
+            <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productLabelCategories }}</dd></div>
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product!.slug }}</dd></div>
           </dl>
         </section>
