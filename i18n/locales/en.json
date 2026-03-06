@@ -57,6 +57,8 @@
     "empty": "Your cart is empty",
     "continueShopping": "Go to catalog",
     "remove": "Remove",
+    "clear": "Clear cart",
+    "clearConfirm": "Clear the entire cart?",
     "pdfItem": "Digital item: PDF",
     "total": "Total",
     "checkout": "Checkout via Telegram",

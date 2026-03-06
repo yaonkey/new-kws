@@ -41,8 +41,8 @@ const handleQuickAdd = () => {
 </script>
 
 <template>
-  <article class="group overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-    <NuxtLink :to="localePath(`/products/${product.slug}`)" class="block">
+  <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <NuxtLink :to="localePath(`/products/${product.slug}`)" class="block flex-1">
       <div class="relative overflow-hidden">
         <img
           :src="coverImage"
@@ -72,7 +72,7 @@ const handleQuickAdd = () => {
         <p class="text-lg font-bold text-emerald-700">{{ localizedPrice }} {{ t('currency') }}</p>
       </div>
     </NuxtLink>
-    <div class="px-4 pb-4">
+    <div class="mt-auto px-4 pb-4">
       <button
         v-if="canBuyProduct || canBuyPdf"
         class="w-full rounded-lg border border-emerald-700 px-3 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-700 hover:text-white"

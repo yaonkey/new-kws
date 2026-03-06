@@ -150,7 +150,7 @@ export const getProductImages = (product: CatalogProduct) => {
     }
   }
 
-  const images = rawImages.filter((image) => typeof image === 'string' && image.trim().length > 0)
+  const images = rawImages.filter((image): image is string => typeof image === 'string' && image.trim().length > 0)
   return images.length ? images : ['/images/product-placeholder.svg']
 }
 

@@ -57,6 +57,8 @@
     "empty": "Корзина пуста",
     "continueShopping": "Перейти в каталог",
     "remove": "Удалить",
+    "clear": "Очистить корзину",
+    "clearConfirm": "Очистить корзину полностью?",
     "pdfItem": "Цифровой товар: PDF",
     "total": "Итого",
     "checkout": "Оформить через Telegram",

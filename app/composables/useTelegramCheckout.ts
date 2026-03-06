@@ -5,6 +5,7 @@ export const useTelegramCheckout = () => {
   const config = useRuntimeConfig()
   const cart = useCart()
   const currency = computed(() => (locale.value === 'ru' ? 'RUB' : 'USD'))
+  const telegramUsername = computed(() => String(config.public.telegramUsername || '').trim().replace(/^@+/, ''))
 
   const telegramMessage = computed(() => {
     if (!cart.items.value.length) {
@@ -46,15 +47,57 @@ export const useTelegramCheckout = () => {
     return [...intro, ...lines, ...summary].join('\n')
   })
 
+  const shareCheckoutUrl = computed(() => {
+    if (!telegramMessage.value) {
+      return '#'
+    }
+    const encodedMessage = encodeURIComponent(telegramMessage.value)
+    return `https://t.me/share/url?url=${encodeURIComponent(config.public.siteUrl || '')}&text=${encodedMessage}`
+  })
+
   const checkoutUrl = computed(() => {
     if (!telegramMessage.value) {
       return '#'
     }
-    return `https://t.me/${config.public.telegramUsername}?text=${encodeURIComponent(telegramMessage.value)}`
+
+    const encodedMessage = encodeURIComponent(telegramMessage.value)
+    if (telegramUsername.value) {
+      return `https://t.me/${telegramUsername.value}?text=${encodedMessage}`
+    }
+    return shareCheckoutUrl.value
   })
+
+  const checkoutAppUrl = computed(() => {
+    if (!telegramMessage.value || !telegramUsername.value) {
+      return ''
+    }
+    const encodedMessage = encodeURIComponent(telegramMessage.value)
+    return `tg://resolve?domain=${telegramUsername.value}&text=${encodedMessage}`
+  })
+
+  const openCheckout = () => {
+    if (typeof window === 'undefined' || !telegramMessage.value) {
+      return
+    }
+
+    // Use same-tab navigation to avoid popup blockers.
+    const targetUrl = checkoutAppUrl.value || checkoutUrl.value
+    window.location.href = targetUrl
+    if (checkoutAppUrl.value) {
+      setTimeout(() => {
+        // If app did not open, fallback to web t.me URL.
+        if (document.visibilityState === 'visible') {
+          window.location.href = checkoutUrl.value
+        }
+      }, 500)
+    }
+  }
 
   return {
     telegramMessage,
     checkoutUrl,
+    checkoutAppUrl,
+    shareCheckoutUrl,
+    openCheckout,
   }
 }

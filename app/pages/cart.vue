@@ -3,10 +3,18 @@ import { getCurrencyByLocale, getPriceByLocale } from '~/composables/useCatalog'
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
-const { items, totals, incrementItem, decrementItem, removeItem } = useCart()
-const { checkoutUrl } = useTelegramCheckout()
+const { items, totals, incrementItem, decrementItem, removeItem, clearCart } = useCart()
+const { openCheckout } = useTelegramCheckout()
 const localizedTotal = computed(() => getPriceByLocale(totals.value, locale.value))
 const localizedCurrency = computed(() => getCurrencyByLocale(locale.value))
+
+const handleClearCart = () => {
+  const confirmed = window.confirm(t('cart.clearConfirm'))
+  if (!confirmed) {
+    return
+  }
+  clearCart()
+}
 
 useSeoMeta({
   title: t('seo.cartTitle'),
@@ -74,12 +82,18 @@ useSeoMeta({
       <aside class="h-fit rounded-xl border border-stone-200 bg-white p-5">
         <p class="text-sm text-stone-500">{{ t('cart.total') }}</p>
         <p class="mt-1 text-2xl font-bold text-stone-900">{{ localizedTotal }} {{ localizedCurrency }}</p>
-        <a
-          :href="checkoutUrl"
-          class="mt-4 inline-flex w-full justify-center rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-800"
+        <button
+          class="mt-4 inline-flex w-full cursor-pointer justify-center rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-800"
+          @click="openCheckout"
         >
           {{ t('cart.checkout') }}
-        </a>
+        </button>
+        <button
+          class="mt-2 inline-flex w-full cursor-pointer justify-center rounded-lg border border-red-300 px-5 py-3 text-sm font-semibold text-red-700 hover:bg-red-50"
+          @click="handleClearCart"
+        >
+          {{ t('cart.clear') }}
+        </button>
       </aside>
     </section>
   </div>
