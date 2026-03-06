@@ -1,353 +1,402 @@
 ---
 title: "Workshop Catalog"
 products:
-  - slug: "knitted-doll-01"
+  - slug: "plague-doctor"
     categories: ["knitted", "toys"]
     labels: ["new"]
-    title: { ru: "Вязаная кукла №1", en: "Knitted Doll #1" }
-    description: { ru: "Мягкая интерьерная кукла ручной работы.", en: "Soft handmade decorative doll." }
-    details:
-      ru: "Размер: 28 см\nПряжа: хлопок/акрил\nНаполнитель: гипоаллергенный холлофайбер\nУход: ручная стирка при 30°C"
-      en: "Size: 28 cm\nYarn: cotton/acrylic\nFilling: hypoallergenic hollow fiber\nCare: hand wash at 30°C"
-    price: 24
-    image:
-      - "/images/product-placeholder.svg"
-      - "/images/product-placeholder-2.svg"
-      - "/images/product-placeholder-3.svg"
-    hasPdf: true
-    pdfPrice: 160
-  - slug: "knitted-doll-02"
-    title: { ru: "Вязаная кукла №2", en: "Knitted Doll #2" }
+    title: { ru: "Чумной доктор", en: "Plague Doctor" }
+    description: { ru: "Чумный доктор в шапочке.", en: "Plague doctor in a hat." }
+    price: { rub: 1500, usd: 25 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "the-secret-frog-box"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Секретная лягушка", en: "The Secret Frog Box" }
     description: { ru: "Кукла в пастельной палитре для детской комнаты.", en: "Pastel-tone doll for kids room decor." }
-    price: 25
+    price: { rub: 400, usd: 5 }
     image: "/images/product-placeholder.svg"
-  - slug: "knitted-doll-03"
+
+  - slug: "disgruntled-bunny"
     categories: ["knitted", "toys"]
-    title: { ru: "Вязаная кукла №3", en: "Knitted Doll #3" }
-    description: { ru: "Авторский образ с вышитыми деталями.", en: "Author design with embroidered details." }
-    price: 26
-    image:
-      - "/images/product-placeholder-2.svg"
-      - "/images/product-placeholder.svg"
-  - slug: "knitted-doll-04"
-    title: { ru: "Вязаная кукла №4", en: "Knitted Doll #4" }
-    description: { ru: "Легкая и приятная на ощупь игрушка.", en: "Lightweight and pleasant-to-touch toy." }
-    price: 27
+    title: { ru: "Недовольный зайчик в шапочке", en: "A disgruntled bunny in a hat" }
+    description: { ru: "Недовольный зайчик в шапочке.", en: "A disgruntled bunny in a hat." }
+    price: { rub: 1500, usd: 25 }
     image: "/images/product-placeholder.svg"
-    hasPdf: true
-    pdfPrice: 110
-  - slug: "knitted-doll-05"
-    title: { ru: "Вязаная кукла №5", en: "Knitted Doll #5" }
-    description: { ru: "Подходит как подарок для праздника.", en: "Great gift option for special occasions." }
-    price: 28
-    image: "/images/product-placeholder.svg"
-  - slug: "wooden-toy-06"
-    categories: ["wooden", "toys", "eco"]
-    labels: ["hit"]
-    title: { ru: "Деревянная игрушка №6", en: "Wooden Toy #6" }
-    description: { ru: "Экологичная игрушка из натурального дерева.", en: "Eco-friendly toy made from natural wood." }
-    details:
-      ru: "Материал: береза\nПокрытие: безопасный воск\nРазмер: 11 x 7 см\nРекомендуемый возраст: 3+"
-    price: 22
-    image:
-      - "/images/product-placeholder-3.svg"
-      - "/images/product-placeholder.svg"
-      - "/images/product-placeholder-2.svg"
-  - slug: "wooden-toy-07"
-    title: { ru: "Деревянная игрушка №7", en: "Wooden Toy #7" }
-    description: { ru: "Ручная шлифовка и безопасное покрытие.", en: "Hand-polished and coated with safe finish." }
-    price: 23
-    image: "/images/product-placeholder.svg"
-    hasPdf: true
-    pdfPrice: 110
-  - slug: "wooden-toy-08"
-    title: { ru: "Деревянная игрушка №8", en: "Wooden Toy #8" }
-    description: { ru: "Минималистичный дизайн и теплый оттенок.", en: "Minimalist design with warm wood tones." }
-    price: 24
-    image: "/images/product-placeholder.svg"
-  - slug: "wooden-toy-09"
-    title: { ru: "Деревянная игрушка №9", en: "Wooden Toy #9" }
-    description: { ru: "Развивает моторику и воображение.", en: "Supports motor skills and imagination." }
-    price: 25
-    image: "/images/product-placeholder.svg"
-  - slug: "wooden-toy-10"
-    title: { ru: "Деревянная игрушка №10", en: "Wooden Toy #10" }
-    description: { ru: "Классический формат для семейной игры.", en: "Classic shape for family play time." }
-    price: 26
-    image: "/images/product-placeholder.svg"
-    hasPdf: true
-  - slug: "macrame-decor-11"
-    title: { ru: "Макраме-декор №11", en: "Macrame Decor #11" }
-    description: { ru: "Плетеный декор для уютного интерьера.", en: "Woven decor piece for a cozy interior." }
-    price: 31
-    image: "/images/product-placeholder.svg"
-  - slug: "macrame-decor-12"
-    title: { ru: "Макраме-декор №12", en: "Macrame Decor #12" }
-    description: { ru: "Натуральный хлопковый шнур, ручная работа.", en: "Natural cotton cord crafted by hand." }
-    price: 32
-    image: "/images/product-placeholder.svg"
-  - slug: "macrame-decor-13"
-    title: { ru: "Макраме-декор №13", en: "Macrame Decor #13" }
-    description: { ru: "Подходит для скандинавского стиля.", en: "Perfect fit for Scandinavian interiors." }
-    price: 33
-    image: "/images/product-placeholder.svg"
-    hasPdf: true
-  - slug: "macrame-decor-14"
-    title: { ru: "Макраме-декор №14", en: "Macrame Decor #14" }
-    description: { ru: "Лаконичный акцент для стены.", en: "Minimal wall accent for modern homes." }
-    price: 34
-    image: "/images/product-placeholder.svg"
-  - slug: "macrame-decor-15"
-    title: { ru: "Макраме-декор №15", en: "Macrame Decor #15" }
-    description: { ru: "Плотное плетение и стойкая форма.", en: "Dense knotting with stable structure." }
-    price: 35
-    image: "/images/product-placeholder.svg"
-  - slug: "ceramic-cup-16"
-    categories: ["ceramic", "kitchen"]
+
+  - slug: "pikmi-fawn"
+    categories: ["knitted", "toys", "eco"]
     labels: ["new"]
-    title: { ru: "Керамическая чашка №16", en: "Ceramic Cup #16" }
+    title: { ru: "Пикми олененок", en: "Pikmi fawn" }
+    description: { ru: "Легкая и приятная на ощупь игрушка.", en: "Lightweight and pleasant-to-touch toy." }
+    price: { rub: 1750, usd: 27 }
+    image: "/images/product-placeholder.svg"
+    hasPdf: true
+    pdfPrice: 110
+
+  - slug: "rocking-horse"
+    categories: ["knitted", "toys", "eco"]
+    labels: ["new", "hit"]
+    title: { ru: "Лошадка-качалка", en: "Rocking horse" }
+    description: { ru: "Подходит как подарок для праздника.", en: "Great gift option for special occasions." }
+    price: { rub: 1800, usd: 30 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "totoro-keychain"
+    categories: ["knitted", "toys", "eco"]
+    labels: ["hit"]
+    title: { ru: "Брелок Тоторо", en: "Totoro keychain" }
+    description: { ru: "Экологичная игрушка из натурального дерева.", en: "Eco-friendly toy made from natural wood." }
+    price: { rub: 550, usd: 10 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "two-headed-bunny"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Двухголовый зайчик", en: "Two-headed bunny" }
+    description: { ru: "Ручная шлифовка и безопасное покрытие.", en: "Hand-polished and coated with safe finish." }
+    price: { rub: 2000, usd: 30 }
+    image: "/images/product-placeholder.svg"
+    hasPdf: true
+    pdfPrice: 110
+
+  - slug: "mage-mushroom"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Маг Гриб", en: "Mage mushroom" }
+    description: { ru: "Минималистичный дизайн и теплый оттенок.", en: "Minimalist design with warm wood tones." }
+    price: { rub: 700, usd: 12 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "otori-soma"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Отори Сома", en: "Otorisoma" }
+    description: { ru: "Развивает моторику и воображение.", en: "Supports motor skills and imagination." }
+    price: { rub: 1000, usd: 15 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "cow-ufo"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Корова НЛО", en: "Cow UFO" }
+    description: { ru: "Классический формат для семейной игры.", en: "Classic shape for family play time." }
+    price: { rub: 1333, usd: 20 }
+    image: "/images/product-placeholder.svg"
+    hasPdf: true
+
+  - slug: "hippo"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Бегемотик", en: "Hippo" }
+    description: { ru: "Плетеный декор для уютного интерьера.", en: "Woven decor piece for a cozy interior." }
+    price: { rub: 600, usd: 10 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "micro-red-panda"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Микро красная панда", en: "Micro red panda" }
+    description: { ru: "Натуральный хлопковый шнур, ручная работа.", en: "Natural cotton cord crafted by hand." }
+    price: { rub: 1200, usd: 20 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "micro-cat-with-a-fish"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Микро котик с рыбкой", en: "Micro cat with a fish" }
+    description: { ru: "Подходит для скандинавского стиля.", en: "Perfect fit for Scandinavian interiors." }
+    price: { rub: 1200, usd: 20 }
+    image: "/images/product-placeholder.svg"
+    hasPdf: true
+
+  - slug: "micro-fox"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Микро лис", en: "Micro fox" }
+    description: { ru: "Лаконичный акцент для стены.", en: "Minimal wall accent for modern homes." }
+    price: { rub: 1200, usd: 20 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "micro-raccoon"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Микро енот", en: "Micro raccoon" }
+    description: { ru: "Плотное плетение и стойкая форма.", en: "Dense knotting with stable structure." }
+    price: { rub: 1200, usd: 20 }
+    image: "/images/product-placeholder.svg"
+
+  - slug: "bunny-in-a-fruit-hat"
+    categories: ["knitted", "toys", "eco"]
+    labels: ["new"]
+    title: { ru: "Зайчик во фруктовой шапочке", en: "Bunny in a Fruit Hat" }
     description: { ru: "Чашка ручной лепки для ежедневного чая.", en: "Hand-thrown cup for your daily tea." }
     details:
       en: "Volume: 280 ml\nHeight: 9 cm\nFood-safe glaze\nMicrowave safe: yes\nDishwasher: gentle mode"
-    price: 19
+    price: { rub: 550, usd: 10 }
     image: "/images/product-placeholder.svg"
     hasPdf: true
     pdfPrice: 160
-  - slug: "ceramic-cup-17"
-    title: { ru: "Керамическая чашка №17", en: "Ceramic Cup #17" }
+
+  - slug: "duck-in-an-onion-cap"
+    categories: ["knitted", "toys", "eco"]
+    labels: ["new"]
+    title: { ru: "Уточка в шапке лука", en: "Duck in an onion cap" }
     description: { ru: "Матовая глазурь и удобная форма.", en: "Matte glaze with ergonomic shape." }
-    price: 20
+    price: { rub: 550, usd: 10 }
     image: "/images/product-placeholder.svg"
-  - slug: "ceramic-cup-18"
-    title: { ru: "Керамическая чашка №18", en: "Ceramic Cup #18" }
+
+  - slug: "capybara"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Капибара", en: "Capybara" }
     description: { ru: "Теплый природный оттенок глины.", en: "Warm natural clay tone." }
-    price: 21
+    price: { rub: 550, usd: 10 }
     image: "/images/product-placeholder.svg"
-  - slug: "ceramic-cup-19"
-    title: { ru: "Керамическая чашка №19", en: "Ceramic Cup #19" }
+
+  - slug: "pig-in-a-hat"
+    title: { ru: "Поросенок в шапочке", en: "Pig in a Hat" }
     description: { ru: "Индивидуальная текстура на поверхности.", en: "Unique handcrafted surface texture." }
-    price: 22
+    price: { rub: 500, usd: 10 }
     image: "/images/product-placeholder.svg"
-  - slug: "ceramic-cup-20"
-    title: { ru: "Керамическая чашка №20", en: "Ceramic Cup #20" }
+
+  - slug: "duckling-in-a-frog-hat"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Утенок в шапочке жабки", en: "Duckling in a Frog's Hat" }
     description: { ru: "Идеальна для кофе и травяных настоев.", en: "Ideal for coffee and herbal infusions." }
-    price: 23
+    price: { rub: 550, usd: 10 }
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "felt-brooch-21"
-    title: { ru: "Фетровая брошь №21", en: "Felt Brooch #21" }
+
+  - slug: "sweet-baphomet"
+    categories: ["knitted", "toys", "eco"]
+    title: { ru: "Сладкий бафомет", en: "Sweet baphomet" }
     description: { ru: "Легкая брошь с ручной вышивкой.", en: "Lightweight brooch with hand embroidery." }
-    price: 12
+    price: { rub: 2000, usd: 30 }
     image: "/images/product-placeholder.svg"
-  - slug: "felt-brooch-22"
-    title: { ru: "Фетровая брошь №22", en: "Felt Brooch #22" }
+
+  - slug: "bear-frog"
+    title: { ru: "Мишка-лягушка", en: "Bear-frog" }
     description: { ru: "Яркий цветовой акцент для образа.", en: "Vivid accent piece for your outfit." }
-    price: 13
+    price: { rub: 1750, usd: 27 }
     image: "/images/product-placeholder.svg"
-  - slug: "felt-brooch-23"
-    title: { ru: "Фетровая брошь №23", en: "Felt Brooch #23" }
+
+  - slug: "dove-keychain"
+    title: { ru: "Брелок голубь", en: "Dove keychain" }
     description: { ru: "Изготовлена из мягкого шерстяного фетра.", en: "Crafted from soft wool felt." }
-    price: 14
+    price: { rub: 450, usd: 7 }
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "felt-brooch-24"
-    title: { ru: "Фетровая брошь №24", en: "Felt Brooch #24" }
+
+  - slug: "pig-in-a-bread"
+    title: { ru: "Свинка в хлебушке", en: "Pig in a Bread" }
     description: { ru: "Подойдет для пальто или шарфа.", en: "Looks great on coats and scarves." }
-    price: 15
+    price: { rub: 1500, usd: 25 }
     image: "/images/product-placeholder.svg"
-  - slug: "felt-brooch-25"
-    title: { ru: "Фетровая брошь №25", en: "Felt Brooch #25" }
+
+  - slug: "paired-magnetic-cats"
+    title: { ru: "Парные магнитные котики", en: "Paired magnetic cats" }
     description: { ru: "Компактный аксессуар ручной работы.", en: "Compact handmade accessory." }
-    price: 16
+    price: { rub: 800, usd: 13 }
     image: "/images/product-placeholder.svg"
-  - slug: "linen-bag-26"
-    title: { ru: "Льняная сумка №26", en: "Linen Bag #26" }
+
+  - slug: "cute-frog"
+    title: { ru: "Милая жабка", en: "Cute frog" }
     description: { ru: "Прочная сумка из натурального льна.", en: "Durable tote made from natural linen." }
-    price: 27
+    price: { rub: 350, usd: 6 }
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "linen-bag-27"
-    title: { ru: "Льняная сумка №27", en: "Linen Bag #27" }
+
+  - slug: "harlequin"
+    title: { ru: "Арлекино", en: "Harlequin" }
     description: { ru: "Вместительный формат для покупок.", en: "Roomy format for everyday shopping." }
-    price: 28
+    price: { rub: 1750, usd: 27 }
     image: "/images/product-placeholder.svg"
-  - slug: "linen-bag-28"
-    title: { ru: "Льняная сумка №28", en: "Linen Bag #28" }
+
+  - slug: "baphomet"
+    title: { ru: "Бафомет", en: "Baphomet" }
     description: { ru: "С декоративной ручной печатью.", en: "With decorative hand-printed pattern." }
-    price: 29
+    price: { rub: 2200, usd: 35 }
     image: "/images/product-placeholder.svg"
-  - slug: "linen-bag-29"
-    title: { ru: "Льняная сумка №29", en: "Linen Bag #29" }
+
+  - slug: "baphomet-pennywise"
+    title: { ru: "Бафомет Пеннивайз", en: "Baphomet Pennywise" }
     description: { ru: "Минималистичный эко-стиль.", en: "Minimal eco-style daily bag." }
-    price: 30
+    price: { rub: 2200, usd: 35}
     image: "/images/product-placeholder.svg"
-  - slug: "linen-bag-30"
-    title: { ru: "Льняная сумка №30", en: "Linen Bag #30" }
+
+  - slug: "mini-baphomet"
+    title: { ru: "Мини Бафомет", en: "Mini Baphomet" }
     description: { ru: "Подкладка и усиленные швы.", en: "Lining and reinforced seams included." }
-    price: 31
+    price: { rub: 1750, usd: 27}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "embroidery-hoop-31"
-    title: { ru: "Пяльцы с вышивкой №31", en: "Embroidery Hoop #31" }
+
+  - slug: "fugu-fish"
+    title: { ru: "Рыба Фугу", en: "Fugu fish" }
     description: { ru: "Декоративная вышивка для стены.", en: "Decorative embroidery wall artwork." }
-    price: 29
+    price: { rub: 1750, usd: 27}
     image: "/images/product-placeholder.svg"
-  - slug: "embroidery-hoop-32"
-    title: { ru: "Пяльцы с вышивкой №32", en: "Embroidery Hoop #32" }
+
+  - slug: "kitty-fly-agaric"
+    title: { ru: "Котик Мухомур", en: "Kitty Fly Agaric" }
     description: { ru: "Цветочные мотивы ручной вышивки.", en: "Floral motifs stitched by hand." }
-    price: 30
+    price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "embroidery-hoop-33"
-    title: { ru: "Пяльцы с вышивкой №33", en: "Embroidery Hoop #33" }
+
+  - slug: "crocodile"
+    title: { ru: "Крокодильчик", en: "Crocodile" }
     description: { ru: "Тонкая детальная работа нитями.", en: "Fine detailed stitch work." }
-    price: 31
+    price: { rub: 550, usd: 10}
     image: "/images/product-placeholder.svg"
-  - slug: "embroidery-hoop-34"
-    title: { ru: "Пяльцы с вышивкой №34", en: "Embroidery Hoop #34" }
+
+  - slug: "capybara-in-a-suit"
+    title: { ru: "Капибара в костюме", en: "Capybara in a suit" }
     description: { ru: "Нежная гамма для светлого интерьера.", en: "Gentle tones for bright interiors." }
-    price: 32
+    price: { rub: 600, usd: 12}
     image: "/images/product-placeholder.svg"
-  - slug: "embroidery-hoop-35"
-    title: { ru: "Пяльцы с вышивкой №35", en: "Embroidery Hoop #35" }
+
+  - slug: "little-penguin-pollo"
+    title: { ru: "Пингвиненок Полло", en: "Little Penguin Pollo" }
     description: { ru: "Коллекционная мини-серия декора.", en: "Collectible mini decor series." }
-    price: 33
+    price: { rub: 1200, usd: 20}
     image: "/images/product-placeholder.svg"
-  - slug: "candles-set-36"
-    title: { ru: "Набор свечей №36", en: "Candle Set #36" }
+
+  - slug: "cat-in-a-fish-hat"
+    title: { ru: "Котик в шапке рыбке", en: "A cat in a fish hat" }
     description: { ru: "Свечи ручной заливки с мягким ароматом.", en: "Hand-poured candles with gentle scent." }
-    price: 18
+    price: { rub: 1300, usd: 22}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "candles-set-37"
-    title: { ru: "Набор свечей №37", en: "Candle Set #37" }
+
+  - slug: "gingerbread-cat"
+    title: { ru: "Котик пряник", en: "Gingerbread cat" }
     description: { ru: "Декоративные формы для уютных вечеров.", en: "Decorative shapes for cozy evenings." }
-    price: 19
+    price: { rub: 1450, usd: 25}
     image: "/images/product-placeholder.svg"
-  - slug: "candles-set-38"
-    title: { ru: "Набор свечей №38", en: "Candle Set #38" }
+
+  - slug: "disgruntled-cat-in-a-hat"
+    title: { ru: "Недовольный котик в шапочке", en: "A disgruntled cat in a hat" }
     description: { ru: "Натуральный воск и хлопковый фитиль.", en: "Natural wax and cotton wick." }
-    price: 20
+    price: { rub: 1500, usd: 25}
     image: "/images/product-placeholder.svg"
-  - slug: "candles-set-39"
-    title: { ru: "Набор свечей №39", en: "Candle Set #39" }
+
+  - slug: "strawberry-toad"
+    title: { ru: "Клубничная жабка", en: "Strawberry Toad" }
     description: { ru: "Сдержанный дизайн для любого интерьера.", en: "Understated style for any interior." }
-    price: 21
+    price: { rub: 550, usd: 10}
     image: "/images/product-placeholder.svg"
-  - slug: "candles-set-40"
-    title: { ru: "Набор свечей №40", en: "Candle Set #40" }
+
+  - slug: "dissatisfied-frog"
+    title: { ru: "Недовольная жабка", en: "Dissatisfied frog" }
     description: { ru: "Готовый подарочный комплект.", en: "Ready-to-gift candle bundle." }
-    price: 22
+    price: { rub: 400, usd: 7}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "wool-scarf-41"
-    title: { ru: "Шерстяной шарф №41", en: "Wool Scarf #41" }
+
+  - slug: "cat-magician"
+    title: { ru: "Котик маг", en: "Cat magician" }
     description: { ru: "Теплый шарф ручной вязки.", en: "Warm hand-knitted wool scarf." }
-    price: 36
+    price: { rub: 1900, usd: 30}
     image: "/images/product-placeholder.svg"
-  - slug: "wool-scarf-42"
-    title: { ru: "Шерстяной шарф №42", en: "Wool Scarf #42" }
+
+  - slug: "keychain-cat"
+    title: { ru: "Брелок котик", en: "Keychain cat" }
     description: { ru: "Мягкая пряжа и плотный узор.", en: "Soft yarn with dense knit pattern." }
-    price: 37
+    price: { rub: 400, usd: 7}
     image: "/images/product-placeholder.svg"
-  - slug: "wool-scarf-43"
-    title: { ru: "Шерстяной шарф №43", en: "Wool Scarf #43" }
+
+  - slug: "yuki-the-cat"
+    title: { ru: "Котик Юки", en: "Yuki the cat" }
     description: { ru: "Универсальный цвет для повседневности.", en: "Versatile tone for everyday use." }
-    price: 38
+    price: { rub: 1500, usd: 25}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "wool-scarf-44"
-    title: { ru: "Шерстяной шарф №44", en: "Wool Scarf #44" }
+
+  - slug: "totoro-20"
+    title: { ru: "Тоторо 2.0", en: "Totoro 2.0" }
     description: { ru: "Комфорт и тепло в холодный сезон.", en: "Comfort and warmth for cold weather." }
-    price: 39
+    price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
-  - slug: "wool-scarf-45"
-    title: { ru: "Шерстяной шарф №45", en: "Wool Scarf #45" }
+
+  - slug: "the-frog-in-love"
+    title: { ru: "Влюбленная лягушка", en: "The Frog in Love" }
     description: { ru: "Стильный аксессуар ручной работы.", en: "Stylish handmade wardrobe piece." }
-    price: 40
+    price: { rub: 1700, usd: 27}
     image: "/images/product-placeholder.svg"
-  - slug: "table-decor-46"
-    title: { ru: "Столовый декор №46", en: "Table Decor #46" }
+
+  - slug: "glinda-the-bunny"
+    title: { ru: "Зайка Глинда", en: "Glinda the Bunny" }
     description: { ru: "Набор для сервировки в эко-стиле.", en: "Eco-style table setting decor set." }
-    price: 26
+    price: { rub: 2000, usd: 33}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "table-decor-47"
-    title: { ru: "Столовый декор №47", en: "Table Decor #47" }
+
+  - slug: "the-raccoon"
+    title: { ru: "Енот", en: "The Raccoon" }
     description: { ru: "Ручная отделка и натуральные ткани.", en: "Hand-finished with natural fabrics." }
-    price: 27
+    price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
+
   - slug: "table-decor-48"
-    title: { ru: "Столовый декор №48", en: "Table Decor #48" }
+    title: { ru: "Кролик Бини", en: "Beanie Rabbit" }
     description: { ru: "Добавляет тепла семейным ужинам.", en: "Adds warmth to family dinners." }
-    price: 28
+    price: { rub: 2000, usd: 33}
     image: "/images/product-placeholder.svg"
-  - slug: "table-decor-49"
-    title: { ru: "Столовый декор №49", en: "Table Decor #49" }
+
+  - slug: "woof-the-kitten"
+    title: { ru: "Котенок Гав!", en: "Woof The Kitten" }
     description: { ru: "Практичный и эстетичный формат.", en: "Practical and aesthetic format." }
-    price: 29
+    price: { rub: 1400, usd: 25}
     image: "/images/product-placeholder.svg"
-  - slug: "table-decor-50"
-    title: { ru: "Столовый декор №50", en: "Table Decor #50" }
+
+  - slug: "robin-the-kitten"
+    title: { ru: "Котенок Робин", en: "Robin The Kitten" }
     description: { ru: "Подходит для праздничных сервировок.", en: "Great for festive table settings." }
-    price: 30
+    price: { rub: 2200, usd: 35}
     image: "/images/product-placeholder.svg"
     hasPdf: true
+
   - slug: "gift-box-51"
-    title: { ru: "Подарочный бокс №51", en: "Gift Box #51" }
+    title: { ru: "Зайчик Фурфур", en: "Furfur the Bunny" }
     description: { ru: "Собранный вручную подарочный комплект.", en: "Curated handmade gift box." }
-    price: 42
+    price: { rub: 2200, usd: 35}
     image: "/images/product-placeholder.svg"
-  - slug: "gift-box-52"
-    categories: ["gift", "holiday"]
-    title: { ru: "Подарочный бокс №52", en: "Gift Box #52" }
+
+  - slug: "axolotl"
+    title: { ru: "Аксолотль", en: "Axolotl" }
     description: { ru: "Включает сезонные изделия мастерской.", en: "Includes seasonal workshop products." }
-    price: 43
+    price: { rub: 2200, usd: 35 }
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "gift-box-53"
-    title: { ru: "Подарочный бокс №53", en: "Gift Box #53" }
+
+  - slug: "the-frog"
+    title: { ru: "ЛЯгушенок", en: "The Frog" }
     description: { ru: "Упакован и готов к отправке.", en: "Packed and ready for shipping." }
-    price: 44
+    price: { rub: 1600, usd: 25}
     image: "/images/product-placeholder.svg"
-  - slug: "gift-box-54"
-    title: { ru: "Подарочный бокс №54", en: "Gift Box #54" }
+
+  - slug: "pumpkin-cat"
+    title: { ru: "Котик-тыква", en: "Pumpkin Cat" }
     description: { ru: "Сбалансированный набор из хитов.", en: "Balanced set of customer favorites." }
-    price: 45
+    price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
-  - slug: "gift-box-55"
-    title: { ru: "Подарочный бокс №55", en: "Gift Box #55" }
+
+  - slug: "articulated-fox"
+    title: { ru: "Шарнирный лисенок", en: "Articulated fox" }
     description: { ru: "Премиальная коллекция для подарка.", en: "Premium collection for gifting." }
-    price: 46
+    price: { rub: 2200, usd: 35}
     image: "/images/product-placeholder.svg"
-  - slug: "holiday-ornament-56"
-    title: { ru: "Праздничное украшение №56", en: "Holiday Ornament #56" }
+
+  - slug: "silver-the-kitty"
+    title: { ru: "Котик Сильвер", en: "Silver The Kitten" }
     description: { ru: "Декор ручной работы для праздничного настроения.", en: "Handmade ornament for festive vibes." }
-    price: 17
+    price: { rub: 1750, usd: 27}
     image: "/images/product-placeholder.svg"
     hasPdf: true
-  - slug: "holiday-ornament-57"
-    title: { ru: "Праздничное украшение №57", en: "Holiday Ornament #57" }
+
+  - slug: "two-colored-cat"
+    title: { ru: "Двухцветный котик", en: "Two-colored cat" }
     description: { ru: "Легкий и прочный декор для дома.", en: "Lightweight and durable home decor." }
-    price: 18
+    price: { rub: 1650, usd: 25}
     image: "/images/product-placeholder.svg"
-  - slug: "holiday-ornament-58"
-    title: { ru: "Праздничное украшение №58", en: "Holiday Ornament #58" }
+
+  - slug: "dirty-the-kitten"
+    title: { ru: "Котенок Грязнуля", en: "Dirty The Kitten" }
     description: { ru: "Мини-серия с авторским дизайном.", en: "Mini series with signature style." }
-    price: 19
+    price: { rub: 1800, usd: 30}
     image: "/images/product-placeholder.svg"
-  - slug: "holiday-ornament-59"
-    title: { ru: "Праздничное украшение №59", en: "Holiday Ornament #59" }
-    description: { ru: "Хорошо сочетается с натуральным декором.", en: "Pairs well with natural interior decor." }
-    price: 20
-    image: "/images/product-placeholder.svg"
-  - slug: "holiday-ornament-60"
-    categories: ["holiday", "decor"]
-    title: { ru: "Праздничное украшение №60", en: "Holiday Ornament #60" }
-    description: { ru: "Финальный элемент коллекции сезона.", en: "Final piece of the seasonal collection." }
-    price: 21
-    image: "/images/product-placeholder.svg"
-    hasPdf: true
+
   - slug: "knitted-schema-61"
     categories: ["patterns", "schema", "knitted"]
     labels: ["new"]
@@ -359,6 +408,7 @@ products:
       - "/images/product-placeholder-2.svg"
       - "/images/product-placeholder.svg"
     hasPdf: true
+
   - slug: "macrame-schema-62"
     categories: ["patterns", "schema", "macrame"]
     is_schema: true
@@ -370,6 +420,7 @@ products:
       - "/images/product-placeholder.svg"
       - "/images/product-placeholder-2.svg"
     hasPdf: true
+
   - slug: "wooden-toy-63"
     categories: ["wooden", "toys", "eco"]
     labels: ["new", "limited"]
@@ -381,6 +432,7 @@ products:
       - "/images/product-placeholder-2.svg"
     hasPdf: true
     pdfPrice: { rub: 160, usd: 1.8 }
+
   - slug: "knitted-schema-64"
     categories: ["patterns", "schema", "knitted"]
     labels: ["new", "bestseller"]
@@ -393,6 +445,7 @@ products:
       - "/images/product-placeholder-3.svg"
       - "/images/product-placeholder.svg"
     hasPdf: true
+
   - slug: "ceramic-cup-65"
     categories: ["ceramic", "kitchen", "gift"]
     labels: ["new"]
@@ -402,6 +455,7 @@ products:
     image: "/images/product-placeholder-3.svg"
     hasPdf: true
     pdfPrice: { rub: 160 }
+
   - slug: "macrame-decor-66"
     categories: ["macrame", "decor", "holiday"]
     labels: ["new", "handmade"]
