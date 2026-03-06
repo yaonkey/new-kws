@@ -80,17 +80,9 @@ export const useTelegramCheckout = () => {
       return
     }
 
-    // Use same-tab navigation to avoid popup blockers.
+    // Use single same-tab navigation to avoid popup blockers and double redirects.
     const targetUrl = checkoutAppUrl.value || checkoutUrl.value
     window.location.href = targetUrl
-    if (checkoutAppUrl.value) {
-      setTimeout(() => {
-        // If app did not open, fallback to web t.me URL.
-        if (document.visibilityState === 'visible') {
-          window.location.href = checkoutUrl.value
-        }
-      }, 500)
-    }
   }
 
   return {

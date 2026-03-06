@@ -146,15 +146,29 @@ useHead({
             :src="activeImage || getPrimaryProductImage(product!)"
             :alt="productTitle"
             loading="lazy"
-            class="h-[420px] w-full rounded-2xl border border-stone-200 object-cover bg-white md:h-[520px]"
+            class="h-[320px] w-full rounded-2xl border border-stone-200 object-cover bg-white sm:h-[420px] md:h-[520px]"
           />
           <div
             v-if="galleryImages.length > 1"
-            class="mt-2 max-h-[520px] space-y-2 overflow-y-auto pl-2 pr-1"
+            class="mt-2 flex gap-2 overflow-x-auto pb-1 md:hidden"
           >
             <button
               v-for="image in galleryImages"
-              :key="image"
+              :key="`mobile-${image}`"
+              class="h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-stone-200 bg-white"
+              :class="activeImage === image ? 'border-emerald-600 shadow-[inset_0_0_0_1px_#059669]' : ''"
+              @click="activeImage = image"
+            >
+              <img :src="image" :alt="productTitle" loading="lazy" class="h-full w-full object-cover" />
+            </button>
+          </div>
+          <div
+            v-if="galleryImages.length > 1"
+            class="mt-2 hidden max-h-[520px] space-y-2 overflow-y-auto pl-2 pr-1 md:block"
+          >
+            <button
+              v-for="image in galleryImages"
+              :key="`desktop-${image}`"
               class="block w-full overflow-hidden rounded-lg border border-stone-200 bg-white"
               :class="activeImage === image ? 'border-emerald-600 shadow-[inset_0_0_0_1px_#059669]' : ''"
               @click="activeImage = image"
