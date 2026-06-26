@@ -16,19 +16,26 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-30 border-b border-circus-border bg-circus-bg/95 backdrop-blur">
-    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+  <header class="sticky top-0 z-30 border-b border-circus-border bg-circus-bg/95 backdrop-blur relative overflow-visible">
+    <div class="pointer-events-none absolute inset-x-0 -top-1 z-20 flex h-7 items-start justify-start gap-[1px] overflow-hidden">
+      <span
+        v-for="index in 220"
+        :key="`header-flag-${index}`"
+        class="circus-bunting-item circus-bunting-sway h-6 w-[19px] shrink-0"
+        :class="index % 2 ? 'circus-bunting-red' : 'circus-bunting-light'"
+        :style="{ '--base-y': `${Math.sin(index / 3.4) * 7 + 1.2}px`, animationDelay: `-${index * 32}ms` }"
+      />
+    </div>
+    <div class="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <NuxtLink :to="localePath('/')" class="inline-flex items-center gap-3">
-        <NuxtImg src="/images/brand-logo.png" alt="Kofworkshop" width="42" height="42" class="h-10 w-10 rounded-full border border-circus-border object-cover" />
+        <NuxtImg src="/images/brand-logo-cutout.png" alt="Kofworkshop" width="52" height="52" class="h-12 w-12 object-contain" />
         <span class="circus-heading text-xl font-semibold">Kofworkshop</span>
       </NuxtLink>
 
       <nav class="hidden gap-6 text-sm font-medium md:flex">
         <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white">{{ t('nav.products') }}</NuxtLink>
         <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white">{{ t('nav.patterns') }}</NuxtLink>
-        <a href="https://taplink.cc/kofworkshop" target="_blank" rel="noopener noreferrer" class="text-circus-muted hover:text-circus-white">
-          {{ t('nav.socials') }}
-        </a>
+        <NuxtLink :to="localePath('/socials')" class="text-circus-muted hover:text-circus-white">{{ t('nav.socials') }}</NuxtLink>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -64,9 +71,7 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
       <div class="flex flex-col gap-3 text-sm font-medium">
         <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.products') }}</NuxtLink>
         <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.patterns') }}</NuxtLink>
-        <a href="https://taplink.cc/kofworkshop" target="_blank" rel="noopener noreferrer" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">
-          {{ t('nav.socials') }}
-        </a>
+        <NuxtLink :to="localePath('/socials')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.socials') }}</NuxtLink>
         <button class="inline-flex w-fit rounded border border-circus-red bg-circus-red px-3 py-1 text-xs text-circus-white" @click="open(); mobileMenuOpen = false">
           {{ t('nav.cart') }} ({{ itemCount }})
         </button>

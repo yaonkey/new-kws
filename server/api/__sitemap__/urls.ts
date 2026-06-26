@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const staticPaths = ['/', '/products', '/patterns', '/cart']
+  const staticPaths = ['/', '/products', '/patterns', '/cart', '/socials']
   const locales = ['ru', 'en']
 
   const localizedStaticUrls = locales.flatMap((locale) =>

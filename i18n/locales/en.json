@@ -2,13 +2,13 @@
   "currency": "USD",
   "nav": {
     "home": "Home",
-    "products": "Products",
-    "patterns": "PDF Patterns",
+    "products": "Catalog",
+    "patterns": "Descriptions",
     "socials": "Socials",
     "cart": "Cart"
   },
   "home": {
-    "brandTagline": "Dark Circus Collection",
+    "brandTagline": "From Russia with love",
     "title": "Kofworkshop - handmade toy workshop",
     "subtitle": "We create original handmade toys and digital PDF patterns in a dark circus visual style.",
     "ctaProducts": "View catalog",
@@ -22,7 +22,8 @@
     "teamTitle": "Workshop team",
     "deliveryTitle": "Delivery",
     "socialTitle": "Our social platforms",
-    "socialSubtitle": "We post updates, new arrivals and releases across social media."
+    "socialSubtitle": "We post updates, new arrivals and releases across social media.",
+    "openSocialsPage": "Open socials page"
   },
   "products": {
     "title": "Product Catalog",
@@ -71,6 +72,10 @@
     "twitch": "Twitch",
     "pikabu": "Pikabu"
   },
+  "socials": {
+    "title": "Kofworkshop Socials",
+    "subtitle": "All active workshop platforms in one place."
+  },
   "footer": {
     "copyright": "© Kofworkshop. All rights reserved."
   },
@@ -78,6 +83,7 @@
     "homeTitle": "Home",
     "productsTitle": "Product Catalog",
     "patternsTitle": "PDF Pattern Catalog",
+    "socialsTitle": "Socials",
     "cartTitle": "Cart",
     "aboutTitle": "About"
   }

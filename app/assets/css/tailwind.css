@@ -8,8 +8,17 @@
   }
 
   body {
-    @apply bg-circus-bg bg-circus-radial font-body text-circus-text;
+    @apply bg-circus-bg bg-circus-radial font-body tracking-[0.01em] text-circus-text antialiased;
     min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
   }
 
   a,
@@ -39,6 +48,59 @@
 
   .circus-heading {
     @apply font-display tracking-wide text-circus-white;
+  }
+
+  .circus-bunting-item {
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  .circus-bunting-red {
+    background:
+      linear-gradient(155deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 36%),
+      linear-gradient(335deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 45%),
+      #7a2b3a;
+  }
+
+  .circus-bunting-light {
+    background:
+      linear-gradient(155deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(335deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 45%),
+      #d6cfd2;
+  }
+
+  .circus-bunting-sway {
+    animation: buntingSway 4200ms ease-in-out infinite;
+    transform-origin: 50% 0%;
+    will-change: transform;
+  }
+
+  .circus-bg-scene {
+    animation: bgDrift 24s ease-in-out infinite alternate;
+    will-change: background-position;
+  }
+}
+
+@keyframes buntingSway {
+  0%, 100% {
+    transform: translateX(-0.5px) translateY(var(--base-y, 0px)) rotate(-2.2deg);
+  }
+  25% {
+    transform: translateX(0.2px) translateY(calc(var(--base-y, 0px) + 1.4px)) rotate(-0.2deg);
+  }
+  50% {
+    transform: translateX(0.6px) translateY(calc(var(--base-y, 0px) + 2.6px)) rotate(2.2deg);
+  }
+  75% {
+    transform: translateX(0.2px) translateY(calc(var(--base-y, 0px) + 1.4px)) rotate(-0.2deg);
+  }
+}
+
+@keyframes bgDrift {
+  0% {
+    background-position: 92% center;
+  }
+  100% {
+    background-position: 100% center;
   }
 }
 

@@ -76,7 +76,7 @@ useSeoMeta({
 <template>
   <div>
     <section class="circus-card animate-riseFade p-8 md:p-10">
-      <NuxtImg src="/images/brand-logo.png" alt="Kofworkshop logo" width="180" height="180" sizes="180px" class="mb-6 h-20 w-20 rounded-2xl border border-circus-border object-cover" />
+      <NuxtImg src="/images/brand-logo-cutout.png" alt="Kofworkshop logo" width="180" height="180" sizes="180px" class="mb-6 h-24 w-24 object-contain" />
       <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">
         {{ t('home.brandTagline') }}
       </p>
@@ -142,15 +142,10 @@ useSeoMeta({
     <section class="circus-card mt-8 p-6">
       <h3 class="circus-heading text-xl font-semibold">{{ t('home.socialTitle') }}</h3>
       <p class="mt-2 text-sm text-circus-muted">{{ t('home.socialSubtitle') }}</p>
+      <NuxtLink :to="localePath('/socials')" class="circus-btn-secondary mt-3">
+        {{ t('home.openSocialsPage') }}
+      </NuxtLink>
       <div class="mt-3 flex flex-wrap gap-2">
-        <a
-          href="https://taplink.cc/kofworkshop"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rounded-full border border-circus-red px-4 py-2 text-sm font-semibold text-circus-white hover:bg-circus-red"
-        >
-          Taplink
-        </a>
         <a
           v-for="link in socialLinks"
           :key="link.href"

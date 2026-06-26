@@ -97,7 +97,7 @@ useSeoMeta({
   ogDescription: productDescription,
   ogType: 'product',
   ogUrl: () => `${config.public.siteUrl}${localePath(`/products/${String(route.params.slug)}`)}`,
-  ogImage: () => (product.value ? getPrimaryProductImage(product.value) : '/images/brand-logo.png'),
+  ogImage: () => (product.value ? getPrimaryProductImage(product.value) : '/images/brand-logo-cutout.png'),
 })
 
 useHead({
@@ -144,17 +144,14 @@ useHead({
           class="mt-3 grid gap-3"
           :class="galleryImages.length > 1 ? 'md:grid-cols-[1fr_110px]' : 'grid-cols-1'"
         >
-          <NuxtImg
+          <img
             :src="activeImage || getPrimaryProductImage(product)"
             :alt="productTitle"
-            width="1200"
-            height="1200"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 55vw"
-            format="webp"
-            preload
             fetchpriority="high"
-            class="h-[320px] w-full rounded-2xl border border-circus-border object-cover bg-circus-surface sm:h-[420px] md:h-[520px]"
-          />
+            loading="eager"
+            decoding="async"
+            class="max-h-[72vh] min-h-[260px] w-full rounded-2xl border border-circus-border object-contain bg-circus-surface"
+          >
           <div
             v-if="galleryImages.length > 1"
             class="mt-2 flex gap-2 overflow-x-auto pb-1 md:hidden"
@@ -166,7 +163,7 @@ useHead({
               :class="activeImage === image ? 'border-circus-red shadow-[inset_0_0_0_1px_#cf2d3a]' : ''"
               @click="activeImage = image"
             >
-              <NuxtImg :src="image" :alt="productTitle" width="128" height="128" sizes="64px" format="webp" class="h-full w-full object-cover" />
+              <img :src="image" :alt="productTitle" loading="lazy" decoding="async" class="h-full w-full object-cover">
             </button>
           </div>
           <div
@@ -180,7 +177,7 @@ useHead({
               :class="activeImage === image ? 'border-circus-red shadow-[inset_0_0_0_1px_#cf2d3a]' : ''"
               @click="activeImage = image"
             >
-              <NuxtImg :src="image" :alt="productTitle" width="200" height="200" sizes="110px" format="webp" class="h-20 w-full object-cover" />
+              <img :src="image" :alt="productTitle" loading="lazy" decoding="async" class="h-20 w-full object-cover">
             </button>
           </div>
         </div>

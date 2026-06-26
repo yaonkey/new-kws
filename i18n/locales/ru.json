@@ -2,13 +2,13 @@
   "currency": "RUB",
   "nav": {
     "home": "Главная",
-    "products": "Товары",
-    "patterns": "PDF-описания",
+    "products": "Каталог",
+    "patterns": "Описания",
     "socials": "Соцсети",
     "cart": "Корзина"
   },
   "home": {
-    "brandTagline": "Dark Circus Collection",
+    "brandTagline": "Из России с любовью",
     "title": "Kofworkshop - мастерская вязаных игрушек",
     "subtitle": "Создаем авторские игрушки ручной работы и цифровые PDF-схемы в фирменной эстетике темного цирка.",
     "ctaProducts": "Смотреть каталог",
@@ -22,7 +22,8 @@
     "teamTitle": "Команда мастерской",
     "deliveryTitle": "Доставка",
     "socialTitle": "Наши соцсети",
-    "socialSubtitle": "Основные обновления и новинки публикуем в социальных сетях."
+    "socialSubtitle": "Основные обновления и новинки публикуем в социальных сетях.",
+    "openSocialsPage": "Открыть страницу соцсетей"
   },
   "products": {
     "title": "Каталог изделий",
@@ -71,6 +72,10 @@
     "twitch": "Twitch",
     "pikabu": "Пикабу"
   },
+  "socials": {
+    "title": "Соцсети Kofworkshop",
+    "subtitle": "Все актуальные площадки мастерской в одном месте."
+  },
   "footer": {
     "copyright": "© Kofworkshop. Все права защищены."
   },
@@ -78,6 +83,7 @@
     "homeTitle": "Главная",
     "productsTitle": "Каталог товаров",
     "patternsTitle": "Каталог PDF-описаний",
+    "socialsTitle": "Соцсети",
     "cartTitle": "Корзина",
     "aboutTitle": "О мастерской"
   }
