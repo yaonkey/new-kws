@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const staticPaths = ['/', '/products', '/blog', '/cart', '/about']
+  const staticPaths = ['/', '/products', '/patterns', '/cart']
   const locales = ['ru', 'en']
 
   const localizedStaticUrls = locales.flatMap((locale) =>
@@ -16,11 +16,5 @@ export default defineEventHandler(async (event) => {
     })),
   )
 
-  const blogPosts = await queryCollection(event, 'blog').all()
-  const blogUrls = blogPosts.map((post: { slug: string; date?: string; locale?: string }) => ({
-    loc: `/${post.locale === 'en' ? 'en' : 'ru'}/blog/${post.slug}`,
-    lastmod: post.date,
-  }))
-
-  return [...localizedStaticUrls, ...productUrls, ...blogUrls]
+  return [...localizedStaticUrls, ...productUrls]
 })

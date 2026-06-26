@@ -8,24 +8,54 @@
   }
 
   body {
-    @apply bg-stone-50 text-stone-800;
+    @apply bg-circus-bg bg-circus-radial font-body text-circus-text;
+    min-height: 100vh;
+  }
+
+  a,
+  button,
+  input,
+  select {
+    @apply transition duration-200;
+  }
+}
+
+@layer components {
+  .circus-card {
+    @apply rounded-2xl border border-circus-border bg-circus-surface shadow-circus-glow;
+  }
+
+  .circus-input {
+    @apply rounded-lg border border-circus-border bg-circus-surfaceSoft px-3 py-2 text-sm text-circus-text outline-none placeholder:text-circus-muted focus:border-circus-red;
+  }
+
+  .circus-btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg border border-circus-red bg-circus-red px-5 py-3 text-sm font-semibold text-circus-white hover:bg-circus-redDeep hover:border-circus-redDeep;
+  }
+
+  .circus-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-circus-border bg-circus-surface px-5 py-3 text-sm font-semibold text-circus-text hover:border-circus-red hover:text-circus-white;
+  }
+
+  .circus-heading {
+    @apply font-display tracking-wide text-circus-white;
   }
 }
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  transform: translateY(4px);
+  transform: translateY(8px) scale(0.99);
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.22s ease;
 }
 
 .fade-enter-from,

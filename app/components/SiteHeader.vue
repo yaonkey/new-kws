@@ -16,41 +16,43 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-30 border-b border-stone-200 bg-white/95 backdrop-blur">
+  <header class="sticky top-0 z-30 border-b border-circus-border bg-circus-bg/95 backdrop-blur">
     <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <NuxtLink :to="localePath('/')" class="text-lg font-semibold text-stone-900">
-        Kofworkshop
+      <NuxtLink :to="localePath('/')" class="inline-flex items-center gap-3">
+        <NuxtImg src="/images/brand-logo.png" alt="Kofworkshop" width="42" height="42" class="h-10 w-10 rounded-full border border-circus-border object-cover" />
+        <span class="circus-heading text-xl font-semibold">Kofworkshop</span>
       </NuxtLink>
 
       <nav class="hidden gap-6 text-sm font-medium md:flex">
-        <NuxtLink :to="localePath('/products')" class="hover:text-emerald-700">{{ t('nav.products') }}</NuxtLink>
-        <NuxtLink :to="localePath('/patterns')" class="hover:text-emerald-700">{{ t('nav.patterns') }}</NuxtLink>
-        <NuxtLink :to="localePath('/blog')" class="hover:text-emerald-700">{{ t('nav.blog') }}</NuxtLink>
-        <NuxtLink :to="localePath('/about')" class="hover:text-emerald-700">{{ t('nav.about') }}</NuxtLink>
+        <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white">{{ t('nav.products') }}</NuxtLink>
+        <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white">{{ t('nav.patterns') }}</NuxtLink>
+        <a href="https://taplink.cc/kofworkshop" target="_blank" rel="noopener noreferrer" class="text-circus-muted hover:text-circus-white">
+          {{ t('nav.socials') }}
+        </a>
       </nav>
 
       <div class="flex items-center gap-3">
-        <button class="rounded border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
+        <button class="rounded border border-circus-border bg-circus-surface px-3 py-1 text-xs text-circus-text md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
           ☰
         </button>
-        <button class="hidden rounded border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 md:inline-flex" @click="open">
+        <button class="hidden rounded border border-circus-red bg-circus-red px-3 py-1 text-xs font-semibold text-circus-white md:inline-flex" @click="open">
           {{ t('nav.cart') }} ({{ itemCount }})
         </button>
-        <div class="relative hidden rounded-full border border-stone-300 bg-white p-0.5 text-xs md:flex">
+        <div class="relative hidden rounded-full border border-circus-border bg-circus-surface p-0.5 text-xs md:flex">
           <span
-            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-stone-900 transition-transform duration-200"
+            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-circus-red transition-transform duration-200"
             :class="locale === 'en' ? 'translate-x-full' : 'translate-x-0'"
           />
           <button
             class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'ru' ? 'text-white' : 'text-stone-700'"
+            :class="locale === 'ru' ? 'text-circus-white' : 'text-circus-muted'"
             @click="setLocale('ru')"
           >
             RU
           </button>
           <button
             class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'en' ? 'text-white' : 'text-stone-700'"
+            :class="locale === 'en' ? 'text-circus-white' : 'text-circus-muted'"
             @click="setLocale('en')"
           >
             EN
@@ -58,30 +60,31 @@ const setLocale = async (nextLocale: 'ru' | 'en') => {
         </div>
       </div>
     </div>
-    <nav v-if="mobileMenuOpen" class="border-t border-stone-200 px-4 py-3 md:hidden">
+    <nav v-if="mobileMenuOpen" class="border-t border-circus-border bg-circus-surface px-4 py-3 md:hidden">
       <div class="flex flex-col gap-3 text-sm font-medium">
-        <NuxtLink :to="localePath('/products')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.products') }}</NuxtLink>
-        <NuxtLink :to="localePath('/patterns')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.patterns') }}</NuxtLink>
-        <NuxtLink :to="localePath('/blog')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.blog') }}</NuxtLink>
-        <NuxtLink :to="localePath('/about')" class="hover:text-emerald-700" @click="mobileMenuOpen = false">{{ t('nav.about') }}</NuxtLink>
-        <button class="inline-flex w-fit rounded border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100" @click="open(); mobileMenuOpen = false">
+        <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.products') }}</NuxtLink>
+        <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.patterns') }}</NuxtLink>
+        <a href="https://taplink.cc/kofworkshop" target="_blank" rel="noopener noreferrer" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">
+          {{ t('nav.socials') }}
+        </a>
+        <button class="inline-flex w-fit rounded border border-circus-red bg-circus-red px-3 py-1 text-xs text-circus-white" @click="open(); mobileMenuOpen = false">
           {{ t('nav.cart') }} ({{ itemCount }})
         </button>
-        <div class="relative mt-1 flex w-fit rounded-full border border-stone-300 bg-white p-0.5 text-xs">
+        <div class="relative mt-1 flex w-fit rounded-full border border-circus-border bg-circus-bg p-0.5 text-xs">
           <span
-            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-stone-900 transition-transform duration-200"
+            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-circus-red transition-transform duration-200"
             :class="locale === 'en' ? 'translate-x-full' : 'translate-x-0'"
           />
           <button
             class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'ru' ? 'text-white' : 'text-stone-700'"
+            :class="locale === 'ru' ? 'text-circus-white' : 'text-circus-muted'"
             @click="setLocale('ru')"
           >
             RU
           </button>
           <button
             class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'en' ? 'text-white' : 'text-stone-700'"
+            :class="locale === 'en' ? 'text-circus-white' : 'text-circus-muted'"
             @click="setLocale('en')"
           >
             EN

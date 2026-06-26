@@ -59,17 +59,5 @@ export default defineContentConfig({
         ),
       }),
     }),
-    blog: defineCollection({
-      type: 'page',
-      source: 'blog/**/*.md',
-      schema: z.object({
-        slug: z.string(),
-        locale: z.enum(['ru', 'en']),
-        title: z.string(),
-        excerpt: z.string(),
-        date: z.string(),
-        coverImage: z.string(),
-      }),
-    }),
   },
 })

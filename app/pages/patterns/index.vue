@@ -70,22 +70,22 @@ useHead({
 <template>
   <div>
     <section class="mb-8">
-      <h1 class="text-3xl font-bold text-stone-900">{{ t('patterns.title') }}</h1>
-      <p class="mt-2 max-w-3xl text-stone-600">{{ t('patterns.subtitle') }}</p>
+      <h1 class="circus-heading text-3xl font-bold">{{ t('patterns.title') }}</h1>
+      <p class="mt-2 max-w-3xl text-circus-muted">{{ t('patterns.subtitle') }}</p>
     </section>
 
-    <section class="mb-6 rounded-2xl border border-stone-200 bg-white p-4 md:p-5">
+    <section class="circus-card mb-6 p-4 md:p-5">
       <input
         v-model="searchQuery"
         type="search"
         :placeholder="t('patterns.searchPlaceholder')"
-        class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600"
+        class="circus-input w-full"
       />
     </section>
 
-    <div class="mb-4 text-sm text-stone-600">{{ t('patterns.results') }}: {{ filteredPatterns.length }}</div>
+    <div class="mb-4 text-sm text-circus-muted">{{ t('patterns.results') }}: {{ filteredPatterns.length }}</div>
 
-    <p v-if="status === 'pending'" class="mb-4 text-sm text-stone-500">
+    <p v-if="status === 'pending'" class="mb-4 text-sm text-circus-muted">
       {{ t('patterns.loading') }}
     </p>
 

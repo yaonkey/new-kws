@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/sitemap',
+    '@nuxt/image',
   ],
   css: ['~/assets/css/tailwind.css'],
   app: {
@@ -14,13 +15,28 @@ export default defineNuxtConfig({
         lang: 'ru',
       },
       titleTemplate: '%s | Kofworkshop',
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: '',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap',
+        },
+      ],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
-          content: 'Handmade workshop showcase with product catalog and blog.',
+          content: 'Kofworkshop handmade toys and PDF patterns catalog.',
         },
-        { name: 'theme-color', content: '#047857' },
+        { name: 'theme-color', content: '#0a0a0f' },
       ],
     },
   },
@@ -42,6 +58,18 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
+  },
+  image: {
+    quality: 80,
+    format: ['webp'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
   },
   routeRules: {
     '/': { prerender: true },

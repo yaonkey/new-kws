@@ -21,6 +21,18 @@ const services = computed(() =>
       ],
 )
 
+const team = computed(() =>
+  isRu.value
+    ? [
+        { name: 'Мария Кофонкина', role: 'Главная вязальщица' },
+        { name: 'Дмитрий Лисовский', role: 'Разработка и поддержка сайта' },
+      ]
+    : [
+        { name: 'Maria Kofonkina', role: 'Lead craftswoman' },
+        { name: 'Dmitry Lisovsky', role: 'Development and website support' },
+      ],
+)
+
 const deliveryItems = computed(() =>
   isRu.value
     ? [
@@ -38,17 +50,17 @@ const deliveryItems = computed(() =>
 )
 
 const socialLinks = computed(() =>
-  isRu.value
-    ? [
-        { label: 'Telegram: Мария', href: 'https://t.me/Kofonkina/' },
-        { label: 'Telegram: Дмитрий', href: 'https://t.me/ya0nkey/' },
-        { label: 'Сайт мастерской', href: 'https://kofworkshop.vercel.app/' },
-      ]
-    : [
-        { label: 'Telegram: Maria', href: 'https://t.me/Kofonkina/' },
-        { label: 'Telegram: Dmitry', href: 'https://t.me/ya0nkey/' },
-        { label: 'Workshop website', href: 'https://kofworkshop.vercel.app/' },
-      ],
+  [
+    { key: 'vk', href: 'https://vk.com/kofworkshop' },
+    { key: 'telegram', href: 'https://t.me/kofworkshop' },
+    { key: 'instagram', href: 'https://instagram.com/kofworkshop' },
+    { key: 'reddit', href: 'https://www.reddit.com/r/kofworkshop/' },
+    { key: 'boosty', href: 'https://boosty.to/kofonkina' },
+    { key: 'pinterest', href: 'https://www.pinterest.com/kofworkshop/' },
+    { key: 'flowwow', href: 'https://flowwow.com/shop/kofworkshop/' },
+    { key: 'twitch', href: 'https://twitch.tv/bakasempaides' },
+    { key: 'pikabu', href: 'https://pikabu.ru/@megawhat' },
+  ] as const,
 )
 
 useSeoMeta({
@@ -63,82 +75,93 @@ useSeoMeta({
 
 <template>
   <div>
-    <section class="rounded-2xl bg-white p-8 shadow-sm">
-      <h1 class="text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
-        {{ isRu ? 'Kofworkshop - творческая мастерская вязаных игрушек' : 'Kofworkshop - creative handmade toy workshop' }}
+    <section class="circus-card animate-riseFade p-8 md:p-10">
+      <NuxtImg src="/images/brand-logo.png" alt="Kofworkshop logo" width="180" height="180" sizes="180px" class="mb-6 h-20 w-20 rounded-2xl border border-circus-border object-cover" />
+      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">
+        {{ t('home.brandTagline') }}
+      </p>
+      <h1 class="circus-heading text-3xl font-bold md:text-5xl">
+        {{ t('home.title') }}
       </h1>
-      <p class="mt-4 max-w-3xl text-stone-600">
-        {{
-          isRu
-            ? 'Небольшая мастерская, где мы создаем игрушки разной сложности и расцветок, а также продаем цифровые PDF-схемы.'
-            : 'A small workshop creating handmade toys in different styles and color palettes, plus digital PDF patterns.'
-        }}
+      <p class="mt-4 max-w-3xl text-circus-muted">
+        {{ t('home.subtitle') }}
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <NuxtLink :to="localePath('/products')" class="rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-800">
+        <NuxtLink :to="localePath('/products')" class="circus-btn-primary">
           {{ t('home.ctaProducts') }}
         </NuxtLink>
-        <NuxtLink :to="localePath('/blog')" class="rounded-lg border border-stone-300 px-5 py-3 text-sm font-semibold text-stone-700 hover:bg-stone-100">
-          {{ t('home.ctaBlog') }}
+        <NuxtLink :to="localePath('/patterns')" class="circus-btn-secondary">
+          {{ t('home.ctaPatterns') }}
         </NuxtLink>
       </div>
     </section>
 
     <section class="mt-8 grid gap-4 md:grid-cols-3">
-      <article class="rounded-xl border border-stone-200 bg-white p-5">
-        <h2 class="text-sm font-medium text-stone-500">{{ t('home.statsTitle') }}</h2>
-        <p class="mt-2 text-2xl font-bold text-stone-900">{{ t('home.statsProducts') }}</p>
+      <article class="circus-card p-5">
+        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
+        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsProducts') }}</p>
       </article>
-      <article class="rounded-xl border border-stone-200 bg-white p-5">
-        <h2 class="text-sm font-medium text-stone-500">{{ t('home.statsTitle') }}</h2>
-        <p class="mt-2 text-2xl font-bold text-stone-900">{{ t('home.statsShipping') }}</p>
+      <article class="circus-card p-5">
+        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
+        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsShipping') }}</p>
       </article>
-      <article class="rounded-xl border border-stone-200 bg-white p-5">
-        <h2 class="text-sm font-medium text-stone-500">{{ t('home.statsTitle') }}</h2>
-        <p class="mt-2 text-2xl font-bold text-stone-900">{{ t('home.statsCustom') }}</p>
+      <article class="circus-card p-5">
+        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
+        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsCustom') }}</p>
       </article>
     </section>
 
-    <section class="mt-8 rounded-2xl border border-stone-200 bg-white p-6">
-      <h2 class="text-2xl font-bold text-stone-900">
-        {{ isRu ? 'Давайте придумаем игрушку' : 'Let us design your toy' }}
-      </h2>
-      <p class="mt-2 text-stone-600">
-        {{
-          isRu
-            ? 'Мы создаем уникальные игрушки по запросу заказчика и готовим авторские схемы для самостоятельного вязания.'
-            : 'We create unique toys by request and publish original patterns for independent crafting.'
-        }}
-      </p>
+    <section class="circus-card mt-8 p-6">
+      <h2 class="circus-heading text-2xl font-semibold">{{ t('home.craftTitle') }}</h2>
+      <p class="mt-2 text-circus-muted">{{ t('home.craftSubtitle') }}</p>
       <ul class="mt-4 grid gap-2 md:grid-cols-2">
-        <li v-for="item in services" :key="item" class="rounded-lg border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-700">
+        <li v-for="item in services" :key="item" class="rounded-lg border border-circus-border bg-circus-surfaceSoft px-4 py-3 text-sm text-circus-text">
           {{ item }}
         </li>
       </ul>
     </section>
 
     <section class="mt-8 grid gap-6 lg:grid-cols-2">
-      <article class="rounded-2xl border border-stone-200 bg-white p-6">
-        <h3 class="text-xl font-semibold text-stone-900">{{ isRu ? 'Доставка' : 'Delivery' }}</h3>
-        <ul class="mt-3 space-y-2 text-sm text-stone-700">
+      <article class="circus-card p-6">
+        <h3 class="circus-heading text-xl font-semibold">{{ t('home.deliveryTitle') }}</h3>
+        <ul class="mt-3 space-y-2 text-sm text-circus-muted">
           <li v-for="item in deliveryItems" :key="item">- {{ item }}</li>
         </ul>
       </article>
-      <article class="rounded-2xl border border-stone-200 bg-white p-6">
-        <h3 class="text-xl font-semibold text-stone-900">{{ isRu ? 'Соцсети и контакты' : 'Socials and contacts' }}</h3>
-        <div class="mt-3 flex flex-wrap gap-2">
-          <a
-            v-for="link in socialLinks"
-            :key="link.href"
-            :href="link.href"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-full border border-stone-300 px-4 py-2 text-sm text-stone-700 hover:bg-stone-100"
-          >
-            {{ link.label }}
-          </a>
+      <article class="circus-card p-6">
+        <h3 class="circus-heading text-xl font-semibold">{{ t('home.teamTitle') }}</h3>
+        <div class="mt-3 space-y-3">
+          <div v-for="member in team" :key="member.name" class="rounded-lg border border-circus-border bg-circus-surfaceSoft p-3">
+            <p class="font-semibold text-circus-text">{{ member.name }}</p>
+            <p class="text-sm text-circus-muted">{{ member.role }}</p>
+          </div>
         </div>
       </article>
+    </section>
+
+    <section class="circus-card mt-8 p-6">
+      <h3 class="circus-heading text-xl font-semibold">{{ t('home.socialTitle') }}</h3>
+      <p class="mt-2 text-sm text-circus-muted">{{ t('home.socialSubtitle') }}</p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <a
+          href="https://taplink.cc/kofworkshop"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full border border-circus-red px-4 py-2 text-sm font-semibold text-circus-white hover:bg-circus-red"
+        >
+          Taplink
+        </a>
+        <a
+          v-for="link in socialLinks"
+          :key="link.href"
+          :href="link.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full border border-circus-border px-4 py-2 text-sm text-circus-muted hover:border-circus-red hover:text-circus-white"
+        >
+          {{ t(`social.${link.key}`) }}
+        </a>
+      </div>
     </section>
   </div>
 </template>

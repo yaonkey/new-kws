@@ -106,30 +106,30 @@ useHead({
 <template>
   <div>
     <section class="mb-8">
-      <h1 class="text-3xl font-bold text-stone-900">{{ t('products.title') }}</h1>
-      <p class="mt-2 max-w-3xl text-stone-600">{{ t('products.subtitle') }}</p>
+      <h1 class="circus-heading text-3xl font-bold">{{ t('products.title') }}</h1>
+      <p class="mt-2 max-w-3xl text-circus-muted">{{ t('products.subtitle') }}</p>
     </section>
 
-    <section class="mb-6 rounded-2xl border border-stone-200 bg-white p-4 md:p-5">
+    <section class="circus-card mb-6 p-4 md:p-5">
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <input
           v-model="searchQuery"
           type="search"
           :placeholder="t('products.searchPlaceholder')"
-          class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600"
+          class="circus-input"
         />
-        <select v-model="selectedLabel" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600">
+        <select v-model="selectedLabel" class="circus-input">
           <option value="all">{{ t('products.allCategories') }}</option>
           <option v-for="category in categories" :key="category.key" :value="category.key">
             {{ category.label }}
           </option>
         </select>
-        <input v-model.number="minPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600" />
-        <input v-model.number="maxPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none transition focus:border-emerald-600" />
+        <input v-model.number="minPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />
+        <input v-model.number="maxPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />
       </div>
     </section>
 
-    <div class="mb-4 text-sm text-stone-600">{{ t('products.results') }}: {{ filteredProducts.length }}</div>
+    <div class="mb-4 text-sm text-circus-muted">{{ t('products.results') }}: {{ filteredProducts.length }}</div>
 
     <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <ProductCard v-for="product in filteredProducts" :key="product.slug" :product="product" />

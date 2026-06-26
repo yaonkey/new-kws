@@ -4,19 +4,25 @@
     "home": "Home",
     "products": "Products",
     "patterns": "PDF Patterns",
-    "blog": "Blog",
-    "about": "About",
+    "socials": "Socials",
     "cart": "Cart"
   },
   "home": {
-    "title": "Handmade Products with Soul",
-    "subtitle": "A boutique workshop for handmade toys, decor, and gift items.",
+    "brandTagline": "Dark Circus Collection",
+    "title": "Kofworkshop - handmade toy workshop",
+    "subtitle": "We create original handmade toys and digital PDF patterns in a dark circus visual style.",
     "ctaProducts": "View catalog",
-    "ctaBlog": "Read blog",
+    "ctaPatterns": "View PDF patterns",
     "statsTitle": "What you get",
     "statsProducts": "60+ products",
     "statsShipping": "Worldwide shipping",
-    "statsCustom": "Custom orders"
+    "statsCustom": "Custom orders",
+    "craftTitle": "We craft toys and patterns with character",
+    "craftSubtitle": "From one-off custom pieces to collectible series and clear PDF guides for independent crafting.",
+    "teamTitle": "Workshop team",
+    "deliveryTitle": "Delivery",
+    "socialTitle": "Our social platforms",
+    "socialSubtitle": "We post updates, new arrivals and releases across social media."
   },
   "products": {
     "title": "Product Catalog",
@@ -33,7 +39,6 @@
     "metaTitle": "Product metadata",
     "metaCategory": "Labels",
     "metaSku": "SKU",
-    "metaPdf": "PDF",
     "extraDetailsTitle": "Additional details"
   },
   "patterns": {
@@ -42,15 +47,6 @@
     "searchPlaceholder": "Search...",
     "results": "PDF patterns found",
     "loading": "Loading PDF catalog..."
-  },
-  "blog": {
-    "title": "Workshop Blog",
-    "subtitle": "Behind-the-scenes stories and tips for handmade care.",
-    "readMore": "Read article",
-    "notFound": "Article not found",
-    "readingTime": "min read",
-    "toc": "Table of contents",
-    "related": "Related posts"
   },
   "cart": {
     "title": "Cart",
@@ -64,9 +60,16 @@
     "checkout": "Checkout via Telegram",
     "decrease": "Decrease quantity"
   },
-  "about": {
-    "title": "About the Workshop",
-    "description": "We create handmade products from natural materials with a focus on quality, longevity, and thoughtful design."
+  "social": {
+    "vk": "VK",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "reddit": "Reddit",
+    "boosty": "Boosty",
+    "pinterest": "Pinterest",
+    "flowwow": "Flowwow",
+    "twitch": "Twitch",
+    "pikabu": "Pikabu"
   },
   "footer": {
     "copyright": "© Kofworkshop. All rights reserved."
@@ -75,7 +78,6 @@
     "homeTitle": "Home",
     "productsTitle": "Product Catalog",
     "patternsTitle": "PDF Pattern Catalog",
-    "blogTitle": "Blog",
     "cartTitle": "Cart",
     "aboutTitle": "About"
   }

@@ -4,19 +4,25 @@
     "home": "Главная",
     "products": "Товары",
     "patterns": "PDF-описания",
-    "blog": "Блог",
-    "about": "О мастерской",
+    "socials": "Соцсети",
     "cart": "Корзина"
   },
   "home": {
-    "title": "Ручные изделия с душой",
-    "subtitle": "Авторская мастерская: игрушки, декор и подарки ручной работы.",
+    "brandTagline": "Dark Circus Collection",
+    "title": "Kofworkshop - мастерская вязаных игрушек",
+    "subtitle": "Создаем авторские игрушки ручной работы и цифровые PDF-схемы в фирменной эстетике темного цирка.",
     "ctaProducts": "Смотреть каталог",
-    "ctaBlog": "Читать блог",
+    "ctaPatterns": "Смотреть PDF-описания",
     "statsTitle": "Что вы найдете",
     "statsProducts": "60+ изделий",
     "statsShipping": "Доставка по миру",
-    "statsCustom": "Индивидуальные заказы"
+    "statsCustom": "Индивидуальные заказы",
+    "craftTitle": "Мы создаем игрушки и схемы с характером",
+    "craftSubtitle": "От единичных кастомных работ до коллекционных серий и понятных PDF-инструкций для самостоятельного вязания.",
+    "teamTitle": "Команда мастерской",
+    "deliveryTitle": "Доставка",
+    "socialTitle": "Наши соцсети",
+    "socialSubtitle": "Основные обновления и новинки публикуем в социальных сетях."
   },
   "products": {
     "title": "Каталог изделий",
@@ -33,7 +39,6 @@
     "metaTitle": "Характеристики",
     "metaCategory": "Метки",
     "metaSku": "Артикул",
-    "metaPdf": "PDF",
     "extraDetailsTitle": "Дополнительное описание"
   },
   "patterns": {
@@ -42,15 +47,6 @@
     "searchPlaceholder": "Поиск...",
     "results": "Найдено PDF-описаний",
     "loading": "Загрузка PDF-каталога..."
-  },
-  "blog": {
-    "title": "Блог мастерской",
-    "subtitle": "Истории создания и советы по уходу за handmade-изделиями.",
-    "readMore": "Читать статью",
-    "notFound": "Статья не найдена",
-    "readingTime": "мин чтения",
-    "toc": "Содержание",
-    "related": "Похожие статьи"
   },
   "cart": {
     "title": "Корзина",
@@ -64,9 +60,16 @@
     "checkout": "Оформить через Telegram",
     "decrease": "Уменьшить количество"
   },
-  "about": {
-    "title": "О мастерской",
-    "description": "Мы создаем handmade-изделия из натуральных материалов, уделяя внимание деталям, долговечности и эстетике."
+  "social": {
+    "vk": "ВКонтакте",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "reddit": "Reddit",
+    "boosty": "Boosty",
+    "pinterest": "Pinterest",
+    "flowwow": "Flowwow",
+    "twitch": "Twitch",
+    "pikabu": "Пикабу"
   },
   "footer": {
     "copyright": "© Kofworkshop. Все права защищены."
@@ -75,7 +78,6 @@
     "homeTitle": "Главная",
     "productsTitle": "Каталог товаров",
     "patternsTitle": "Каталог PDF-описаний",
-    "blogTitle": "Блог",
     "cartTitle": "Корзина",
     "aboutTitle": "О мастерской"
   }

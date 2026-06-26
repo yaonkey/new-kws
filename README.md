@@ -1,19 +1,20 @@
-# Handmade Workshop Showcase (Nuxt 3/4)
+# Kofworkshop Dark Circus (Nuxt 4)
 
 Multilingual handmade workshop showcase with:
 
-- Product catalog (about 60 products)
-- Product pages with cart actions
+- Product catalog and PDF patterns storefront
+- Product pages with gallery and cart actions
 - LocalStorage cart and Telegram checkout link
-- Blog powered by `@nuxt/content`
 - Russian/English support via `@nuxtjs/i18n`
-- TailwindCSS UI
+- Dark circus UI theme (black/red/white) with animations
 - SEO + OpenGraph + sitemap
+- Optimized images via `@nuxt/image`
 
 ## Tech Stack
 
 - Nuxt
 - @nuxt/content
+- @nuxt/image
 - @nuxtjs/i18n
 - @nuxtjs/tailwindcss
 - @nuxtjs/sitemap
