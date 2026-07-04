@@ -34,6 +34,7 @@ const { data: catalog, refresh } = await useAsyncData(
 const products = computed<CatalogProduct[]>(() => (catalog.value?.products ?? []).filter((product) => !product.is_schema))
 const searchQuery = ref('')
 const selectedLabel = ref('all')
+const selectedSort = ref<'newest' | 'oldest' | 'price-asc' | 'price-desc'>('newest')
 
 const priceBounds = computed(() => {
   if (!products.value.length) {
@@ -71,16 +72,35 @@ const categories = computed(() => {
 
 const filteredProducts = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
-  return products.value.filter((product) => {
-    const localizedTitle = getLocalizedField(product.title, locale.value).toLowerCase()
-    const localizedDescription = getLocalizedField(product.description, locale.value).toLowerCase()
-    const productLabelKeys = getProductCategories(product).map((label) => getCategoryKey(label))
-    const matchesSearch = !query || localizedTitle.includes(query) || localizedDescription.includes(query)
-    const matchesCategory = selectedLabel.value === 'all' || productLabelKeys.includes(selectedLabel.value)
-    const productPrice = getPriceByLocale(getProductEffectivePrice(product), locale.value)
-    const matchesPrice = productPrice >= minPrice.value && productPrice <= maxPrice.value
-    return matchesSearch && matchesCategory && matchesPrice
+  const sourceProducts = products.value
+    .map((product, index) => ({ product, index }))
+    .filter(({ product }) => {
+      const localizedTitle = getLocalizedField(product.title, locale.value).toLowerCase()
+      const localizedDescription = getLocalizedField(product.description, locale.value).toLowerCase()
+      const productLabelKeys = getProductCategories(product).map((label) => getCategoryKey(label))
+      const matchesSearch = !query || localizedTitle.includes(query) || localizedDescription.includes(query)
+      const matchesCategory = selectedLabel.value === 'all' || productLabelKeys.includes(selectedLabel.value)
+      const productPrice = getPriceByLocale(getProductEffectivePrice(product), locale.value)
+      const matchesPrice = productPrice >= minPrice.value && productPrice <= maxPrice.value
+      return matchesSearch && matchesCategory && matchesPrice
+    })
+
+  sourceProducts.sort((a, b) => {
+    if (selectedSort.value === 'newest') {
+      return b.index - a.index
+    }
+    if (selectedSort.value === 'oldest') {
+      return a.index - b.index
+    }
+    if (selectedSort.value === 'price-asc') {
+      return getPriceByLocale(getProductEffectivePrice(a.product), locale.value)
+        - getPriceByLocale(getProductEffectivePrice(b.product), locale.value)
+    }
+    return getPriceByLocale(getProductEffectivePrice(b.product), locale.value)
+      - getPriceByLocale(getProductEffectivePrice(a.product), locale.value)
   })
+
+  return sourceProducts.map(({ product }) => product)
 })
 
 onMounted(async () => {
@@ -111,7 +131,7 @@ useHead({
     </section>
 
     <section class="circus-card mb-6 p-4 md:p-5">
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <input
           v-model="searchQuery"
           type="search"
@@ -123,6 +143,12 @@ useHead({
           <option v-for="category in categories" :key="category.key" :value="category.key">
             {{ category.label }}
           </option>
+        </select>
+        <select v-model="selectedSort" class="circus-input">
+          <option value="newest">{{ t('products.sortNewest') }}</option>
+          <option value="oldest">{{ t('products.sortOldest') }}</option>
+          <option value="price-asc">{{ t('products.sortPriceAsc') }}</option>
+          <option value="price-desc">{{ t('products.sortPriceDesc') }}</option>
         </select>
         <input v-model.number="minPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />
         <input v-model.number="maxPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />

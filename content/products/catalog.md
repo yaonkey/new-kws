@@ -44,18 +44,6 @@ products:
     hasPdf: true
     pdfPrice: 110
 
-  - slug: "rocking-horse"
-    labels: ["new", "hit"]
-    title: { ru: "Лошадка-качалка", en: "Rocking horse" }
-    description: { ru: "Подходит как подарок для праздника.", en: "Great gift option for special occasions." }
-    price: { rub: 1800, usd: 30 }
-    salePrice: { rub: 1550 }
-    image:
-      - "/images/rocking-horse-1.jpg"
-      - "/images/rocking-horse-2.jpg"
-      - "/images/rocking-horse-3.jpg"
-      - "/images/rocking-horse-4.jpg"
-
   - slug: "totoro-keychain"
     labels: ["hit", "keychain"]
     title: { ru: "Брелок Тоторо", en: "Totoro keychain" }
@@ -103,15 +91,6 @@ products:
       - "/images/cow-ufo-2.jpg"
       - "/images/cow-ufo-3.jpg"
     hasPdf: true
-
-  - slug: "hippo"
-    title: { ru: "Бегемотик", en: "Hippo" }
-    description: { ru: "Плетеный декор для уютного интерьера.", en: "Woven decor piece for a cozy interior." }
-    price: { rub: 600, usd: 10 }
-    image:
-      - "/images/hippo-1.jpg"
-      - "/images/hippo-2.jpg"
-      - "/images/hippo-3.jpg"
 
   - slug: "micro-red-panda"
     title: { ru: "Микро красная панда", en: "Micro red panda" }
@@ -163,16 +142,6 @@ products:
       - "/images/bunny-in-a-fruit-hat-3.jpg"
     hasPdf: true
     pdfPrice: 160
-
-  - slug: "duck-in-an-onion-cap"
-    labels: ["new"]
-    title: { ru: "Уточка в шапке лука", en: "Duck in an onion cap" }
-    description: { ru: "Матовая глазурь и удобная форма.", en: "Matte glaze with ergonomic shape." }
-    price: { rub: 550, usd: 10 }
-    image:
-      - "/images/duck-in-an-onion-cap-1.jpg"
-      - "/images/duck-in-an-onion-cap-2.jpg"
-      - "/images/duck-in-an-onion-cap-3.jpg"
 
   - slug: "capybara"
     title: { ru: "Капибара", en: "Capybara" }
@@ -332,26 +301,6 @@ products:
       - "/images/crocodile-2.jpg"
       - "/images/crocodile-3.jpg"
 
-  - slug: "capybara-in-a-suit"
-    title: { ru: "Капибара в костюме", en: "Capybara in a suit" }
-    description: { ru: "Нежная гамма для светлого интерьера.", en: "Gentle tones for bright interiors." }
-    price: { rub: 600, usd: 12}
-    image:
-      - "/images/crocodile-1.jpg"
-      - "/images/crocodile-2.jpg"
-      - "/images/crocodile-3.jpg"
-
-  - slug: "little-penguin-pollo"
-    title: { ru: "Пингвиненок Полло", en: "Little Penguin Pollo" }
-    description: { ru: "Коллекционная мини-серия декора.", en: "Collectible mini decor series." }
-    price: { rub: 1200, usd: 20}
-    image:
-      - "/images/little-penguin-pollo-1.jpg"
-      - "/images/little-penguin-pollo-2.jpg"
-      - "/images/little-penguin-pollo-3.jpg"
-      - "/images/little-penguin-pollo-4.jpg"
-      - "/images/little-penguin-pollo-5.jpg"
-
   - slug: "cat-in-a-fish-hat"
     title: { ru: "Котик в шапке рыбки", en: "A cat in a fish hat" }
     description: { ru: "Свечи ручной заливки с мягким ароматом.", en: "Hand-poured candles with gentle scent." }
@@ -461,26 +410,6 @@ products:
       - "/images/glinda-bunny-4.jpg"
     hasPdf: true
 
-  - slug: "raccoon"
-    title: { ru: "Енот", en: "The Raccoon" }
-    description: { ru: "Ручная отделка и натуральные ткани.", en: "Hand-finished with natural fabrics." }
-    price: { rub: 1800, usd: 30}
-    image:
-      - "/images/raccoon-1.jpg"
-      - "/images/raccoon-2.jpg"
-      - "/images/raccoon-3.jpg"
-      - "/images/raccoon-4.jpg"
-
-  - slug: "beanie-rabbit"
-    title: { ru: "Кролик Бини", en: "Beanie Rabbit" }
-    description: { ru: "Добавляет тепла семейным ужинам.", en: "Adds warmth to family dinners." }
-    price: { rub: 2000, usd: 33}
-    image:
-      - "/images/beanie-rabbit-1.jpg"
-      - "/images/beanie-rabbit-2.jpg"
-      - "/images/beanie-rabbit-3.jpg"
-      - "/images/beanie-rabbit-4.jpg"
-
   - slug: "woof-kitten"
     title: { ru: "Котенок Гав!", en: "Woof The Kitten" }
     description: { ru: "Практичный и эстетичный формат.", en: "Practical and aesthetic format." }
@@ -579,6 +508,23 @@ products:
       - "/images/dirty-kitten-2.jpg"
       - "/images/dirty-kitten-3.jpg"
       - "/images/dirty-kitten-4.jpg"
+
+  - slug: "dinodog"
+    labels: ["new"]
+    title: { ru: "Динодог", en: "Dinodog" }
+    description: { ru: "Хотдог в виде динозаврика.", en: "A hotdog in the shape of a tiny dinosaur." }
+    price: { rub: 1100, usd: 18 }
+    image:
+      - "/images/dinodog-1.jpg"
+      - "/images/dinodog-2.jpg"
+
+  - slug: "jellyfish"
+    labels: ["new", "keychain"]
+    title: { ru: "Медуза-брелок", en: "Jellyfish keychain" }
+    description: { ru: "Медуза в формате брелока.", en: "A jellyfish made as a keychain." }
+    price: { rub: 750, usd: 12 }
+    image:
+      - "/images/jellyfish-1.jpg"
 
   - slug: "knitted-schema-61"
     labels: ["new"]
