@@ -21,8 +21,10 @@
     "socialSubtitle": "Основные обновления и новинки публикуем в социальных сетях.",
     "openSocialsPage": "Открыть страницу соцсетей",
     "marketTitle": "Ближайшая ярмарка",
+    "marketTitlePast": "Последняя ярмарка",
     "marketCurrent": "Сейчас идёт",
     "marketUpcoming": "Скоро",
+    "marketPast": "Событие уже прошло",
     "shelvesTitle": "Наши полочки"
   },
   "products": {

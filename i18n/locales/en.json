@@ -21,8 +21,10 @@
     "socialSubtitle": "We post updates, new arrivals and releases across social media.",
     "openSocialsPage": "Open socials page",
     "marketTitle": "Upcoming fair",
+    "marketTitlePast": "Recent fair",
     "marketCurrent": "Happening now",
     "marketUpcoming": "Coming soon",
+    "marketPast": "This event has already passed",
     "shelvesTitle": "Our shelves"
   },
   "products": {

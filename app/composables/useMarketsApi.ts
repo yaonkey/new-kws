@@ -6,6 +6,7 @@ export type UpcomingMarket = {
   address?: string
   link?: string
   is_current: boolean
+  is_past: boolean
 }
 
 type DateParts = { year: number; month: number; day: number }

@@ -110,7 +110,9 @@ useSeoMeta({
     </section>
 
     <section v-if="upcomingMarket" class="circus-card mt-8 p-6 md:p-8">
-      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">{{ t('home.marketTitle') }}</p>
+      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">
+        {{ upcomingMarket.is_past ? t('home.marketTitlePast') : t('home.marketTitle') }}
+      </p>
       <h2 class="circus-heading text-2xl font-semibold">
         <a
           v-if="upcomingMarket.link"
@@ -126,7 +128,13 @@ useSeoMeta({
       <p class="mt-2 text-circus-muted">{{ marketPeriod }}</p>
       <p v-if="upcomingMarket.address" class="mt-1 text-sm text-circus-muted">{{ upcomingMarket.address }}</p>
       <p class="mt-3 text-sm font-medium text-circus-text">
-        {{ upcomingMarket.is_current ? t('home.marketCurrent') : t('home.marketUpcoming') }}
+        {{
+          upcomingMarket.is_current
+            ? t('home.marketCurrent')
+            : upcomingMarket.is_past
+              ? t('home.marketPast')
+              : t('home.marketUpcoming')
+        }}
       </p>
     </section>
 
