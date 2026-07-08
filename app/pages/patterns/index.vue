@@ -6,18 +6,11 @@ const { t, locale } = useI18n()
 const config = useRuntimeConfig()
 const localePath = useLocalePath()
 
-const loadProductsCatalog = async () => {
-  const byPath = await queryCollection('products').path('/products/catalog').first()
-  if (byPath?.products) {
-    return byPath
-  }
-  const all = await queryCollection('products').all()
-  return all.find((entry) => Array.isArray(entry.products)) || { products: [] }
-}
+const { fetchCatalog } = useProductsApi()
 
 const { data: catalog, status, refresh } = await useAsyncData(
   () => `patterns-catalog-${locale.value}`,
-  loadProductsCatalog,
+  fetchCatalog,
   {
     watch: [locale],
     default: () => ({ products: [] }),

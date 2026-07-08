@@ -25,6 +25,7 @@ export interface CatalogProduct {
   image: string | string[]
   hasPdf?: boolean
   pdfPrice?: number | PriceValue
+  stock?: number | null
 }
 
 export interface CartItem {
@@ -51,7 +52,7 @@ export const useCart = () => {
   const initialized = useState<boolean>('cart-initialized', () => false)
 
   const makeItemId = (slug: string, kind: CartItemKind) => `${kind}:${slug}`
-  const getPdfPrice = (product: CatalogProduct) => normalizePriceValue(product.pdfPrice ?? product.price ?? { rub: 110, usd: 2 })
+  const getPdfPrice = (product: CatalogProduct) => normalizePriceValue(product.pdfPrice ?? { rub: 160, usd: 2 })
   const findItemById = (itemId: string) => items.value.find((item) => item.id === itemId)
 
   if (import.meta.client && !initialized.value) {
@@ -106,11 +107,17 @@ export const useCart = () => {
   })
 
   const addItem = (product: CatalogProduct) => {
+    if (product.is_schema) {
+      return false
+    }
     const itemId = makeItemId(product.slug, 'product')
     const existingItem = findItemById(itemId)
     if (existingItem) {
+      if (product.stock != null && product.stock > 0 && existingItem.quantity >= product.stock) {
+        return false
+      }
       existingItem.quantity += 1
-      return
+      return true
     }
 
     items.value.push({
@@ -122,6 +129,7 @@ export const useCart = () => {
       image: getPrimaryProductImage(product),
       quantity: 1,
     })
+    return true
   }
 
   const addPdfItem = (product: CatalogProduct) => {

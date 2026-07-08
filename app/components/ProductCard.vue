@@ -8,6 +8,8 @@ import {
   getPrimaryProductImage,
   getProductImages,
   getProductLabels,
+  getProductStockStatus,
+  isProductAvailable,
 } from '~/composables/useCatalog'
 
 const props = defineProps<{
@@ -25,16 +27,12 @@ const localizedPrice = computed(() => getPriceByLocale(getProductEffectivePrice(
 const localizedBasePrice = computed(() => getPriceByLocale(getProductBasePrice(props.product), locale.value))
 const isOnSale = computed(() => hasSalePrice(props.product))
 const badges = computed(() => getProductLabels(props.product, locale.value))
-const canBuyProduct = computed(() => !props.product.is_schema)
-const canBuyPdf = computed(() => Boolean(props.product.hasPdf || props.product.is_schema))
+const canBuyProduct = computed(() => isProductAvailable(props.product))
+const stockStatus = computed(() => getProductStockStatus(props.product))
 
 const handleQuickAdd = () => {
   if (canBuyProduct.value) {
     cart.addItem(props.product)
-    return
-  }
-  if (canBuyPdf.value) {
-    cart.addPdfItem(props.product)
   }
 }
 </script>
@@ -76,15 +74,18 @@ const handleQuickAdd = () => {
           <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
         </p>
         <p v-else class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
+        <p v-if="stockStatus !== 'unknown'" class="text-xs text-circus-muted">
+          {{ t(`products.stock.${stockStatus}`) }}
+        </p>
       </div>
     </NuxtLink>
     <div class="mt-auto px-4 pb-4">
       <button
-        v-if="canBuyProduct || canBuyPdf"
+        v-if="canBuyProduct"
         class="w-full rounded-lg border border-circus-border bg-circus-surfaceSoft px-3 py-2 text-sm font-semibold text-circus-text transition hover:border-circus-red hover:bg-circus-red hover:text-circus-white"
         @click="handleQuickAdd"
       >
-        {{ canBuyProduct ? t('products.addToCart') : t('products.addPdfToCart') }}
+        {{ t('products.addToCart') }}
       </button>
     </div>
   </article>

@@ -9,6 +9,10 @@ import {
   getPrimaryProductImage,
   getProductCategories,
   getProductImages,
+  getProductStockStatus,
+  canShowPdfAddon,
+  isProductAvailable,
+  getSchemaAvailability,
   normalizePriceValue,
 } from '~/composables/useCatalog'
 
@@ -19,18 +23,11 @@ const localePath = useLocalePath()
 const cart = useCart()
 const drawer = useCartDrawer()
 
-const loadProductsCatalog = async () => {
-  const byPath = await queryCollection('products').path('/products/catalog').first()
-  if (byPath?.products) {
-    return byPath
-  }
-  const all = await queryCollection('products').all()
-  return all.find((entry) => Array.isArray(entry.products)) || { products: [] }
-}
+const { fetchCatalog } = useProductsApi()
 
 const { data: catalog, status, refresh } = await useAsyncData(
   () => `products-catalog-item-${locale.value}`,
-  loadProductsCatalog,
+  fetchCatalog,
   {
     watch: [locale],
     default: () => ({ products: [] }),
@@ -54,7 +51,7 @@ const productDetails = computed(() => {
   return product.value.details.en || ''
 })
 const activeImage = ref('')
-const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? product.value?.price ?? { rub: 110, usd: 2 }, locale.value))
+const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? { rub: 160, usd: 2 }, locale.value))
 const productPrice = computed(() => (product.value ? getPriceByLocale(getProductEffectivePrice(product.value), locale.value) : 0))
 const productBasePrice = computed(() => (product.value ? getPriceByLocale(getProductBasePrice(product.value), locale.value) : 0))
 const isOnSale = computed(() => (product.value ? hasSalePrice(product.value) : false))
@@ -65,8 +62,9 @@ const productLabelCategories = computed(() => {
   const labels = getProductCategories(product.value).map((category) => getCategoryLabel(category, locale.value))
   return labels.join(', ') || '—'
 })
-const canBuyProduct = computed(() => !product.value?.is_schema)
-const canBuyPdf = computed(() => Boolean(product.value?.hasPdf || product.value?.is_schema))
+const canBuyProduct = computed(() => Boolean(product.value && isProductAvailable(product.value)))
+const stockStatus = computed(() => (product.value ? getProductStockStatus(product.value) : 'unknown'))
+const canBuyPdf = computed(() => Boolean(product.value && (product.value.is_schema || canShowPdfAddon(product.value))))
 const catalogLink = computed(() => localePath(product.value?.is_schema ? '/patterns' : '/products'))
 const catalogLabel = computed(() => (product.value?.is_schema ? t('nav.patterns') : t('nav.products')))
 const galleryImages = computed(() => {
@@ -118,7 +116,7 @@ useHead({
                 '@type': 'Offer',
                 priceCurrency: t('currency'),
                 price: normalizePriceValue(product.value.price).usd,
-                availability: 'https://schema.org/InStock',
+                availability: getSchemaAvailability(product.value),
                 url: `${config.public.siteUrl}${localePath(`/products/${String(route.params.slug)}`)}`,
               },
             }),
@@ -191,6 +189,9 @@ useHead({
           <span class="text-2xl font-bold text-circus-white">{{ productPrice }} {{ t('currency') }}</span>
         </p>
         <p v-else class="text-2xl font-bold text-circus-white">{{ productPrice }} {{ t('currency') }}</p>
+        <p v-if="stockStatus !== 'unknown'" class="text-sm font-medium text-circus-muted">
+          {{ t(`products.stock.${stockStatus}`) }}
+        </p>
 
         <section class="rounded-xl border border-circus-border bg-circus-surface p-4 text-sm">
           <h2 class="mb-3 font-semibold text-circus-white">{{ t('products.metaTitle') }}</h2>
@@ -212,7 +213,7 @@ useHead({
           <button
             v-if="canBuyProduct"
             class="w-full rounded-lg border border-circus-red bg-circus-red px-6 py-3 text-sm font-semibold text-circus-white transition hover:bg-circus-redDeep"
-            @click="cart.addItem(product); drawer.open()"
+            @click="cart.addItem(product) && drawer.open()"
           >
             {{ t('products.addToCart') }}
           </button>

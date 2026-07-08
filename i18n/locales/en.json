@@ -13,17 +13,17 @@
     "subtitle": "We create original handmade toys and digital PDF patterns in a dark circus visual style.",
     "ctaProducts": "View catalog",
     "ctaPatterns": "View PDF patterns",
-    "statsTitle": "What you get",
-    "statsProducts": "60+ products",
-    "statsShipping": "Worldwide shipping",
-    "statsCustom": "Custom orders",
     "craftTitle": "We craft toys and patterns with character",
     "craftSubtitle": "From one-off custom pieces to collectible series and clear PDF guides for independent crafting.",
     "teamTitle": "Workshop team",
     "deliveryTitle": "Delivery",
     "socialTitle": "Our social platforms",
     "socialSubtitle": "We post updates, new arrivals and releases across social media.",
-    "openSocialsPage": "Open socials page"
+    "openSocialsPage": "Open socials page",
+    "marketTitle": "Upcoming fair",
+    "marketCurrent": "Happening now",
+    "marketUpcoming": "Coming soon",
+    "shelvesTitle": "Our shelves"
   },
   "products": {
     "title": "Product Catalog",
@@ -44,7 +44,11 @@
     "metaTitle": "Product metadata",
     "metaCategory": "Labels",
     "metaSku": "SKU",
-    "extraDetailsTitle": "Additional details"
+    "extraDetailsTitle": "Additional details",
+    "stock": {
+      "in_stock": "In stock",
+      "out_of_stock": "Made to order"
+    }
   },
   "patterns": {
     "title": "PDF Patterns",

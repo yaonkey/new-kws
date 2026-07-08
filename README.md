@@ -1,19 +1,10 @@
-# Kofworkshop Dark Circus (Nuxt 4)
+# Kofworkshop (Nuxt 4)
 
-Multilingual handmade workshop showcase with:
-
-- Product catalog and PDF patterns storefront
-- Product pages with gallery and cart actions
-- LocalStorage cart and Telegram checkout link
-- Russian/English support via `@nuxtjs/i18n`
-- Dark circus UI theme (black/red/white) with animations
-- SEO + OpenGraph + sitemap
-- Optimized images via `@nuxt/image`
+Витрина kofworkshop.cc. Каталог загружается с бекенда [kws-crm](../kws-crm).
 
 ## Tech Stack
 
-- Nuxt
-- @nuxt/content
+- Nuxt 4
 - @nuxt/image
 - @nuxtjs/i18n
 - @nuxtjs/tailwindcss
@@ -21,11 +12,16 @@ Multilingual handmade workshop showcase with:
 
 ## Environment variables
 
-Create `.env`:
+```bash
+NUXT_PUBLIC_SITE_URL=https://kofworkshop.cc
+NUXT_PUBLIC_API_URL=https://api.kofworkshop.cc
+NUXT_PUBLIC_TELEGRAM_USERNAME=your_username
+```
+
+Для локальной разработки с CRM на `:8080`:
 
 ```bash
-NUXT_PUBLIC_SITE_URL=https://your-domain.com
-NUXT_PUBLIC_TELEGRAM_USERNAME=USERNAME
+NUXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
 ## Development
@@ -44,4 +40,6 @@ yarn preview
 
 ## Deployment
 
-Project is ready for direct deployment to [Vercel](https://vercel.com/).
+Сайт деплоится на [Vercel](https://vercel.com/). Бекенд и CRM — см. [kws-crm](../kws-crm).
+
+После изменения каталога в CRM запустите rebuild сайта (кнопка в дашборде или Vercel Deploy Hook).

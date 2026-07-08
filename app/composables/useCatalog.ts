@@ -149,3 +149,41 @@ export const hasSalePrice = (product: CatalogProduct) => Boolean(product.salePri
 export const getProductLabels = (product: CatalogProduct, locale: string) => {
   return getProductLabelKeys(product).map((label) => getLocalizedLabel(label, locale)).filter(Boolean)
 }
+
+export type StockStatus = 'in_stock' | 'out_of_stock' | 'unknown'
+
+export const getProductStockStatus = (product: CatalogProduct): StockStatus => {
+  if (product.is_schema || product.stock === null || product.stock === undefined) {
+    return 'unknown'
+  }
+  if (product.stock <= 0) {
+    return 'out_of_stock'
+  }
+  return 'in_stock'
+}
+
+export const isProductAvailable = (product: CatalogProduct) => {
+  if (product.is_schema) {
+    return false
+  }
+  return true
+}
+
+export const canShowPdfAddon = (product: CatalogProduct) => {
+  if (product.is_schema || !product.hasPdf) {
+    return false
+  }
+  const status = getProductStockStatus(product)
+  return status === 'in_stock' || status === 'unknown'
+}
+
+export const getSchemaAvailability = (product: CatalogProduct) => {
+  const status = getProductStockStatus(product)
+  if (status === 'out_of_stock') {
+    return 'https://schema.org/PreOrder'
+  }
+  if (status === 'in_stock') {
+    return 'https://schema.org/InStock'
+  }
+  return 'https://schema.org/InStock'
+}

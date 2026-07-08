@@ -3,6 +3,19 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const config = useRuntimeConfig()
 
+const { fetchUpcomingMarket, formatMarketPeriod } = useMarketsApi()
+const { fetchShelves } = useShelvesApi()
+const { data: upcomingMarket } = await useAsyncData('upcoming-market', fetchUpcomingMarket, {
+  default: () => null,
+})
+const { data: shelves } = await useAsyncData('public-shelves', fetchShelves, {
+  default: () => [],
+})
+
+const marketPeriod = computed(() =>
+  upcomingMarket.value ? formatMarketPeriod(upcomingMarket.value, locale.value) : '',
+)
+
 const isRu = computed(() => locale.value === 'ru')
 
 const services = computed(() =>
@@ -96,19 +109,35 @@ useSeoMeta({
       </div>
     </section>
 
-    <section class="mt-8 grid gap-4 md:grid-cols-3">
-      <article class="circus-card p-5">
-        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
-        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsProducts') }}</p>
-      </article>
-      <article class="circus-card p-5">
-        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
-        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsShipping') }}</p>
-      </article>
-      <article class="circus-card p-5">
-        <h2 class="text-sm font-medium text-circus-muted">{{ t('home.statsTitle') }}</h2>
-        <p class="circus-heading mt-2 text-2xl font-bold">{{ t('home.statsCustom') }}</p>
-      </article>
+    <section v-if="upcomingMarket" class="circus-card mt-8 p-6 md:p-8">
+      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">{{ t('home.marketTitle') }}</p>
+      <h2 class="circus-heading text-2xl font-semibold">
+        <a
+          v-if="upcomingMarket.link"
+          :href="upcomingMarket.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-circus-red"
+        >
+          {{ upcomingMarket.name }}
+        </a>
+        <template v-else>{{ upcomingMarket.name }}</template>
+      </h2>
+      <p class="mt-2 text-circus-muted">{{ marketPeriod }}</p>
+      <p v-if="upcomingMarket.address" class="mt-1 text-sm text-circus-muted">{{ upcomingMarket.address }}</p>
+      <p class="mt-3 text-sm font-medium text-circus-text">
+        {{ upcomingMarket.is_current ? t('home.marketCurrent') : t('home.marketUpcoming') }}
+      </p>
+    </section>
+
+    <section v-if="shelves?.length" class="circus-card mt-8 p-6 md:p-8">
+      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">{{ t('home.shelvesTitle') }}</p>
+      <ul class="space-y-4">
+        <li v-for="shelf in shelves" :key="shelf.name" class="rounded-lg border border-circus-border bg-circus-surfaceSoft px-4 py-3">
+          <h2 class="circus-heading text-lg font-semibold">{{ shelf.name }}</h2>
+          <p v-if="shelf.address" class="mt-1 text-sm text-circus-muted">{{ shelf.address }}</p>
+        </li>
+      </ul>
     </section>
 
     <section class="circus-card mt-8 p-6">

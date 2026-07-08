@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/content',
     '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/sitemap',
@@ -43,6 +42,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:8080',
       telegramUsername: process.env.NUXT_PUBLIC_TELEGRAM_USERNAME || 'USERNAME',
     },
   },
