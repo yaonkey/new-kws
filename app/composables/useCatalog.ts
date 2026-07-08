@@ -115,6 +115,22 @@ export const getCurrencyByLocale = (locale: string) => {
   return locale === 'ru' ? 'РУБ' : 'USD'
 }
 
+export const resolveProductImageUrl = (path: string) => {
+  const trimmed = path.trim()
+  if (!trimmed) {
+    return ''
+  }
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed
+  }
+  if (trimmed.startsWith('/uploads/')) {
+    const config = useRuntimeConfig()
+    const baseUrl = String(config.public.apiUrl || '').replace(/\/$/, '')
+    return baseUrl ? `${baseUrl}${trimmed}` : trimmed
+  }
+  return trimmed
+}
+
 export const getProductImages = (product: CatalogProduct) => {
   let rawImages: unknown[] = []
 
@@ -134,7 +150,9 @@ export const getProductImages = (product: CatalogProduct) => {
     }
   }
 
-  const images = rawImages.filter((image): image is string => typeof image === 'string' && image.trim().length > 0)
+  const images = rawImages
+    .filter((image): image is string => typeof image === 'string' && image.trim().length > 0)
+    .map(resolveProductImageUrl)
   return images.length ? images : ['/images/product-placeholder.svg']
 }
 

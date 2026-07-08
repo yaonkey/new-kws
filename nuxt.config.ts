@@ -1,4 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const apiHost = (() => {
+  try {
+    return new URL(process.env.NUXT_PUBLIC_API_URL || 'http://localhost:8080').hostname
+  } catch {
+    return 'localhost'
+  }
+})()
+
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/i18n',
@@ -60,6 +68,7 @@ export default defineNuxtConfig({
     sources: ['/api/__sitemap__/urls'],
   },
   image: {
+    domains: [apiHost],
     quality: 90,
     screens: {
       xs: 320,
