@@ -112,7 +112,7 @@ export const getPriceByLocale = (value: number | PriceValue, locale: string) => 
 }
 
 export const getCurrencyByLocale = (locale: string) => {
-  return locale === 'ru' ? 'РУБ' : 'USD'
+  return locale === 'ru' ? 'руб' : 'USD'
 }
 
 export const resolveProductImageUrl = (path: string) => {

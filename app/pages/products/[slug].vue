@@ -114,7 +114,7 @@ useHead({
               sku: product.value.slug,
               offers: {
                 '@type': 'Offer',
-                priceCurrency: t('currency'),
+                priceCurrency: locale.value === 'ru' ? 'RUB' : 'USD',
                 price: normalizePriceValue(product.value.price).usd,
                 availability: getSchemaAvailability(product.value),
                 url: `${config.public.siteUrl}${localePath(`/products/${String(route.params.slug)}`)}`,
