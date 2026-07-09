@@ -18,7 +18,9 @@ const { data: catalog, status, refresh } = await useAsyncData(
 )
 const searchQuery = ref('')
 
-const patterns = computed<CatalogProduct[]>(() => (catalog.value?.products ?? []).filter((product) => product.is_schema))
+const patterns = computed<CatalogProduct[]>(() =>
+  (catalog.value?.products ?? []).filter((product) => product.is_schema || product.hasPdf),
+)
 
 const filteredPatterns = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
@@ -83,7 +85,7 @@ useHead({
     </p>
 
     <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      <ProductCard v-for="pattern in filteredPatterns" :key="pattern.slug" :product="pattern" />
+      <ProductCard v-for="pattern in filteredPatterns" :key="pattern.slug" :product="pattern" cart-mode="pdf" />
     </section>
   </div>
 </template>

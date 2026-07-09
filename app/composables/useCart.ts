@@ -52,7 +52,12 @@ export const useCart = () => {
   const initialized = useState<boolean>('cart-initialized', () => false)
 
   const makeItemId = (slug: string, kind: CartItemKind) => `${kind}:${slug}`
-  const getPdfPrice = (product: CatalogProduct) => normalizePriceValue(product.pdfPrice ?? { rub: 160, usd: 2 })
+  const getPdfPrice = (product: CatalogProduct) => {
+    if (product.is_schema) {
+      return getProductEffectivePrice(product)
+    }
+    return normalizePriceValue(product.pdfPrice ?? { rub: 160, usd: 2 })
+  }
   const findItemById = (itemId: string) => items.value.find((item) => item.id === itemId)
 
   if (import.meta.client && !initialized.value) {

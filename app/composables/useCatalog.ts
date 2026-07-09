@@ -164,6 +164,15 @@ export const getProductBasePrice = (product: CatalogProduct) => normalizePriceVa
 export const getProductEffectivePrice = (product: CatalogProduct) => normalizePriceValue(product.salePrice ?? product.price)
 export const hasSalePrice = (product: CatalogProduct) => Boolean(product.salePrice)
 
+export const getPatternPrice = (product: CatalogProduct) => {
+  if (product.is_schema) {
+    return getProductEffectivePrice(product)
+  }
+  return normalizePriceValue(product.pdfPrice ?? { rub: 160, usd: 2 })
+}
+
+export const isPatternProduct = (product: CatalogProduct) => Boolean(product.is_schema || product.hasPdf)
+
 export const getProductLabels = (product: CatalogProduct, locale: string) => {
   return getProductLabelKeys(product).map((label) => getLocalizedLabel(label, locale)).filter(Boolean)
 }

@@ -3,6 +3,7 @@ import type { CatalogProduct } from '~/composables/useCart'
 import {
   getProductBasePrice,
   getProductEffectivePrice,
+  getPatternPrice,
   hasSalePrice,
   getPriceByLocale,
   getPrimaryProductImage,
@@ -10,30 +11,41 @@ import {
   getProductLabels,
   getProductStockStatus,
   isProductAvailable,
+  isPatternProduct,
 } from '~/composables/useCatalog'
 
 const props = defineProps<{
   product: CatalogProduct
+  cartMode?: 'product' | 'pdf'
 }>()
 
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const cart = useCart()
 
+const isPdfMode = computed(() => props.cartMode === 'pdf')
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
 const coverImage = computed(() => getPrimaryProductImage(props.product))
 const totalImages = computed(() => getProductImages(props.product).length)
-const localizedPrice = computed(() => getPriceByLocale(getProductEffectivePrice(props.product), locale.value))
+const localizedPrice = computed(() => {
+  const price = isPdfMode.value ? getPatternPrice(props.product) : getProductEffectivePrice(props.product)
+  return getPriceByLocale(price, locale.value)
+})
 const localizedBasePrice = computed(() => getPriceByLocale(getProductBasePrice(props.product), locale.value))
-const isOnSale = computed(() => hasSalePrice(props.product))
+const isOnSale = computed(() => !isPdfMode.value && hasSalePrice(props.product))
 const badges = computed(() => getProductLabels(props.product, locale.value))
-const canBuyProduct = computed(() => isProductAvailable(props.product))
-const stockStatus = computed(() => getProductStockStatus(props.product))
+const canBuyProduct = computed(() => isPdfMode.value ? isPatternProduct(props.product) : isProductAvailable(props.product))
+const stockStatus = computed(() => (isPdfMode.value ? 'unknown' : getProductStockStatus(props.product)))
 
 const handleQuickAdd = () => {
-  if (canBuyProduct.value) {
-    cart.addItem(props.product)
+  if (!canBuyProduct.value) {
+    return
   }
+  if (isPdfMode.value) {
+    cart.addPdfItem(props.product)
+    return
+  }
+  cart.addItem(props.product)
 }
 </script>
 

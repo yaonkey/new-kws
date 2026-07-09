@@ -97,43 +97,45 @@ useSeoMeta({
       </div>
     </section>
 
-    <section v-if="upcomingMarket" class="circus-card mt-8 p-6 md:p-8">
-      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">
-        {{ upcomingMarket.is_past ? t('home.marketTitlePast') : t('home.marketTitle') }}
-      </p>
-      <h2 class="circus-heading text-2xl font-semibold">
-        <a
-          v-if="upcomingMarket.link"
-          :href="upcomingMarket.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-circus-red"
-        >
-          {{ upcomingMarket.name }}
-        </a>
-        <template v-else>{{ upcomingMarket.name }}</template>
-      </h2>
-      <p class="mt-2 text-circus-muted">{{ marketPeriod }}</p>
-      <p v-if="upcomingMarket.address" class="mt-1 text-sm text-circus-muted">{{ upcomingMarket.address }}</p>
-      <p class="mt-3 text-sm font-medium text-circus-text">
-        {{
-          upcomingMarket.is_current
-            ? t('home.marketCurrent')
-            : upcomingMarket.is_past
-              ? t('home.marketPast')
-              : t('home.marketUpcoming')
-        }}
-      </p>
-    </section>
+    <section v-if="upcomingMarket || shelves?.length" class="mt-8 grid gap-6 lg:grid-cols-2">
+      <article v-if="upcomingMarket" class="circus-card p-6 md:p-8">
+        <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">
+          {{ upcomingMarket.is_past ? t('home.marketTitlePast') : t('home.marketTitle') }}
+        </p>
+        <h2 class="circus-heading text-2xl font-semibold">
+          <a
+            v-if="upcomingMarket.link"
+            :href="upcomingMarket.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-circus-red"
+          >
+            {{ upcomingMarket.name }}
+          </a>
+          <template v-else>{{ upcomingMarket.name }}</template>
+        </h2>
+        <p class="mt-2 text-circus-muted">{{ marketPeriod }}</p>
+        <p v-if="upcomingMarket.address" class="mt-1 text-sm text-circus-muted">{{ upcomingMarket.address }}</p>
+        <p class="mt-3 text-sm font-medium text-circus-text">
+          {{
+            upcomingMarket.is_current
+              ? t('home.marketCurrent')
+              : upcomingMarket.is_past
+                ? t('home.marketPast')
+                : t('home.marketUpcoming')
+          }}
+        </p>
+      </article>
 
-    <section v-if="shelves?.length" class="circus-card mt-8 p-6 md:p-8">
-      <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">{{ t('home.shelvesTitle') }}</p>
-      <ul class="space-y-4">
-        <li v-for="shelf in shelves" :key="shelf.name" class="rounded-lg border border-circus-border bg-circus-surfaceSoft px-4 py-3">
-          <h2 class="circus-heading text-lg font-semibold">{{ shelf.name }}</h2>
-          <p v-if="shelf.address" class="mt-1 text-sm text-circus-muted">{{ shelf.address }}</p>
-        </li>
-      </ul>
+      <article v-if="shelves?.length" class="circus-card p-6 md:p-8">
+        <p class="mb-2 text-xs uppercase tracking-[0.2em] text-circus-red">{{ t('home.shelvesTitle') }}</p>
+        <ul class="space-y-4">
+          <li v-for="shelf in shelves" :key="shelf.name" class="rounded-lg border border-circus-border bg-circus-surfaceSoft px-4 py-3">
+            <h2 class="circus-heading text-lg font-semibold">{{ shelf.name }}</h2>
+            <p v-if="shelf.address" class="mt-1 text-sm text-circus-muted">{{ shelf.address }}</p>
+          </li>
+        </ul>
+      </article>
     </section>
 
     <section class="circus-card mt-8 p-6">
