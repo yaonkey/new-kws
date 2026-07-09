@@ -110,11 +110,11 @@ const handleQuickAdd = () => {
         />
       </div>
       <div class="space-y-3 p-4">
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
-          <span class="shrink-0 pt-0.5 text-xs text-circus-muted">{{ t('patterns.attachedLabel') }}</span>
-        </div>
-        <p class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
+        <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
+        <p class="flex items-baseline gap-2">
+          <span class="text-xs text-circus-muted">{{ t('patterns.attachedLabel') }}</span>
+          <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
+        </p>
       </div>
     </div>
 
