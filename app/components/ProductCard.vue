@@ -108,13 +108,13 @@ const handleQuickAdd = () => {
           quality="80"
           class="h-56 w-full object-cover"
         />
+        <span class="absolute bottom-3 right-3 rounded-full bg-circus-bg/85 px-2.5 py-1 text-xs text-circus-muted">
+          {{ t('patterns.attachedLabel') }}
+        </span>
       </div>
       <div class="space-y-3 p-4">
         <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
-        <p class="flex items-baseline gap-2">
-          <span class="text-xs text-circus-muted">{{ t('patterns.attachedLabel') }}</span>
-          <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
-        </p>
+        <p class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
       </div>
     </div>
 
