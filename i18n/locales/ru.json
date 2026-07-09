@@ -52,11 +52,12 @@
     }
   },
   "patterns": {
-    "title": "PDF-описания",
+    "title": "Описания игрушек",
     "subtitle": "Отдельная витрина цифровых схем и описаний.",
+    "attachedLabel": "описание",
     "searchPlaceholder": "Поиск...",
-    "results": "Найдено PDF-описаний",
-    "loading": "Загрузка PDF-каталога..."
+    "results": "Найдено описаний",
+    "loading": "Загрузка каталога описаний..."
   },
   "cart": {
     "title": "Корзина",
@@ -91,7 +92,7 @@
   "seo": {
     "homeTitle": "Главная",
     "productsTitle": "Каталог товаров",
-    "patternsTitle": "Каталог PDF-описаний",
+    "patternsTitle": "Описания игрушек",
     "socialsTitle": "Соцсети",
     "cartTitle": "Корзина",
     "aboutTitle": "О мастерской"

@@ -26,7 +26,6 @@ const cart = useCart()
 const isPdfMode = computed(() => props.cartMode === 'pdf')
 const isAttachedPdf = computed(() => isPdfMode.value && Boolean(props.product.hasPdf) && !props.product.is_schema)
 const isLinkable = computed(() => !isAttachedPdf.value)
-const showTitle = computed(() => !isAttachedPdf.value)
 const showBadges = computed(() => !isPdfMode.value)
 const showMultiImage = computed(() => !isPdfMode.value && totalImages.value > 1)
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
@@ -85,7 +84,7 @@ const handleQuickAdd = () => {
         </div>
       </div>
       <div class="space-y-3 p-4">
-        <h3 v-if="showTitle" class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
+        <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
         <p v-if="isOnSale" class="flex items-baseline gap-2">
           <span class="text-sm font-semibold text-circus-red line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
           <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
@@ -110,7 +109,11 @@ const handleQuickAdd = () => {
           class="h-56 w-full object-cover"
         />
       </div>
-      <div class="p-4">
+      <div class="space-y-3 p-4">
+        <div class="flex items-start justify-between gap-2">
+          <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
+          <span class="shrink-0 pt-0.5 text-xs text-circus-muted">{{ t('patterns.attachedLabel') }}</span>
+        </div>
         <p class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
       </div>
     </div>

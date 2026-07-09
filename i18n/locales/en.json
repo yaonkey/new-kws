@@ -52,11 +52,12 @@
     }
   },
   "patterns": {
-    "title": "PDF Patterns",
+    "title": "Toy descriptions",
     "subtitle": "A separate storefront for digital descriptions and patterns.",
+    "attachedLabel": "description",
     "searchPlaceholder": "Search...",
-    "results": "PDF patterns found",
-    "loading": "Loading PDF catalog..."
+    "results": "Descriptions found",
+    "loading": "Loading descriptions catalog..."
   },
   "cart": {
     "title": "Cart",
@@ -91,7 +92,7 @@
   "seo": {
     "homeTitle": "Home",
     "productsTitle": "Product Catalog",
-    "patternsTitle": "PDF Pattern Catalog",
+    "patternsTitle": "Toy descriptions",
     "socialsTitle": "Socials",
     "cartTitle": "Cart",
     "aboutTitle": "About"
