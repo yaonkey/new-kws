@@ -34,18 +34,6 @@ const services = computed(() =>
       ],
 )
 
-const team = computed(() =>
-  isRu.value
-    ? [
-        { name: 'Мария Кофонкина', role: 'Главная вязальщица' },
-        { name: 'Дмитрий Лисовский', role: 'Разработка и поддержка сайта' },
-      ]
-    : [
-        { name: 'Maria Kofonkina', role: 'Lead craftswoman' },
-        { name: 'Dmitry Lisovsky', role: 'Development and website support' },
-      ],
-)
-
 const deliveryItems = computed(() =>
   isRu.value
     ? [
@@ -158,21 +146,12 @@ useSeoMeta({
       </ul>
     </section>
 
-    <section class="mt-8 grid gap-6 lg:grid-cols-2">
+    <section class="mt-8">
       <article class="circus-card p-6">
         <h3 class="circus-heading text-xl font-semibold">{{ t('home.deliveryTitle') }}</h3>
         <ul class="mt-3 space-y-2 text-sm text-circus-muted">
           <li v-for="item in deliveryItems" :key="item">- {{ item }}</li>
         </ul>
-      </article>
-      <article class="circus-card p-6">
-        <h3 class="circus-heading text-xl font-semibold">{{ t('home.teamTitle') }}</h3>
-        <div class="mt-3 space-y-3">
-          <div v-for="member in team" :key="member.name" class="rounded-lg border border-circus-border bg-circus-surfaceSoft p-3">
-            <p class="font-semibold text-circus-text">{{ member.name }}</p>
-            <p class="text-sm text-circus-muted">{{ member.role }}</p>
-          </div>
-        </div>
       </article>
     </section>
 
