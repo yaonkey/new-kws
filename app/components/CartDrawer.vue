@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getCurrencyByLocale, getPriceByLocale } from '~/composables/useCatalog'
+import { getCurrencyByLocale, getPriceByLocale, resolveProductImageUrl } from '~/composables/useCatalog'
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
@@ -44,7 +44,15 @@ const handleClearCart = () => {
       <div v-else class="space-y-3">
         <article v-for="item in items" :key="item.id" class="rounded-xl border border-circus-border bg-circus-bg p-3">
           <div class="flex gap-3">
-            <NuxtImg :src="item.image" :alt="item.title[locale as 'ru' | 'en']" width="128" height="128" sizes="64px" format="webp" class="h-16 w-16 rounded object-cover" />
+            <img
+              :key="`${item.id}-${item.image}`"
+              :src="resolveProductImageUrl(item.image)"
+              :alt="item.title[locale as 'ru' | 'en']"
+              width="64"
+              height="64"
+              loading="eager"
+              class="h-16 w-16 rounded object-cover"
+            />
             <div class="min-w-0 flex-1">
               <p class="truncate text-sm font-semibold text-circus-white">{{ item.title[locale as 'ru' | 'en'] }}</p>
               <p v-if="item.kind === 'pdf'" class="text-[11px] font-semibold uppercase tracking-wide text-circus-red">

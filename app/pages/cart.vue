@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getCurrencyByLocale, getPriceByLocale } from '~/composables/useCatalog'
+import { getCurrencyByLocale, getPriceByLocale, resolveProductImageUrl } from '~/composables/useCatalog'
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
@@ -43,7 +43,15 @@ useSeoMeta({
           class="circus-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between"
         >
           <div class="flex items-center gap-4">
-            <NuxtImg :src="item.image" :alt="item.title[locale as 'ru' | 'en']" width="160" height="160" sizes="80px" format="webp" class="h-20 w-20 rounded-lg object-cover" />
+            <img
+              :key="`${item.id}-${item.image}`"
+              :src="resolveProductImageUrl(item.image)"
+              :alt="item.title[locale as 'ru' | 'en']"
+              width="80"
+              height="80"
+              loading="eager"
+              class="h-20 w-20 rounded-lg object-cover"
+            />
             <div>
               <h2 class="font-semibold text-circus-text">{{ item.title[locale as 'ru' | 'en'] }}</h2>
               <p v-if="item.kind === 'pdf'" class="text-xs font-semibold uppercase tracking-wide text-circus-red">

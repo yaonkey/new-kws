@@ -24,6 +24,11 @@ const localePath = useLocalePath()
 const cart = useCart()
 
 const isPdfMode = computed(() => props.cartMode === 'pdf')
+const isAttachedPdf = computed(() => isPdfMode.value && Boolean(props.product.hasPdf) && !props.product.is_schema)
+const isLinkable = computed(() => !isAttachedPdf.value)
+const showTitle = computed(() => !isAttachedPdf.value)
+const showBadges = computed(() => !isPdfMode.value)
+const showMultiImage = computed(() => !isPdfMode.value && totalImages.value > 1)
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
 const coverImage = computed(() => getPrimaryProductImage(props.product))
 const totalImages = computed(() => getProductImages(props.product).length)
@@ -51,7 +56,7 @@ const handleQuickAdd = () => {
 
 <template>
   <article class="group circus-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:animate-glowPulse">
-    <NuxtLink :to="localePath(`/products/${product.slug}`)" class="block flex-1">
+    <NuxtLink v-if="isLinkable" :to="localePath(`/products/${product.slug}`)" class="block flex-1">
       <div class="relative overflow-hidden">
         <NuxtImg
           :src="coverImage"
@@ -64,12 +69,12 @@ const handleQuickAdd = () => {
           class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <span
-          v-if="totalImages > 1"
+          v-if="showMultiImage"
           class="absolute bottom-3 right-3 rounded-full bg-circus-bg/85 px-2.5 py-1 text-xs font-semibold text-circus-white"
         >
           +{{ totalImages - 1 }}
         </span>
-        <div class="absolute left-3 top-3 flex flex-wrap gap-1.5">
+        <div v-if="showBadges" class="absolute left-3 top-3 flex flex-wrap gap-1.5">
           <span
             v-for="badge in badges"
             :key="badge"
@@ -80,7 +85,7 @@ const handleQuickAdd = () => {
         </div>
       </div>
       <div class="space-y-3 p-4">
-        <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
+        <h3 v-if="showTitle" class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
         <p v-if="isOnSale" class="flex items-baseline gap-2">
           <span class="text-sm font-semibold text-circus-red line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
           <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
@@ -91,6 +96,25 @@ const handleQuickAdd = () => {
         </p>
       </div>
     </NuxtLink>
+
+    <div v-else class="block flex-1">
+      <div class="relative overflow-hidden">
+        <NuxtImg
+          :src="coverImage"
+          :alt="productTitle"
+          width="640"
+          height="640"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
+          format="webp"
+          quality="80"
+          class="h-56 w-full object-cover"
+        />
+      </div>
+      <div class="p-4">
+        <p class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
+      </div>
+    </div>
+
     <div class="mt-auto px-4 pb-4">
       <button
         v-if="canBuyProduct"

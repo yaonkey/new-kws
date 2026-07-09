@@ -125,15 +125,18 @@ export const useCart = () => {
       return true
     }
 
-    items.value.push({
-      id: itemId,
-      kind: 'product',
-      slug: product.slug,
-      title: product.title,
-      price: getProductEffectivePrice(product),
-      image: getPrimaryProductImage(product),
-      quantity: 1,
-    })
+    items.value = [
+      ...items.value,
+      {
+        id: itemId,
+        kind: 'product',
+        slug: product.slug,
+        title: product.title,
+        price: getProductEffectivePrice(product),
+        image: getPrimaryProductImage(product),
+        quantity: 1,
+      },
+    ]
     return true
   }
 
@@ -149,18 +152,21 @@ export const useCart = () => {
       return
     }
 
-    items.value.push({
-      id: itemId,
-      kind: 'pdf',
-      slug: product.slug,
-      title: {
-        ru: product.is_schema ? product.title.ru : `${product.title.ru}${PDF_SUFFIX.ru}`,
-        en: product.is_schema ? product.title.en : `${product.title.en}${PDF_SUFFIX.en}`,
+    items.value = [
+      ...items.value,
+      {
+        id: itemId,
+        kind: 'pdf',
+        slug: product.slug,
+        title: {
+          ru: product.is_schema ? product.title.ru : `${product.title.ru}${PDF_SUFFIX.ru}`,
+          en: product.is_schema ? product.title.en : `${product.title.en}${PDF_SUFFIX.en}`,
+        },
+        price: getPdfPrice(product),
+        image: getPrimaryProductImage(product),
+        quantity: 1,
       },
-      price: getPdfPrice(product),
-      image: getPrimaryProductImage(product),
-      quantity: 1,
-    })
+    ]
   }
 
   const incrementItem = (itemId: string) => {
