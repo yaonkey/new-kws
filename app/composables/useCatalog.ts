@@ -63,6 +63,10 @@ export const getProductCategories = (product: CatalogProduct): string[] => {
   return getProductLabelKeys(product)
 }
 
+export const hasProductLabel = (product: CatalogProduct, label: string) => {
+  return getProductLabelKeys(product).includes(getCategoryKey(label))
+}
+
 export const getCategoryLabel = (category: string, locale: string) => {
   return getLocalizedLabel(getCategoryKey(category), locale)
 }

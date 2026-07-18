@@ -7,6 +7,7 @@ import {
   getPriceByLocale,
   getProductEffectivePrice,
   getProductCategories,
+  hasProductLabel,
 } from '~/composables/useCatalog'
 
 const { t, locale } = useI18n()
@@ -79,11 +80,16 @@ const filteredProducts = computed(() => {
     })
 
   sourceProducts.sort((a, b) => {
+    const aNew = hasProductLabel(a.product, 'new') ? 1 : 0
+    const bNew = hasProductLabel(b.product, 'new') ? 1 : 0
+    if (aNew !== bNew) {
+      return bNew - aNew
+    }
     if (selectedSort.value === 'newest') {
-      return b.index - a.index
+      return a.index - b.index
     }
     if (selectedSort.value === 'oldest') {
-      return a.index - b.index
+      return b.index - a.index
     }
     if (selectedSort.value === 'price-asc') {
       return getPriceByLocale(getProductEffectivePrice(a.product), locale.value)
