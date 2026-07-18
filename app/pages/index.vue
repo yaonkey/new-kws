@@ -39,14 +39,12 @@ const deliveryItems = computed(() =>
     ? [
         'Москва: доставка к метро от 100 до 350 руб',
         'Самовывоз: пос. Рублево, ул. Новорублевская, д. 2',
-        'По России: Почта России и Яндекс Доставка',
-        'При заказе от 900 руб доставка по РФ — 100 руб',
+        'По России: Почта России, Озон Доставка или Яндекс Доставка',
       ]
     : [
         'Moscow: metro delivery from 100 to 350 RUB',
         'Pickup: Rublyovo, Novorublevskaya 2',
-        'Russia-wide shipping via Russian Post and Yandex Delivery',
-        'Orders over 900 RUB ship for 100 RUB',
+        'Russia-wide shipping via Russian Post, Ozon Delivery or Yandex Delivery',
       ],
 )
 
