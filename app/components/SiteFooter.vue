@@ -16,8 +16,9 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer class="relative border-t border-circus-border bg-circus-surface">
-    <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-6 text-sm text-circus-muted sm:px-6 lg:px-8">
+  <footer class="relative overflow-hidden border-t border-circus-border bg-circus-surface">
+    <CircusBunting />
+    <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 pb-6 pt-12 text-sm text-circus-muted sm:px-6 lg:px-8">
       <p>{{ t('footer.copyright') }}</p>
       <div class="flex flex-wrap gap-3">
         <NuxtLink :to="localePath('/products')" class="hover:text-circus-white">{{ t('nav.products') }}</NuxtLink>

@@ -22,6 +22,38 @@ const config = useRuntimeConfig()
 const localePath = useLocalePath()
 const cart = useCart()
 const drawer = useCartDrawer()
+const { flyToCart } = useCartFx()
+const justAdded = ref(false)
+
+const flyFromGallery = () => {
+  const image = document.querySelector<HTMLElement>('[data-cart-source]')
+  const current = product.value
+  if (!image || !current) {
+    return
+  }
+  flyToCart(activeImage.value || getPrimaryProductImage(current), image)
+}
+
+const addProduct = () => {
+  if (!product.value || cart.addItem(product.value) === false) {
+    return
+  }
+  flyFromGallery()
+  justAdded.value = true
+  window.setTimeout(() => {
+    justAdded.value = false
+  }, 900)
+  drawer.open()
+}
+
+const addPdf = () => {
+  if (!product.value) {
+    return
+  }
+  cart.addPdfItem(product.value)
+  flyFromGallery()
+  drawer.open()
+}
 
 const { fetchCatalog } = useProductsApi()
 
@@ -143,6 +175,7 @@ useHead({
           :class="galleryImages.length > 1 ? 'md:grid-cols-[1fr_110px]' : 'grid-cols-1'"
         >
           <img
+            data-cart-source
             :src="activeImage || getPrimaryProductImage(product)"
             :alt="productTitle"
             fetchpriority="high"
@@ -185,8 +218,8 @@ useHead({
         <h1 class="circus-heading text-3xl font-bold">{{ productTitle }}</h1>
         <p class="leading-relaxed text-circus-muted">{{ productDescription }}</p>
         <p v-if="isOnSale" class="flex items-baseline gap-3">
-          <span class="text-lg font-semibold text-circus-red line-through">{{ productBasePrice }} {{ t('currency') }}</span>
-          <span class="text-2xl font-bold text-circus-white">{{ productPrice }} {{ t('currency') }}</span>
+          <span class="text-lg text-circus-muted line-through">{{ productBasePrice }} {{ t('currency') }}</span>
+          <span class="text-2xl font-bold text-circus-red">{{ productPrice }} {{ t('currency') }}</span>
         </p>
         <p v-else class="text-2xl font-bold text-circus-white">{{ productPrice }} {{ t('currency') }}</p>
         <p v-if="stockStatus !== 'unknown'" class="text-sm font-medium text-circus-muted">
@@ -213,15 +246,16 @@ useHead({
           <button
             v-if="canBuyProduct"
             class="w-full rounded-lg border border-circus-red bg-circus-red px-6 py-3 text-sm font-semibold text-circus-white transition hover:bg-circus-redDeep"
-            @click="cart.addItem(product) && drawer.open()"
+            :class="justAdded ? 'scale-95' : ''"
+            @click="addProduct"
           >
-            {{ t('products.addToCart') }}
+            {{ justAdded ? t('products.added') : t('products.addToCart') }}
           </button>
           <button
             v-if="canBuyPdf"
             class="w-full rounded-lg border border-circus-border bg-circus-bg px-6 py-3 text-sm font-semibold text-circus-text transition hover:border-circus-red"
             :class="canBuyProduct ? 'mt-2' : ''"
-            @click="cart.addPdfItem(product); drawer.open()"
+            @click="addPdf"
           >
             {{ t('products.addPdfToCart') }} ({{ pdfPrice }} {{ t('currency') }})
           </button>

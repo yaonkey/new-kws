@@ -22,6 +22,8 @@ const props = defineProps<{
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const cart = useCart()
+const { flyToCart } = useCartFx()
+const justAdded = ref(false)
 
 const isPdfMode = computed(() => props.cartMode === 'pdf')
 const isAttachedPdf = computed(() => isPdfMode.value && Boolean(props.product.hasPdf) && !props.product.is_schema)
@@ -41,15 +43,23 @@ const badges = computed(() => getProductLabels(props.product, locale.value))
 const canBuyProduct = computed(() => isPdfMode.value ? isPatternProduct(props.product) : isProductAvailable(props.product))
 const stockStatus = computed(() => (isPdfMode.value ? 'unknown' : getProductStockStatus(props.product)))
 
-const handleQuickAdd = () => {
+const handleQuickAdd = (event: MouseEvent) => {
   if (!canBuyProduct.value) {
     return
   }
-  if (isPdfMode.value) {
-    cart.addPdfItem(props.product)
+  const added = isPdfMode.value ? cart.addPdfItem(props.product) : cart.addItem(props.product)
+  if (added === false) {
     return
   }
-  cart.addItem(props.product)
+  const card = (event.currentTarget as HTMLElement).closest('article')
+  const image = card?.querySelector('img')
+  if (image) {
+    flyToCart(coverImage.value, image)
+  }
+  justAdded.value = true
+  window.setTimeout(() => {
+    justAdded.value = false
+  }, 900)
 }
 </script>
 
@@ -86,8 +96,8 @@ const handleQuickAdd = () => {
       <div class="space-y-3 p-4">
         <h3 class="line-clamp-2 text-base font-semibold text-circus-text md:text-lg">{{ productTitle }}</h3>
         <p v-if="isOnSale" class="flex items-baseline gap-2">
-          <span class="text-sm font-semibold text-circus-red line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
-          <span class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</span>
+          <span class="text-sm text-circus-muted line-through">{{ localizedBasePrice }} {{ t('currency') }}</span>
+          <span class="text-lg font-bold text-circus-red">{{ localizedPrice }} {{ t('currency') }}</span>
         </p>
         <p v-else class="text-lg font-bold text-circus-white">{{ localizedPrice }} {{ t('currency') }}</p>
         <p v-if="stockStatus !== 'unknown'" class="text-xs text-circus-muted">
@@ -121,10 +131,11 @@ const handleQuickAdd = () => {
     <div class="mt-auto px-4 pb-4">
       <button
         v-if="canBuyProduct"
-        class="w-full rounded-lg border border-circus-border bg-circus-surfaceSoft px-3 py-2 text-sm font-semibold text-circus-text transition hover:border-circus-red hover:bg-circus-red hover:text-circus-white"
+        class="w-full rounded-lg border px-3 py-2 text-sm font-semibold transition"
+        :class="justAdded ? 'scale-95 border-circus-red bg-circus-red text-circus-white' : 'border-circus-border bg-circus-surfaceSoft text-circus-text hover:border-circus-red hover:bg-circus-red hover:text-circus-white'"
         @click="handleQuickAdd"
       >
-        {{ t('products.addToCart') }}
+        {{ justAdded ? t('products.added') : t('products.addToCart') }}
       </button>
     </div>
   </article>

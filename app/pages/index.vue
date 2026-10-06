@@ -5,7 +5,7 @@ const config = useRuntimeConfig()
 
 const { fetchUpcomingMarket, formatMarketPeriod } = useMarketsApi()
 const { fetchShelves } = useShelvesApi()
-const { data: upcomingMarket } = await useAsyncData('upcoming-market', fetchUpcomingMarket, {
+const { data: upcomingMarket, refresh: refreshMarket } = await useAsyncData('upcoming-market', fetchUpcomingMarket, {
   default: () => null,
 })
 const { data: shelves } = await useAsyncData('public-shelves', fetchShelves, {
@@ -69,6 +69,10 @@ useSeoMeta({
   ogDescription: t('home.subtitle'),
   ogType: 'website',
   ogUrl: `${config.public.siteUrl}${localePath('/')}`,
+})
+
+onMounted(() => {
+  refreshMarket()
 })
 </script>
 

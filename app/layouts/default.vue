@@ -25,6 +25,7 @@
       <slot />
     </main>
     <SiteFooter class="relative z-10" />
+    <CartFly />
     <CartDrawer />
   </div>
 </template>

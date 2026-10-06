@@ -142,14 +142,14 @@ export const useCart = () => {
 
   const addPdfItem = (product: CatalogProduct) => {
     if (!product.hasPdf && !product.is_schema) {
-      return
+      return false
     }
 
     const itemId = makeItemId(product.slug, 'pdf')
     const existingItem = findItemById(itemId)
     if (existingItem) {
       existingItem.quantity += 1
-      return
+      return true
     }
 
     items.value = [
@@ -167,6 +167,7 @@ export const useCart = () => {
         quantity: 1,
       },
     ]
+    return true
   }
 
   const incrementItem = (itemId: string) => {

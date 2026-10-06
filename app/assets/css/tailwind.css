@@ -48,29 +48,49 @@
 
   .circus-heading {
     @apply font-display tracking-wide text-circus-white;
+    font-weight: 400;
+  }
+
+  .circus-bunting-rope {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(#6b534c, #2a1814 70%);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 3px rgba(0, 0, 0, 0.55);
+    z-index: 2;
   }
 
   .circus-bunting-item {
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 36px;
+    margin-top: 2px;
+    clip-path: polygon(6% 0, 94% 0, 50% 100%);
+    transform-origin: 50% 0;
+    filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.55));
+    flex: 0 0 auto;
+  }
+
+  .circus-bunting-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 28%, rgba(0, 0, 0, 0.12) 48%, rgba(255, 255, 255, 0.16) 54%, rgba(0, 0, 0, 0.38) 100%);
   }
 
   .circus-bunting-red {
-    background:
-      linear-gradient(155deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 36%),
-      linear-gradient(335deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 45%),
-      #7a2b3a;
+    background: linear-gradient(#e4545e, #cf2d3a 46%, #7c1420);
   }
 
   .circus-bunting-light {
-    background:
-      linear-gradient(155deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 42%),
-      linear-gradient(335deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 45%),
-      #d6cfd2;
+    background: linear-gradient(#f7f1f2, #ddd4d7 48%, #b3a6ab);
   }
 
   .circus-bunting-sway {
-    animation: buntingSway 4200ms ease-in-out infinite;
-    transform-origin: 50% 0%;
+    animation: buntingSway 3.6s ease-in-out infinite;
     will-change: transform;
   }
 
@@ -82,17 +102,43 @@
 
 @keyframes buntingSway {
   0%, 100% {
-    transform: translateX(-0.5px) translateY(var(--base-y, 0px)) rotate(-2.2deg);
-  }
-  25% {
-    transform: translateX(0.2px) translateY(calc(var(--base-y, 0px) + 1.4px)) rotate(-0.2deg);
+    transform: translateY(var(--base-y, 0px)) rotate(-9deg) scaleY(1);
   }
   50% {
-    transform: translateX(0.6px) translateY(calc(var(--base-y, 0px) + 2.6px)) rotate(2.2deg);
+    transform: translateY(calc(var(--base-y, 0px) + 4px)) rotate(9deg) scaleY(0.96);
   }
-  75% {
-    transform: translateX(0.2px) translateY(calc(var(--base-y, 0px) + 1.4px)) rotate(-0.2deg);
+}
+
+@keyframes cartFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
   }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.18);
+    opacity: 0.2;
+  }
+}
+
+@keyframes cartPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+.cart-fly {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #cf2d3a;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  animation: cartFly 680ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.cart-pop {
+  animation: cartPop 420ms ease;
 }
 
 @keyframes bgDrift {
