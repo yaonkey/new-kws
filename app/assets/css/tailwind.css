@@ -48,7 +48,7 @@
 
   .circus-heading {
     @apply font-display tracking-wide text-circus-white;
-    font-weight: 400;
+    font-weight: 800;
   }
 
   .circus-bunting-rope {

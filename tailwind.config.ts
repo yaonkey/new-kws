@@ -20,8 +20,8 @@ export default <Partial<Config>>{
         'circus-glow': '0 0 0 1px rgba(207,45,58,0.35), 0 10px 35px rgba(0,0,0,0.45)',
       },
       fontFamily: {
-        display: ['"Yeseva One"', 'serif'],
-        body: ['Manrope', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'circus-radial':

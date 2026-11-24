@@ -1,11 +1,15 @@
-<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="900" fill="#0A0A0F"/>
-  <rect x="180" y="140" width="840" height="620" rx="28" fill="#151520" stroke="#3A2231" stroke-width="4"/>
-  <circle cx="430" cy="390" r="120" fill="#241822"/>
-  <rect x="610" y="300" width="280" height="34" rx="8" fill="#2A1A26"/>
-  <rect x="610" y="366" width="240" height="34" rx="8" fill="#2A1A26"/>
-  <rect x="610" y="432" width="210" height="34" rx="8" fill="#2A1A26"/>
-  <text x="600" y="660" text-anchor="middle" fill="#F5F2F0" font-size="46" font-family="Inter, Arial, sans-serif">
-    PDF Pattern Preview
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#0A0A0F"/>
+  <circle cx="140" cy="220" r="150" fill="#123028"/>
+  <circle cx="660" cy="220" r="150" fill="#123028"/>
+  <ellipse cx="400" cy="470" rx="250" ry="200" fill="#7DCEA0"/>
+  <circle cx="325" cy="400" r="26" fill="#0A0A0F"/>
+  <circle cx="475" cy="400" r="26" fill="#0A0A0F"/>
+  <circle cx="334" cy="390" r="8" fill="#FFFFFF"/>
+  <circle cx="484" cy="390" r="8" fill="#FFFFFF"/>
+  <path d="M360 470c20 28 60 28 80 0" stroke="#145C3A" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="290" cy="470" r="16" fill="#CF2D3A" opacity="0.7"/>
+  <circle cx="510" cy="470" r="16" fill="#CF2D3A" opacity="0.7"/>
+  <ellipse cx="230" cy="250" rx="36" ry="22" fill="#F5F2F0" transform="rotate(-30 230 250)"/>
+  <ellipse cx="570" cy="250" rx="36" ry="22" fill="#F5F2F0" transform="rotate(30 570 250)"/>
 </svg>

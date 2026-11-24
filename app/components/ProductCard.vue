@@ -9,6 +9,8 @@ import {
   getPrimaryProductImage,
   getProductImages,
   getProductLabels,
+  isProductPlaceholder,
+  placeholderForProduct,
   getProductStockStatus,
   isProductAvailable,
   isPatternProduct,
@@ -31,7 +33,10 @@ const isLinkable = computed(() => !isAttachedPdf.value)
 const showBadges = computed(() => !isPdfMode.value)
 const showMultiImage = computed(() => !isPdfMode.value && totalImages.value > 1)
 const productTitle = computed(() => props.product.title[locale.value as 'ru' | 'en'] || props.product.title.ru)
-const coverImage = computed(() => getPrimaryProductImage(props.product))
+const imageFailed = ref(false)
+watch(() => props.product.slug, () => { imageFailed.value = false })
+const coverImage = computed(() => imageFailed.value ? placeholderForProduct(props.product) : getPrimaryProductImage(props.product))
+const coverIsPlaceholder = computed(() => isProductPlaceholder(coverImage.value))
 const totalImages = computed(() => getProductImages(props.product).length)
 const localizedPrice = computed(() => {
   const price = isPdfMode.value ? getPatternPrice(props.product) : getProductEffectivePrice(props.product)
@@ -67,7 +72,16 @@ const handleQuickAdd = (event: MouseEvent) => {
   <article class="group circus-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:animate-glowPulse">
     <NuxtLink v-if="isLinkable" :to="localePath(`/products/${product.slug}`)" class="block flex-1">
       <div class="relative overflow-hidden">
+        <img
+          v-if="coverIsPlaceholder"
+          :src="coverImage"
+          :alt="productTitle"
+          width="640"
+          height="640"
+          class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+        >
         <NuxtImg
+          v-else
           :src="coverImage"
           :alt="productTitle"
           width="640"
@@ -76,6 +90,7 @@ const handleQuickAdd = (event: MouseEvent) => {
           format="webp"
           quality="80"
           class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+          @error="imageFailed = true"
         />
         <span
           v-if="showMultiImage"
@@ -108,7 +123,16 @@ const handleQuickAdd = (event: MouseEvent) => {
 
     <div v-else class="block flex-1">
       <div class="relative overflow-hidden">
+        <img
+          v-if="coverIsPlaceholder"
+          :src="coverImage"
+          :alt="productTitle"
+          width="640"
+          height="640"
+          class="h-56 w-full object-cover"
+        >
         <NuxtImg
+          v-else
           :src="coverImage"
           :alt="productTitle"
           width="640"
@@ -117,6 +141,7 @@ const handleQuickAdd = (event: MouseEvent) => {
           format="webp"
           quality="80"
           class="h-56 w-full object-cover"
+          @error="imageFailed = true"
         />
         <span class="absolute bottom-3 right-3 rounded-full bg-circus-bg/85 px-2.5 py-1 text-xs text-circus-muted">
           {{ t('patterns.attachedLabel') }}

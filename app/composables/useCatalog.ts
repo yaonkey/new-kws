@@ -157,8 +157,27 @@ export const getProductImages = (product: CatalogProduct) => {
   const images = rawImages
     .filter((image): image is string => typeof image === 'string' && image.trim().length > 0)
     .map(resolveProductImageUrl)
-  return images.length ? images : ['/images/product-placeholder.svg']
+  return images.length ? images : [placeholderForProduct(product)]
 }
+
+const productPlaceholders = [
+  '/images/product-placeholder.svg',
+  '/images/product-placeholder-2.svg',
+  '/images/product-placeholder-3.svg',
+  '/images/product-placeholder-4.svg',
+  '/images/product-placeholder-5.svg',
+]
+
+export const placeholderForProduct = (product: { slug?: string }) => {
+  const key = product.slug || 'kws'
+  let hash = 0
+  for (let index = 0; index < key.length; index += 1) {
+    hash = (hash * 33 + key.charCodeAt(index)) >>> 0
+  }
+  return productPlaceholders[hash % productPlaceholders.length]
+}
+
+export const isProductPlaceholder = (src: string) => src.startsWith('/images/product-placeholder')
 
 export const getPrimaryProductImage = (product: CatalogProduct) => {
   return getProductImages(product)[0]
