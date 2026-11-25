@@ -16,14 +16,13 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer class="relative overflow-hidden border-t border-circus-border bg-circus-surface">
-    <CircusBunting />
-    <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 pb-6 pt-12 text-sm text-circus-muted sm:px-6 lg:px-8">
+  <footer class="px-4 pb-6 sm:px-6">
+    <div class="paper mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 py-6 text-sm">
       <p>{{ t('footer.copyright') }}</p>
       <div class="flex flex-wrap gap-3">
-        <NuxtLink :to="localePath('/products')" class="hover:text-circus-white">{{ t('nav.products') }}</NuxtLink>
-        <NuxtLink :to="localePath('/patterns')" class="hover:text-circus-white">{{ t('nav.patterns') }}</NuxtLink>
-        <NuxtLink :to="localePath('/socials')" class="hover:text-circus-white">{{ t('nav.socials') }}</NuxtLink>
+        <NuxtLink :to="localePath('/products')" class="hover:text-circus-red">{{ t('nav.products') }}</NuxtLink>
+        <NuxtLink :to="localePath('/patterns')" class="hover:text-circus-red">{{ t('nav.patterns') }}</NuxtLink>
+        <NuxtLink :to="localePath('/socials')" class="hover:text-circus-red">{{ t('nav.socials') }}</NuxtLink>
       </div>
       <div class="flex flex-wrap gap-2">
         <a
@@ -32,7 +31,7 @@ const socialLinks = [
           :href="link.href"
           target="_blank"
           rel="noopener noreferrer"
-          class="rounded-full border border-circus-border bg-circus-bg px-3 py-1 text-xs hover:border-circus-red hover:text-circus-white"
+          class="rounded-full border border-[#e4d8ce] px-3 py-1 text-xs hover:border-circus-red"
         >
           {{ t(`social.${link.key}`) }}
         </a>

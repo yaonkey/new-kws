@@ -4,12 +4,15 @@
     "home": "Главная",
     "products": "Каталог",
     "patterns": "Описания",
-    "socials": "Соцсети",
+    "socials": "Как заказать",
+    "orderShort": "Заказать",
     "cart": "Корзина"
   },
   "home": {
     "brandTagline": "Из России с любовью",
     "title": "Kofworkshop - мастерская вязаных игрушек",
+    "handLine": "игрушки, которые хочется забрать домой",
+    "stitchLine": "каждая петля — руками",
     "subtitle": "Создаем авторские игрушки ручной работы и описания для их вязания.",
     "ctaProducts": "Каталог",
     "ctaPatterns": "Описания",
@@ -18,7 +21,14 @@
     "deliveryTitle": "Доставка",
     "socialTitle": "Наши соцсети",
     "socialSubtitle": "Основные обновления и новинки публикуем в социальных сетях.",
-    "openSocialsPage": "Открыть страницу соцсетей",
+    "openSocialsPage": "Как заказать",
+    "nowInStock": "Сейчас в наличии",
+    "allCatalog": "весь каталог",
+    "statWorks": "работ в каталоге",
+    "statStock": "сейчас в наличии",
+    "statFair": "ближайшая ярмарка",
+    "statDelivery": "доставка",
+    "statDeliveryValue": "Почта, Озон, Яндекс",
     "marketTitle": "Ближайшая ярмарка",
     "marketTitlePast": "Последняя ярмарка",
     "marketCurrent": "Сейчас идёт",
@@ -27,10 +37,25 @@
     "shelvesTitle": "Наши полочки"
   },
   "products": {
-    "title": "Каталог изделий",
+    "eyebrow": "игрушки мастерской",
+    "title": "Каталог",
+    "handLine": "выбирайте себе игрушку",
     "subtitle": "Выберите готовое изделие или вдохновитесь для персонального заказа.",
+    "summary": "{count} работ — от {min} до {max} руб.",
+    "onTheTable": "сейчас на столе",
+    "works": "работ",
+    "fromPrice": "цены от",
+    "allWorks": "Все работы",
+    "onlyInStock": "только то, что в наличии",
+    "showing": "показываю",
+    "groupCount": "{count} работ",
+    "workshopGroup": "Мастерская",
+    "emptyTitle": "По этому фильтру пока пусто",
+    "emptyFilter": "Здесь ещё ничего не связано — но это не «нет», а «пока нет».",
+    "zoom": "Посмотреть ближе",
+    "close": "Закрыть",
     "details": "Подробнее",
-    "addToCart": "Добавить в корзину",
+    "addToCart": "В корзину",
     "added": "В корзине",
     "addPdfToCart": "Добавить PDF-описание",
     "pdfAvailable": "Доступно PDF-описание",
@@ -48,12 +73,15 @@
     "metaSku": "Артикул",
     "extraDetailsTitle": "Дополнительное описание",
     "stock": {
-      "in_stock": "В наличии",
-      "out_of_stock": "Под заказ"
+      "in_stock": "в наличии",
+      "out_of_stock": "на заказ",
+      "pieces": "{count} шт"
     }
   },
   "patterns": {
-    "title": "Описания игрушек",
+    "eyebrow": "цифровые описания",
+    "title": "Описания",
+    "handLine": "схемы, которые можно связать самим",
     "subtitle": "Отдельная витрина цифровых схем и описаний.",
     "attachedLabel": "описание",
     "searchPlaceholder": "Поиск...",
@@ -69,7 +97,7 @@
     "clearConfirm": "Очистить корзину полностью?",
     "pdfItem": "Цифровой товар: PDF",
     "total": "Итого",
-    "checkout": "Оформить через Telegram",
+    "checkout": "Оформить в телеграме",
     "decrease": "Уменьшить количество"
   },
   "social": {
@@ -84,8 +112,8 @@
     "pikabu": "Пикабу"
   },
   "socials": {
-    "title": "Соцсети Kofworkshop",
-    "subtitle": "Все актуальные площадки мастерской в одном месте."
+    "title": "Как заказать",
+    "subtitle": "Три шага, сроки, доставка и соцсети мастерской."
   },
   "footer": {
     "copyright": "© Kofworkshop. Все права защищены."
@@ -94,7 +122,7 @@
     "homeTitle": "Главная",
     "productsTitle": "Каталог товаров",
     "patternsTitle": "Описания игрушек",
-    "socialsTitle": "Соцсети",
+    "socialsTitle": "Как заказать",
     "cartTitle": "Корзина",
     "aboutTitle": "О мастерской"
   }

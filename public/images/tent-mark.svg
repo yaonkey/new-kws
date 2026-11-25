@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180" fill="none" role="img" aria-label="Kofworkshop">
+  <defs>
+    <path id="titleArc" d="M70 98 Q260 52 450 98"/>
+  </defs>
+
+  <!-- tall ribbon ears so the top never looks sliced -->
+  <path fill="#5c282a" stroke="#ead9c8" stroke-width="2.6" stroke-linejoin="round"
+        d="M148 36 L128 4 L168 8 L198 14 L206 40 Z"/>
+  <path fill="#5c282a" stroke="#ead9c8" stroke-width="2.6" stroke-linejoin="round"
+        d="M372 36 L392 4 L352 8 L322 14 L314 40 Z"/>
+
+  <!-- peaked plaque body -->
+  <path
+    fill="#4a2224"
+    stroke="#ead9c8"
+    stroke-width="4.8"
+    stroke-linejoin="round"
+    d="
+      M 36 84
+      C 48 48, 96 28, 156 20
+      C 200 14, 236 8, 260 8
+      C 284 8, 320 14, 364 20
+      C 424 28, 472 48, 484 84
+      L 510 102
+      L 486 122
+      C 468 150, 420 164, 348 170
+      C 304 174, 280 176, 260 176
+      C 240 176, 216 174, 172 170
+      C 100 164, 52 150, 34 122
+      L 10 102
+      Z
+    "
+  />
+
+  <path
+    fill="none"
+    stroke="#ead9c8"
+    stroke-width="1.5"
+    opacity="0.88"
+    d="
+      M 48 86
+      C 60 54, 104 36, 160 28
+      C 202 22, 236 18, 260 18
+      C 284 18, 318 22, 360 28
+      C 416 36, 460 54, 472 86
+      L 494 102
+      L 474 120
+      C 456 144, 414 156, 346 162
+      C 304 166, 280 168, 260 168
+      C 240 168, 216 166, 174 162
+      C 106 156, 64 144, 46 120
+      L 26 102
+      Z
+    "
+  />
+
+  <path fill="#f0e0d0" d="M70 100 L73.4 109 L83 109 L75.2 114.6 L78 124 L70 118.6 L62 124 L64.8 114.6 L57 109 L66.6 109 Z"/>
+  <path fill="#f0e0d0" d="M450 100 L453.4 109 L463 109 L455.2 114.6 L458 124 L450 118.6 L442 124 L444.8 114.6 L437 109 L446.6 109 Z"/>
+
+  <text fill="#f0e0d0" font-family="Georgia, 'Times New Roman', Times, serif" font-size="32" font-weight="700" letter-spacing="3.8">
+    <textPath href="#titleArc" startOffset="50%" text-anchor="middle">KOFWORKSHOP</textPath>
+  </text>
+
+  <text
+    x="260"
+    y="138"
+    fill="#f0e0d0"
+    font-family="Georgia, 'Times New Roman', Times, serif"
+    font-size="14.5"
+    font-style="italic"
+    text-anchor="middle"
+  >вязаная мастерская</text>
+
+  <path fill="#f0e0d0" d="M170 134 L172 138 L176 138 L173 141 L174 145 L170 143 L166 145 L167 141 L164 138 L168 138 Z"/>
+  <path fill="#f0e0d0" d="M350 134 L352 138 L356 138 L353 141 L354 145 L350 143 L346 145 L347 141 L344 138 L348 138 Z"/>
+</svg>

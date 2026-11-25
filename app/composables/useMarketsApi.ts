@@ -1,3 +1,5 @@
+import { mockMarket } from '~/data/mockCatalog'
+
 export type UpcomingMarket = {
   name: string
   start_date: string
@@ -76,10 +78,15 @@ export const useMarketsApi = () => {
     }
     try {
       const response = await $fetch<{ market: UpcomingMarket | null }>(`${baseUrl}/api/v1/markets/upcoming`)
-      return response.market ?? null
+      if (response.market || !import.meta.dev) {
+        return response.market ?? null
+      }
     } catch {
-      return null
+      if (!import.meta.dev) {
+        return null
+      }
     }
+    return mockMarket
   }
 
   return { fetchUpcomingMarket, formatMarketPeriod }

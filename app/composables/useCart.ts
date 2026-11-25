@@ -4,7 +4,7 @@ export type CartItemKind = 'product' | 'pdf'
 
 export interface CatalogProduct {
   slug: string
-  category?: string
+  category?: string | { ru: string; en: string }
   categories?: string[]
   labels?: string[]
   is_schema?: boolean

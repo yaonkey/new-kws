@@ -202,6 +202,11 @@ export const getProductLabels = (product: CatalogProduct, locale: string) => {
 
 export type StockStatus = 'in_stock' | 'out_of_stock' | 'unknown'
 
+export const stockPieceCount = (product: CatalogProduct): number | null => {
+  if (typeof product.stock === 'number' && product.stock > 0) return product.stock
+  return null
+}
+
 export const getProductStockStatus = (product: CatalogProduct): StockStatus => {
   if (product.is_schema || product.stock === null || product.stock === undefined) {
     return 'unknown'

@@ -1,3 +1,4 @@
+import { mockProducts } from '~/data/mockCatalog'
 import type { CatalogProduct } from '~/composables/useCart'
 
 export interface ProductsCatalog {
@@ -10,26 +11,34 @@ export const useProductsApi = () => {
   const fetchCatalog = async (): Promise<ProductsCatalog> => {
     const baseUrl = String(config.public.apiUrl || '').replace(/\/$/, '')
     if (!baseUrl) {
-      console.warn('[useProductsApi] NUXT_PUBLIC_API_URL is not set')
-      return { products: [] }
+      return import.meta.dev ? { products: mockProducts } : { products: [] }
     }
 
-    const response = await $fetch<ProductsCatalog>(`${baseUrl}/api/v1/products`)
-    return {
-      products: response.products ?? [],
+    try {
+      const response = await $fetch<ProductsCatalog>(`${baseUrl}/api/v1/products`)
+      const products = response.products ?? []
+      if (products.length || !import.meta.dev) {
+        return { products }
+      }
+    } catch (error) {
+      if (!import.meta.dev) {
+        console.warn('[useProductsApi] catalog request failed', error)
+        return { products: [] }
+      }
     }
+    return { products: mockProducts }
   }
 
   const fetchProduct = async (slug: string): Promise<CatalogProduct | null> => {
     const baseUrl = String(config.public.apiUrl || '').replace(/\/$/, '')
     if (!baseUrl) {
-      return null
+      return import.meta.dev ? mockProducts.find((item) => item.slug === slug) ?? null : null
     }
 
     try {
       return await $fetch<CatalogProduct>(`${baseUrl}/api/v1/products/${encodeURIComponent(slug)}`)
     } catch {
-      return null
+      return import.meta.dev ? mockProducts.find((item) => item.slug === slug) ?? null : null
     }
   }
 

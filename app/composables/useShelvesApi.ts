@@ -1,3 +1,5 @@
+import { mockShelves } from '~/data/mockCatalog'
+
 export type PublicShelf = {
   name: string
   address?: string
@@ -13,10 +15,16 @@ export const useShelvesApi = () => {
     }
     try {
       const response = await $fetch<{ shelves: PublicShelf[] }>(`${baseUrl}/api/v1/shelves`)
-      return response.shelves ?? []
+      const shelves = response.shelves ?? []
+      if (shelves.length || !import.meta.dev) {
+        return shelves
+      }
     } catch {
-      return []
+      if (!import.meta.dev) {
+        return []
+      }
     }
+    return mockShelves
   }
 
   return { fetchShelves }

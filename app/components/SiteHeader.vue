@@ -2,11 +2,17 @@
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
+const route = useRoute()
 const { itemCount } = useCart()
 const { pop } = useCartFx()
 const { open } = useCartDrawer()
-const mobileMenuOpen = ref(false)
 const popping = ref(false)
+const compact = ref(false)
+const folded = ref(false)
+const spacer = ref(0)
+const head = ref<HTMLElement | null>(null)
+let tearing = false
+let lastY = 0
 
 watch(pop, async () => {
   popping.value = false
@@ -14,88 +20,136 @@ watch(pop, async () => {
   popping.value = true
 })
 
-const setLocale = async (nextLocale: 'ru' | 'en') => {
-  if (locale.value === nextLocale) {
+const tearOff = async () => {
+  const el = head.value
+  if (!el || tearing || compact.value) return
+  tearing = true
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const firstTop = el.getBoundingClientRect().top
+  spacer.value = el.offsetHeight
+  compact.value = true
+  await nextTick()
+  if (reduce) {
+    tearing = false
     return
   }
-  mobileMenuOpen.value = false
+  const dy = Math.max(-36, Math.min(0, firstTop - el.getBoundingClientRect().top))
+  el.style.transition = 'none'
+  el.style.transform = `translateY(${dy}px)`
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      el.style.transition = 'transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.45s ease, box-shadow 0.62s ease'
+      el.style.transform = ''
+      window.setTimeout(() => {
+        if (el.style.transform === '') el.style.transition = ''
+        tearing = false
+        onScroll()
+      }, 640)
+    })
+  })
+}
+
+const settleBack = async () => {
+  const el = head.value
+  if (!el || tearing || !compact.value) return
+  tearing = true
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  compact.value = false
+  el.style.transition = ''
+  el.style.transform = ''
+  await nextTick()
+  window.setTimeout(() => {
+    tearing = false
+  }, reduce ? 0 : 640)
+}
+
+const narrow = () => window.matchMedia('(max-width: 767px)').matches
+
+const onScroll = () => {
+  const y = window.scrollY
+  if (narrow()) {
+    if (y <= 12) folded.value = false
+    else if (y > lastY + 10) folded.value = true
+    else if (lastY - y > 10) folded.value = false
+    lastY = y
+    return
+  }
+  folded.value = false
+  lastY = y
+  if (tearing) return
+  if (!compact.value && y > 72) {
+    tearOff()
+    return
+  }
+  if (compact.value && y < 16) settleBack()
+}
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+
+const setLocale = async (nextLocale: 'ru' | 'en') => {
+  if (locale.value === nextLocale) return
   await navigateTo(switchLocalePath(nextLocale))
 }
+
+const links = computed(() => [
+  { to: '/', label: t('nav.home'), short: t('nav.home'), exact: true },
+  { to: '/products', label: t('nav.products'), short: t('nav.products'), exact: false },
+  { to: '/patterns', label: t('nav.patterns'), short: t('nav.patterns'), exact: false },
+  { to: '/socials', label: t('nav.socials'), short: t('nav.orderShort'), exact: false },
+])
+
+const isCurrent = (to: string, exact: boolean) => {
+  const path = route.path.replace(/\/$/, '') || '/'
+  const target = localePath(to).replace(/\/$/, '') || '/'
+  if (exact) return path === target
+  return path === target || path.startsWith(`${target}/`)
+}
+
 </script>
 
 <template>
-  <header class="sticky top-0 z-30 border-b border-circus-border bg-circus-bg/95 backdrop-blur relative overflow-visible">
-    <CircusBunting />
-    <div class="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-4 pb-4 pt-10 sm:px-6 lg:px-8">
-      <NuxtLink :to="localePath('/')" class="inline-flex items-center gap-3">
-        <NuxtImg src="/images/brand-logo-cutout.png" alt="Kofworkshop" width="52" height="52" class="h-12 w-12 object-contain" />
-        <span class="font-display text-xl leading-none tracking-wide"><span class="text-circus-red">Kof</span><span class="text-circus-white">workshop</span></span>
-      </NuxtLink>
-
-      <nav class="hidden gap-6 text-sm font-medium md:flex">
-        <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white">{{ t('nav.products') }}</NuxtLink>
-        <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white">{{ t('nav.patterns') }}</NuxtLink>
-        <NuxtLink :to="localePath('/socials')" class="text-circus-muted hover:text-circus-white">{{ t('nav.socials') }}</NuxtLink>
+  <div class="site-head-slot" :style="compact ? { height: `${spacer}px` } : undefined">
+    <header ref="head" class="site-head" :class="{ 'is-compact': compact, 'is-folded': folded }">
+      <nav class="header-nav">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="localePath(link.to)"
+          class="nav-link"
+          :class="isCurrent(link.to, link.exact) ? 'is-on' : ''"
+        >
+          <span class="nav-full">{{ link.label }}</span>
+          <span class="nav-short">{{ link.short }}</span>
+        </NuxtLink>
       </nav>
-
-      <div class="flex items-center gap-3">
-        <button class="rounded border border-circus-border bg-circus-surface px-3 py-1 text-xs text-circus-text md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
-          ☰
-        </button>
-        <button id="cart-button" class="rounded border border-circus-red bg-circus-red px-3 py-1 text-xs font-semibold text-circus-white" :class="{ 'cart-pop': popping }" @click="open">
-          {{ t('nav.cart') }} ({{ itemCount }})
-        </button>
-        <div class="relative hidden rounded-full border border-circus-border bg-circus-surface p-0.5 text-xs md:flex">
-          <span
-            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-circus-red transition-transform duration-200"
-            :class="locale === 'en' ? 'translate-x-full' : 'translate-x-0'"
-          />
+      <div class="header-tools">
+          <div class="head-locale flex shrink-0 rounded-full border border-circus-cream/40 bg-black/35 p-0.5 text-xs text-circus-cream">
+            <button class="rounded-full px-2 py-1" :class="locale === 'ru' ? 'bg-circus-red text-circus-cream' : 'text-circus-cream/70'" @click="setLocale('ru')">RU</button>
+            <button class="rounded-full px-2 py-1" :class="locale === 'en' ? 'bg-circus-red text-circus-cream' : 'text-circus-cream/70'" @click="setLocale('en')">EN</button>
+          </div>
           <button
-            class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'ru' ? 'text-circus-white' : 'text-circus-muted'"
-            @click="setLocale('ru')"
+            id="cart-button"
+            class="cart-fab shrink-0"
+            :class="{ 'cart-pop': popping }"
+            :aria-label="t('nav.cart')"
+            @click="open"
           >
-            RU
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M6 8h12l-1 12H7L6 8Z" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+            </svg>
+            <span class="cart-label">{{ t('nav.cart') }}</span>
+            <span v-if="itemCount" class="cart-count">{{ itemCount }}</span>
           </button>
-          <button
-            class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'en' ? 'text-circus-white' : 'text-circus-muted'"
-            @click="setLocale('en')"
-          >
-            EN
-          </button>
-        </div>
       </div>
-    </div>
-    <nav v-if="mobileMenuOpen" class="border-t border-circus-border bg-circus-surface px-4 py-3 md:hidden">
-      <div class="flex flex-col gap-3 text-sm font-medium">
-        <NuxtLink :to="localePath('/products')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.products') }}</NuxtLink>
-        <NuxtLink :to="localePath('/patterns')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.patterns') }}</NuxtLink>
-        <NuxtLink :to="localePath('/socials')" class="text-circus-muted hover:text-circus-white" @click="mobileMenuOpen = false">{{ t('nav.socials') }}</NuxtLink>
-        <button class="inline-flex w-fit rounded border border-circus-red bg-circus-red px-3 py-1 text-xs text-circus-white" @click="open(); mobileMenuOpen = false">
-          {{ t('nav.cart') }} ({{ itemCount }})
-        </button>
-        <div class="relative mt-1 flex w-fit rounded-full border border-circus-border bg-circus-bg p-0.5 text-xs">
-          <span
-            class="pointer-events-none absolute inset-y-0.5 w-1/2 rounded-full bg-circus-red transition-transform duration-200"
-            :class="locale === 'en' ? 'translate-x-full' : 'translate-x-0'"
-          />
-          <button
-            class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'ru' ? 'text-circus-white' : 'text-circus-muted'"
-            @click="setLocale('ru')"
-          >
-            RU
-          </button>
-          <button
-            class="relative z-10 rounded-full px-3 py-1 transition"
-            :class="locale === 'en' ? 'text-circus-white' : 'text-circus-muted'"
-            @click="setLocale('en')"
-          >
-            EN
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
+      <NuxtLink :to="localePath('/')" class="head-mark" :aria-label="t('nav.home')">
+        <img src="/images/brand-logo-cutout.png" alt="Kofworkshop" width="537" height="601">
+      </NuxtLink>
+    </header>
+  </div>
 </template>

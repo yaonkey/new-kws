@@ -4,12 +4,15 @@
     "home": "Home",
     "products": "Catalog",
     "patterns": "Descriptions",
-    "socials": "Socials",
+    "socials": "How to order",
+    "orderShort": "Order",
     "cart": "Cart"
   },
   "home": {
     "brandTagline": "From Russia with love",
     "title": "Kofworkshop - handmade toy workshop",
+    "handLine": "toys you want to take home",
+    "stitchLine": "every stitch by hand",
     "subtitle": "We create original handmade toys and knitting patterns for them.",
     "ctaProducts": "Catalog",
     "ctaPatterns": "Descriptions",
@@ -18,7 +21,14 @@
     "deliveryTitle": "Delivery",
     "socialTitle": "Our social platforms",
     "socialSubtitle": "We post updates, new arrivals and releases across social media.",
-    "openSocialsPage": "Open socials page",
+    "openSocialsPage": "How to order",
+    "nowInStock": "In stock now",
+    "allCatalog": "the whole catalog",
+    "statWorks": "works in the catalog",
+    "statStock": "in stock now",
+    "statFair": "next fair",
+    "statDelivery": "delivery",
+    "statDeliveryValue": "Post, Ozon, Yandex",
     "marketTitle": "Upcoming fair",
     "marketTitlePast": "Recent fair",
     "marketCurrent": "Happening now",
@@ -27,10 +37,25 @@
     "shelvesTitle": "Our shelves"
   },
   "products": {
-    "title": "Product Catalog",
+    "eyebrow": "workshop toys",
+    "title": "Catalog",
+    "handLine": "pick a toy",
     "subtitle": "Explore ready-made products or get ideas for your custom order.",
+    "summary": "{count} works — from {min} to {max}.",
+    "onTheTable": "on the table now",
+    "works": "works",
+    "fromPrice": "prices from",
+    "allWorks": "All works",
+    "onlyInStock": "only what is in stock",
+    "showing": "showing",
+    "groupCount": "{count} works",
+    "workshopGroup": "Workshop",
+    "emptyTitle": "Nothing matches this filter yet",
+    "emptyFilter": "Nothing is linked here yet — that means not yet, not never.",
+    "zoom": "Look closer",
+    "close": "Close",
     "details": "View details",
-    "addToCart": "Add to cart",
+    "addToCart": "To cart",
     "added": "Added",
     "addPdfToCart": "Add PDF description",
     "pdfAvailable": "PDF description available",
@@ -48,12 +73,15 @@
     "metaSku": "SKU",
     "extraDetailsTitle": "Additional details",
     "stock": {
-      "in_stock": "In stock",
-      "out_of_stock": "Made to order"
+      "in_stock": "in stock",
+      "out_of_stock": "made to order",
+      "pieces": "{count} pcs"
     }
   },
   "patterns": {
-    "title": "Toy descriptions",
+    "eyebrow": "digital patterns",
+    "title": "Patterns",
+    "handLine": "patterns you can knit yourself",
     "subtitle": "A separate storefront for digital descriptions and patterns.",
     "attachedLabel": "description",
     "searchPlaceholder": "Search...",
@@ -69,7 +97,7 @@
     "clearConfirm": "Clear the entire cart?",
     "pdfItem": "Digital item: PDF",
     "total": "Total",
-    "checkout": "Checkout via Telegram",
+    "checkout": "Checkout in Telegram",
     "decrease": "Decrease quantity"
   },
   "social": {
@@ -84,8 +112,8 @@
     "pikabu": "Pikabu"
   },
   "socials": {
-    "title": "Kofworkshop Socials",
-    "subtitle": "All active workshop platforms in one place."
+    "title": "How to order",
+    "subtitle": "Three steps, timing, delivery and the workshop socials."
   },
   "footer": {
     "copyright": "© Kofworkshop. All rights reserved."
@@ -94,7 +122,7 @@
     "homeTitle": "Home",
     "productsTitle": "Product Catalog",
     "patternsTitle": "Toy descriptions",
-    "socialsTitle": "Socials",
+    "socialsTitle": "How to order",
     "cartTitle": "Cart",
     "aboutTitle": "About"
   }

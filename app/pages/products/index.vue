@@ -1,163 +1,130 @@
 <script setup lang="ts">
-import type { CatalogProduct } from '~/composables/useCart'
-import {
-  getCategoryKey,
-  getCategoryLabel,
-  getLocalizedField,
-  getPriceByLocale,
-  getProductEffectivePrice,
-  getProductCategories,
-  hasProductLabel,
-} from '~/composables/useCatalog'
-
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const config = useRuntimeConfig()
 const localePath = useLocalePath()
+const { open } = useQuickView()
+const listKey = ref(0)
 
-const { fetchCatalog } = useProductsApi()
+const {
+  products,
+  status,
+  refresh,
+  selectedKey,
+  inStockOnly,
+  searchQuery,
+  chips,
+  pool,
+  shown,
+  groups,
+  minPrice,
+  maxPrice,
+  stockCount,
+  worksLabel,
+} = useCatalogFilters()
 
-const { data: catalog, refresh } = await useAsyncData(
-  () => `products-catalog-${locale.value}`,
-  fetchCatalog,
-  {
-    watch: [locale],
-    default: () => ({ products: [] }),
-  },
-)
-
-const products = computed<CatalogProduct[]>(() => (catalog.value?.products ?? []).filter((product) => !product.is_schema))
-const searchQuery = ref('')
-const selectedLabel = ref('all')
-const selectedSort = ref<'newest' | 'oldest' | 'price-asc' | 'price-desc'>('newest')
-
-const priceBounds = computed(() => {
-  if (!products.value.length) {
-    return { min: 0, max: 0 }
-  }
-  const prices = products.value.map((product) => getProductEffectivePrice(product))
-  const localizedPrices = prices.map((price) => getPriceByLocale(price, locale.value))
-  return { min: Math.min(...localizedPrices), max: Math.max(...localizedPrices) }
-})
-
-const minPrice = ref(0)
-const maxPrice = ref(0)
-
-watchEffect(() => {
-  if (!minPrice.value && !maxPrice.value && priceBounds.value.max) {
-    minPrice.value = priceBounds.value.min
-    maxPrice.value = priceBounds.value.max
-  }
-})
-
-const categories = computed(() => {
-  const labelMap = new Map<string, string>()
-  products.value.forEach((product) => {
-    getProductCategories(product).forEach((label) => {
-      const key = getCategoryKey(label)
-      if (!labelMap.has(key)) {
-        labelMap.set(key, getCategoryLabel(label, locale.value))
-      }
-    })
-  })
-  return Array.from(labelMap.entries())
-    .map(([key, label]) => ({ key, label }))
-    .sort((a, b) => a.label.localeCompare(b.label))
-})
-
-const filteredProducts = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase()
-  const sourceProducts = products.value
-    .map((product, index) => ({ product, index }))
-    .filter(({ product }) => {
-      const localizedTitle = getLocalizedField(product.title, locale.value).toLowerCase()
-      const localizedDescription = getLocalizedField(product.description, locale.value).toLowerCase()
-      const productLabelKeys = getProductCategories(product).map((label) => getCategoryKey(label))
-      const matchesSearch = !query || localizedTitle.includes(query) || localizedDescription.includes(query)
-      const matchesCategory = selectedLabel.value === 'all' || productLabelKeys.includes(selectedLabel.value)
-      const productPrice = getPriceByLocale(getProductEffectivePrice(product), locale.value)
-      const matchesPrice = productPrice >= minPrice.value && productPrice <= maxPrice.value
-      return matchesSearch && matchesCategory && matchesPrice
-    })
-
-  sourceProducts.sort((a, b) => {
-    const aNew = hasProductLabel(a.product, 'new') ? 1 : 0
-    const bNew = hasProductLabel(b.product, 'new') ? 1 : 0
-    if (aNew !== bNew) {
-      return bNew - aNew
-    }
-    if (selectedSort.value === 'newest') {
-      return a.index - b.index
-    }
-    if (selectedSort.value === 'oldest') {
-      return b.index - a.index
-    }
-    if (selectedSort.value === 'price-asc') {
-      return getPriceByLocale(getProductEffectivePrice(a.product), locale.value)
-        - getPriceByLocale(getProductEffectivePrice(b.product), locale.value)
-    }
-    return getPriceByLocale(getProductEffectivePrice(b.product), locale.value)
-      - getPriceByLocale(getProductEffectivePrice(a.product), locale.value)
-  })
-
-  return sourceProducts.map(({ product }) => product)
+watch([selectedKey, inStockOnly, searchQuery], () => {
+  listKey.value += 1
 })
 
 onMounted(async () => {
-  if (!products.value.length) {
-    await refresh()
-  }
+  if (!products.value.length) await refresh()
 })
 
 useSeoMeta({
   title: t('seo.productsTitle'),
   description: t('products.subtitle'),
-  ogTitle: `Handmade Workshop - ${t('seo.productsTitle')}`,
+  ogTitle: `Kofworkshop - ${t('seo.productsTitle')}`,
   ogDescription: t('products.subtitle'),
   ogType: 'website',
   ogUrl: `${config.public.siteUrl}${localePath('/products')}`,
-})
-
-useHead({
-  link: [{ rel: 'canonical', href: `${config.public.siteUrl}${localePath('/products')}` }],
 })
 </script>
 
 <template>
   <div>
-    <section class="mb-8">
-      <h1 class="circus-heading text-3xl font-bold">{{ t('products.title') }}</h1>
-      <p class="mt-2 max-w-3xl text-circus-muted">{{ t('products.subtitle') }}</p>
+    <section class="grid items-end gap-6 md:grid-cols-[1.3fr_0.7fr]">
+      <div>
+        <p class="text-xs uppercase tracking-[0.22em] text-circus-red">{{ t('products.eyebrow') }}</p>
+        <h1 class="circus-heading mt-2 text-5xl font-bold md:text-7xl">{{ t('products.title') }}</h1>
+        <svg class="zigzag mt-2 h-4 w-36 text-circus-red" viewBox="0 0 140 16" fill="none" aria-hidden="true">
+          <path d="M2 12 L14 4 L26 12 L38 4 L50 12 L62 4 L74 12 L86 4 L98 12 L110 4 L122 12 L134 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="script mt-2 text-2xl text-[#f3c7cb]">{{ t('products.handLine') }}</p>
+        <p class="mt-3 max-w-xl text-circus-muted">
+          {{ t('products.summary', { count: products.length, min: minPrice, max: maxPrice }) }}
+        </p>
+      </div>
+      <aside class="paper p-5">
+        <p class="script text-2xl text-circus-red">{{ t('products.onTheTable') }}</p>
+        <dl class="mt-3 grid grid-cols-3 gap-2 text-center">
+          <div>
+            <dt class="text-2xl font-bold">{{ products.length }}</dt>
+            <dd class="text-xs paper-muted">{{ t('products.works') }}</dd>
+          </div>
+          <div>
+            <dt class="text-2xl font-bold">{{ stockCount }}</dt>
+            <dd class="text-xs paper-muted">{{ t('products.stock.in_stock') }}</dd>
+          </div>
+          <div>
+            <dt class="text-2xl font-bold">{{ minPrice || '—' }}</dt>
+            <dd class="text-xs paper-muted">{{ t('products.fromPrice') }}</dd>
+          </div>
+        </dl>
+      </aside>
     </section>
 
-    <section class="circus-card mb-6 p-4 md:p-5">
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <input
-          v-model="searchQuery"
-          type="search"
-          :placeholder="t('products.searchPlaceholder')"
-          class="circus-input"
-        />
-        <select v-model="selectedLabel" class="circus-input">
-          <option value="all">{{ t('products.allCategories') }}</option>
-          <option v-for="category in categories" :key="category.key" :value="category.key">
-            {{ category.label }}
-          </option>
-        </select>
-        <select v-model="selectedSort" class="circus-input">
-          <option value="newest">{{ t('products.sortNewest') }}</option>
-          <option value="oldest">{{ t('products.sortOldest') }}</option>
-          <option value="price-asc">{{ t('products.sortPriceAsc') }}</option>
-          <option value="price-desc">{{ t('products.sortPriceDesc') }}</option>
-        </select>
-        <input v-model.number="minPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />
-        <input v-model.number="maxPrice" type="number" :min="priceBounds.min" :max="priceBounds.max" class="circus-input" />
+    <section class="mt-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="catalog-nav">
+          <button class="chip" :class="{ 'is-on': selectedKey === 'all' }" @click="selectedKey = 'all'">
+            {{ t('products.allWorks') }}
+            <span class="chip-count">{{ pool.length }}</span>
+          </button>
+          <button
+            v-for="chip in chips"
+            :key="chip.key"
+            class="chip"
+            :class="{ 'is-on': selectedKey === chip.key }"
+            @click="selectedKey = chip.key"
+          >
+            {{ chip.label }}
+            <span class="chip-count">{{ chip.count }}</span>
+          </button>
+        </div>
+        <button class="catalog-nav" role="switch" :aria-checked="inStockOnly" @click="inStockOnly = !inStockOnly">
+          <span class="chip" :class="{ 'is-on': inStockOnly }">
+            {{ t('products.onlyInStock') }}
+            <span class="chip-count">{{ stockCount }}</span>
+          </span>
+        </button>
+        <input v-model="searchQuery" type="search" :placeholder="t('products.searchPlaceholder')" class="circus-input w-full max-w-xs bg-white/10">
+      </div>
+      <div class="mt-4 border-t border-dashed border-white/25 pt-3 text-sm text-circus-muted">
+        {{ t('products.showing') }} {{ worksLabel(shown.length) }}
       </div>
     </section>
 
-    <div class="mb-4 text-sm text-circus-muted">{{ t('products.results') }}: {{ filteredProducts.length }}</div>
-
-    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      <ProductCard v-for="product in filteredProducts" :key="product.slug" :product="product" />
+    <section v-if="status === 'pending' && !products.length" class="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">
+      <div v-for="n in 6" :key="n" class="skeleton-card" />
     </section>
+
+    <section v-else-if="!groups.length" class="paper mt-6 p-8 text-center">
+      <h2 class="font-display text-2xl font-bold">{{ t('products.emptyTitle') }}</h2>
+      <p class="mt-2 paper-muted">{{ t('products.emptyFilter') }}</p>
+    </section>
+
+    <div v-else :key="listKey" class="catalog-pop mt-8 space-y-10">
+      <section v-for="group in groups" :key="group.key">
+        <header class="mb-4 flex items-end gap-3">
+          <h2 class="fandom-tag text-lg">{{ group.label }}</h2>
+          <p class="script text-2xl text-[#f3c7cb]">{{ worksLabel(group.items.length) }}</p>
+        </header>
+        <div class="grid grid-cols-2 gap-3 lg:grid-cols-3">
+          <div v-for="(product, index) in group.items" :key="product.slug" v-reveal class="reveal" :style="{ '--rd': `${Math.min(index, 8) * 70}ms` }">
+            <ProductCard :product="product" @zoom="open(product)" />
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </template>

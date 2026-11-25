@@ -5,19 +5,20 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         circus: {
-          bg: '#0a0a0f',
-          surface: '#151520',
-          surfaceSoft: '#1b1b29',
-          border: '#3a2231',
-          text: '#f5f2f0',
-          muted: '#b8b0b5',
-          red: '#cf2d3a',
-          redDeep: '#8f1624',
-          white: '#ffffff',
+          bg: '#100e0c',
+          surface: '#1a1412',
+          surfaceSoft: '#241c18',
+          border: '#4a3830',
+          text: '#f4eadf',
+          muted: '#cbb6a6',
+          red: '#6b3032',
+          redDeep: '#4a2224',
+          cream: '#ead9c8',
+          white: '#f6ecdf',
         },
       },
       boxShadow: {
-        'circus-glow': '0 0 0 1px rgba(207,45,58,0.35), 0 10px 35px rgba(0,0,0,0.45)',
+        'circus-glow': '0 0 0 1px rgba(107,48,50,0.4), 0 10px 35px rgba(0,0,0,0.45)',
       },
       fontFamily: {
         display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
@@ -25,12 +26,12 @@ export default <Partial<Config>>{
       },
       backgroundImage: {
         'circus-radial':
-          'radial-gradient(1200px 500px at 15% -20%, rgba(207,45,58,0.22), transparent 60%), radial-gradient(1000px 500px at 90% -10%, rgba(143,22,36,0.2), transparent 55%)',
+          'radial-gradient(1200px 500px at 15% -20%, rgba(107,48,50,0.28), transparent 60%), radial-gradient(1000px 500px at 90% -10%, rgba(74,34,36,0.22), transparent 55%)',
       },
       keyframes: {
         glowPulse: {
-          '0%, 100%': { boxShadow: '0 0 0 1px rgba(207,45,58,0.22), 0 8px 24px rgba(0,0,0,0.45)' },
-          '50%': { boxShadow: '0 0 0 1px rgba(207,45,58,0.55), 0 14px 36px rgba(0,0,0,0.55)' },
+          '0%, 100%': { boxShadow: '0 0 0 1px rgba(107,48,50,0.28), 0 8px 24px rgba(0,0,0,0.45)' },
+          '50%': { boxShadow: '0 0 0 1px rgba(234,217,200,0.45), 0 14px 36px rgba(0,0,0,0.55)' },
         },
         riseFade: {
           '0%': { opacity: '0', transform: 'translateY(8px)' },

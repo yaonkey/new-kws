@@ -166,17 +166,17 @@ useHead({
 <template>
   <div>
     <nav class="mb-5 text-sm text-circus-muted">
-      <NuxtLink :to="localePath('/')" class="hover:text-circus-white">{{ t('nav.home') }}</NuxtLink>
+      <NuxtLink :to="localePath('/')" class="hover:text-white">{{ t('nav.home') }}</NuxtLink>
       <span class="mx-2">/</span>
-      <NuxtLink :to="catalogLink" class="hover:text-circus-white">{{ catalogLabel }}</NuxtLink>
+      <NuxtLink :to="catalogLink" class="hover:text-white">{{ catalogLabel }}</NuxtLink>
       <span class="mx-2">/</span>
-      <span class="text-circus-text">{{ productTitle }}</span>
+      <span class="text-white">{{ productTitle }}</span>
     </nav>
 
-    <article v-if="product" class="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-      <div>
+    <article v-if="product" class="paper grid items-start overflow-hidden md:grid-cols-[1.05fr_0.95fr]">
+      <div class="bg-[#efe6dc] p-3">
         <div
-          class="mt-3 grid gap-3"
+          class="grid gap-3"
           :class="galleryImages.length > 1 ? 'md:grid-cols-[1fr_110px]' : 'grid-cols-1'"
         >
           <img
@@ -186,7 +186,7 @@ useHead({
             fetchpriority="high"
             loading="eager"
             decoding="async"
-            class="max-h-[72vh] min-h-[260px] w-full rounded-2xl border border-circus-border object-contain bg-circus-surface"
+            class="max-h-[72vh] min-h-[260px] w-full rounded-2xl object-contain"
           >
           <div
             v-if="galleryImages.length > 1"
@@ -195,8 +195,8 @@ useHead({
             <button
               v-for="image in galleryImages"
               :key="`mobile-${image}`"
-              class="h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-circus-border bg-circus-surface"
-              :class="activeImage === image ? 'border-circus-red shadow-[inset_0_0_0_1px_#cf2d3a]' : ''"
+              class="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-white"
+              :class="activeImage === image ? 'ring-2 ring-circus-red' : ''"
               @click="activeImage = image"
             >
               <img :src="image" :alt="productTitle" loading="lazy" decoding="async" class="h-full w-full object-cover">
@@ -209,8 +209,8 @@ useHead({
             <button
               v-for="image in galleryImages"
               :key="`desktop-${image}`"
-              class="block w-full overflow-hidden rounded-lg border border-circus-border bg-circus-surface"
-              :class="activeImage === image ? 'border-circus-red shadow-[inset_0_0_0_1px_#cf2d3a]' : ''"
+              class="block w-full overflow-hidden rounded-lg bg-white"
+              :class="activeImage === image ? 'ring-2 ring-circus-red' : ''"
               @click="activeImage = image"
             >
               <img :src="image" :alt="productTitle" loading="lazy" decoding="async" class="h-20 w-full object-cover">
@@ -219,21 +219,21 @@ useHead({
         </div>
       </div>
 
-      <div class="space-y-5">
-        <h1 class="circus-heading text-3xl font-bold">{{ productTitle }}</h1>
-        <p class="leading-relaxed text-circus-muted">{{ productDescription }}</p>
+      <div class="space-y-5 p-5 sm:p-7">
+        <h1 class="font-display text-4xl font-bold">{{ productTitle }}</h1>
+        <p class="leading-relaxed paper-muted">{{ productDescription }}</p>
         <p v-if="isOnSale" class="flex items-baseline gap-3">
-          <span class="text-lg text-circus-muted line-through">{{ productBasePrice }} {{ t('currency') }}</span>
+          <span class="text-lg paper-muted line-through">{{ productBasePrice }} {{ t('currency') }}</span>
           <span class="text-2xl font-bold text-circus-red">{{ productPrice }} {{ t('currency') }}</span>
         </p>
-        <p v-else class="text-2xl font-bold text-circus-white">{{ productPrice }} {{ t('currency') }}</p>
-        <p v-if="stockStatus !== 'unknown'" class="text-sm font-medium text-circus-muted">
+        <p v-else class="text-2xl font-bold">{{ productPrice }} {{ t('currency') }}</p>
+        <p v-if="stockStatus !== 'unknown'" class="text-sm font-medium paper-muted">
           {{ t(`products.stock.${stockStatus}`) }}
         </p>
 
-        <section class="rounded-xl border border-circus-border bg-circus-surface p-4 text-sm">
-          <h2 class="mb-3 font-semibold text-circus-white">{{ t('products.metaTitle') }}</h2>
-          <dl class="space-y-1 text-circus-muted">
+        <section class="rounded-2xl bg-white/70 p-4 text-sm">
+          <h2 class="mb-3 font-semibold">{{ t('products.metaTitle') }}</h2>
+          <dl class="space-y-1 paper-muted">
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaCategory') }}</dt><dd>{{ productLabelCategories }}</dd></div>
             <div class="flex justify-between gap-2"><dt>{{ t('products.metaSku') }}</dt><dd>{{ product.slug }}</dd></div>
           </dl>
@@ -241,16 +241,16 @@ useHead({
 
         <section
           v-if="productDetails"
-          class="rounded-xl border border-circus-border bg-circus-surface p-4 text-sm"
+          class="rounded-2xl bg-white/70 p-4 text-sm"
         >
-          <h2 class="mb-3 font-semibold text-circus-white">{{ t('products.extraDetailsTitle') }}</h2>
-          <p class="whitespace-pre-line leading-relaxed text-circus-muted">{{ productDetails }}</p>
+          <h2 class="mb-3 font-semibold">{{ t('products.extraDetailsTitle') }}</h2>
+          <p class="whitespace-pre-line leading-relaxed paper-muted">{{ productDetails }}</p>
         </section>
 
-        <aside class="sticky top-24 rounded-xl border border-circus-border bg-circus-surface p-4 shadow-circus-glow">
+        <aside class="sticky top-36 rounded-2xl bg-white/80 p-4">
           <button
             v-if="canBuyProduct"
-            class="w-full rounded-lg border border-circus-red bg-circus-red px-6 py-3 text-sm font-semibold text-circus-white transition hover:bg-circus-redDeep"
+            class="circus-btn-primary w-full"
             :class="justAdded ? 'scale-95' : ''"
             @click="addProduct"
           >
@@ -258,7 +258,7 @@ useHead({
           </button>
           <button
             v-if="canBuyPdf"
-            class="w-full rounded-lg border border-circus-border bg-circus-bg px-6 py-3 text-sm font-semibold text-circus-text transition hover:border-circus-red"
+            class="circus-btn-secondary w-full"
             :class="canBuyProduct ? 'mt-2' : ''"
             @click="addPdf"
           >
@@ -267,10 +267,8 @@ useHead({
         </aside>
       </div>
     </article>
-    <div v-else-if="status === 'pending'" class="rounded-xl border border-circus-border bg-circus-surface p-6 text-sm text-circus-muted">
-      {{ t('patterns.loading') }}
-    </div>
-    <div v-else class="rounded-xl border border-circus-red/60 bg-circus-red/10 p-6 text-sm text-circus-white">
+    <div v-else-if="status === 'pending'" class="skeleton-card" />
+    <div v-else class="paper p-6 text-sm">
       {{ t('products.notFound') }}
     </div>
   </div>
