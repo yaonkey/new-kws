@@ -10,6 +10,7 @@ import {
   getProductCategories,
   getProductImages,
   getProductStockStatus,
+  getPatternPrice,
   canShowPdfAddon,
   isProductAvailable,
   getSchemaAvailability,
@@ -83,7 +84,11 @@ const productDetails = computed(() => {
   return product.value.details.en || ''
 })
 const activeImage = ref('')
-const pdfPrice = computed(() => getPriceByLocale(product.value?.pdfPrice ?? { rub: 160, usd: 2 }, locale.value))
+const pdfPrice = computed(() => {
+  if (!product.value) return 0
+  const value = product.value.is_schema ? getPatternPrice(product.value) : (product.value.pdfPrice ?? { rub: 160, usd: 2 })
+  return getPriceByLocale(value, locale.value)
+})
 const productPrice = computed(() => (product.value ? getPriceByLocale(getProductEffectivePrice(product.value), locale.value) : 0))
 const productBasePrice = computed(() => (product.value ? getPriceByLocale(getProductBasePrice(product.value), locale.value) : 0))
 const isOnSale = computed(() => (product.value ? hasSalePrice(product.value) : false))
