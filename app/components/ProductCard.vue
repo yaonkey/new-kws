@@ -7,7 +7,6 @@ import {
   hasSalePrice,
   getPriceByLocale,
   getPrimaryProductImage,
-  isProductPlaceholder,
   placeholderForProduct,
   stockPieceCount,
   isProductAvailable,
@@ -32,8 +31,7 @@ const productTitle = computed(() => props.product.title[locale.value as 'ru' | '
 const note = computed(() => getLocalizedField(props.product.description, locale.value))
 const imageFailed = ref(false)
 watch(() => props.product.slug, () => { imageFailed.value = false })
-const coverImage = computed(() => imageFailed.value ? placeholderForProduct(props.product) : getPrimaryProductImage(props.product))
-const coverIsPlaceholder = computed(() => isProductPlaceholder(coverImage.value))
+const coverImage = computed(() => imageFailed.value ? placeholderForProduct() : getPrimaryProductImage(props.product))
 const localizedPrice = computed(() => {
   const price = isPdfMode.value ? getPatternPrice(props.product) : getProductEffectivePrice(props.product)
   return getPriceByLocale(price, locale.value)
@@ -78,8 +76,7 @@ const handleQuickAdd = (event: MouseEvent) => {
         :alt="productTitle"
         width="640"
         height="640"
-        class="aspect-square w-full object-cover"
-        :class="coverIsPlaceholder ? 'object-contain p-6' : ''"
+          class="aspect-square w-full object-cover"
         @error="imageFailed = true"
       >
       <span class="absolute left-3 top-3 rounded-full border border-circus-cream bg-circus-red px-2.5 py-1 text-[11px] font-semibold text-circus-cream">

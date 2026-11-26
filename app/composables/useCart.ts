@@ -77,7 +77,7 @@ export const useCart = () => {
                 slug: String(item.slug),
                 title: item.title as { ru: string; en: string },
                 price: normalizePriceValue(item.price as number | PriceValue),
-                image: String(item.image || '/images/product-placeholder.svg'),
+                image: String(item.image || '/images/product-placeholder.jpg'),
                 quantity: Math.max(1, Number(item.quantity || 1)),
               }
             })
