@@ -704,9 +704,9 @@
   align-items: center;
   gap: 0.15rem;
   border: 1px solid rgba(234, 217, 200, 0.4);
-  border-radius: 999px;
+  border-radius: 1.4rem;
   background: rgba(16, 14, 12, 0.45);
-  padding: 0.2rem;
+  padding: 0.45rem 0.5rem;
 }
 
 .chip {
